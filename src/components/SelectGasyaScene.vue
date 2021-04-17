@@ -5,13 +5,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { GASYA_KIND } from "../constants";
 
 @Component
 export default class SelectGasyaScene extends Vue {
   @Prop() private msg!: string;
   pullGasha() {
-    this.$emit("pull", 1)
+    this.$emit("pull", GASYA_KIND.SIMPLE);
   }
 }
 </script>

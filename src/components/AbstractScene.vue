@@ -1,0 +1,28 @@
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
+
+@Component
+export default class AbstractScene extends Vue {
+  /** 画面クリックで終了するか否か */
+  clickToDone = false;
+  /** 表示後に何msでdoneになるか。-1で無効。 ※アニメーション後に終了させたい場合はこのプロパティでなくonanimationendでthis.done()を実行する */
+  timeoutForDone = -1;
+  timeoutID = -1;
+  onclick() {
+    if (this.clickToDone) {
+      this.done();
+    }
+  }
+  mounted() {
+    // タイムアウトが設定されている場合はマウント時点からカウントダウンする
+    if (this.timeoutForDone > -1) {
+      this.timeoutID = setTimeout(this.done, this.timeoutForDone);
+    }
+  }
+  done() {
+    clearTimeout(this.timeoutForDone);
+    this.$emit("done", this.constructor.name);
+  }
+}
+</script>
+

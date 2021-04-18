@@ -1,13 +1,15 @@
 <template>
-  <div>{{result}}</div>
+  <div @click="onclick">{{result}}</div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import AbstractScene from "@/components/AbstractScene.vue"
 
 @Component
-export default class ResultScene extends Vue {
+export default class ResultScene extends AbstractScene {
   @Prop() private result!: string;
+  clickToDone = true;
 }
 </script>
 

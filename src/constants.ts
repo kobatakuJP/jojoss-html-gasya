@@ -3,5 +3,7 @@ export const enum SCENE {
     POWA,
     PUNCHER_APPEAR,
     PUNCH,
+    LAST_PUNCH,
+    PIKAA,
     RESULT,
 }

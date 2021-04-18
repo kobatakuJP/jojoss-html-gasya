@@ -4,6 +4,8 @@
     <PowaScene v-if="isPowa" @done="sceneDone" />
     <PuncherAppearScene v-if="isPuncherAppear" @done="sceneDone" />
     <PunchScene v-if="isPunch" @done="sceneDone" />
+    <LastPunchScene v-if="isLastPunch" @done="sceneDone" />
+    <PikaaScene v-if="isPikaa" @done="sceneDone" />
     <ResultScene v-if="isResult" :result="result" @done="sceneDone" />
   </div>
 </template>
@@ -12,8 +14,10 @@
 import { Component, Vue } from "vue-property-decorator";
 import SelectGasyaScene from "@/components/SelectGasyaScene.vue";
 import PowaScene from "@/components/PowaScene.vue";
-import PuncherAppearScene from "@/components/PuncherAppearScene.vue"
-import PunchScene from "@/components/PunchScene.vue"
+import PuncherAppearScene from "@/components/PuncherAppearScene.vue";
+import PunchScene from "@/components/PunchScene.vue";
+import LastPunchScene from "@/components/LastPunchScene.vue";
+import PikaaScene from "@/components/PikaaScene.vue";
 import ResultScene from "@/components/ResultScene.vue";
 import { SCENE } from "../constants";
 
@@ -23,6 +27,8 @@ import { SCENE } from "../constants";
     PowaScene,
     PuncherAppearScene,
     PunchScene,
+    LastPunchScene,
+    PikaaScene,
     ResultScene,
   },
 })
@@ -33,6 +39,8 @@ export default class Home extends Vue {
     SCENE.POWA,
     SCENE.PUNCHER_APPEAR,
     SCENE.PUNCH,
+    SCENE.LAST_PUNCH,
+    SCENE.PIKAA,
     SCENE.RESULT,
   ];
   result = "";
@@ -63,6 +71,12 @@ export default class Home extends Vue {
   }
   get isPunch() {
     return this.currentScene === SCENE.PUNCH;
+  }
+  get isLastPunch() {
+    return this.currentScene === SCENE.LAST_PUNCH;
+  }
+  get isPikaa() {
+    return this.currentScene === SCENE.PIKAA;
   }
   get isResult() {
     return this.currentScene === SCENE.RESULT;

@@ -7,7 +7,7 @@ export default class AbstractScene extends Vue {
   clickToDone = false;
   /** 表示後に何msでdoneになるか。-1で無効。 ※アニメーション後に終了させたい場合はこのプロパティでなくonanimationendでthis.done()を実行する */
   timeoutForDone = -1;
-  timeoutID = -1;
+  private timeoutID = -1;
   onclick() {
     if (this.clickToDone) {
       this.done();
@@ -20,7 +20,7 @@ export default class AbstractScene extends Vue {
     }
   }
   done() {
-    clearTimeout(this.timeoutForDone);
+    clearTimeout(this.timeoutID);
     this.$emit("done", this.constructor.name);
   }
 }

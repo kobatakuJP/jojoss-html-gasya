@@ -1,14 +1,13 @@
 <template>
-  <div>
-    ディオ
-  </div>
+  <div>{{result}}</div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
-export default class SelectGasyaScene extends Vue {
+export default class ResultScene extends Vue {
+  @Prop() private result!: string;
 }
 </script>
 

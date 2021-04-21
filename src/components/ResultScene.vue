@@ -1,10 +1,14 @@
 <template>
-  <div @click="onclick">{{result}}</div>
+  <div @click="onclick">
+    <ul>
+      <li v-for="(unit, i) in result" :key="i">{{ unit }}</li>
+    </ul>
+  </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import AbstractScene from "@/components/AbstractScene.vue"
+import { Component, Prop } from "vue-property-decorator";
+import AbstractScene from "@/components/AbstractScene.vue";
 
 @Component
 export default class ResultScene extends AbstractScene {
@@ -14,4 +18,7 @@ export default class ResultScene extends AbstractScene {
 </script>
 
 <style scoped>
+li {
+  list-style: none;
+}
 </style>

@@ -41,14 +41,14 @@ export default class Home extends Vue {
     "ResultScene",
   ];
   currentScene = this.scenes[0];
-  result = "";
-  async actionPull(v: number) {
-    const json = await this.gasya();
-    this.result = json[0]["n"];
+  result: string[] = [];
+  async actionPull(n: number) {
+    const json: { n: string }[] = await this.gasya(n);
+    this.result = json.map((u) => u["n"]);
     this.nextScene();
   }
-  async gasya() {
-    const resp = await fetch("/.netlify/functions/gasya");
+  async gasya(n: number) {
+    const resp = await fetch(`/.netlify/functions/gasya?num=${n}`);
     return resp.json();
   }
   nextScene() {

@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
-    <button @click="pullGasha">ガシャを引く</button>
+    <div><button @click="pullGasha(1)">ガシャを引く!💎0個消費</button></div>
+    <div><button @click="pullGasha(10)">10回!!ガシャを引く!💎0個消費</button></div>
   </div>
 </template>
 
@@ -10,8 +11,8 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 @Component
 export default class SelectGasyaScene extends Vue {
   @Prop() private msg!: string;
-  pullGasha() {
-    this.$emit("pull");
+  pullGasha(v: number) {
+    this.$emit("pull", v);
   }
 }
 </script>

@@ -3,11 +3,18 @@ const units = [
   { n: "ジョナサン" }
 ]
 export function handler(event, context, callback) {
-  const result = renGasya(1)
-  callback(null, {
-    statusCode: 200,
-    body: JSON.stringify(result)
-  })
+  const num = parseInt(event?.queryStringParameters?.num);
+  if (isNaN(num)) {
+    callback(null, {
+      statusCode: 500
+    })
+  } else {
+    const result = renGasya(num)
+    callback(null, {
+      statusCode: 200,
+      body: JSON.stringify(result)
+    })
+  }
 }
 function renGasya(num) {
   const result = []

@@ -19,6 +19,10 @@ import LastPunchScene from "@/components/LastPunchScene.vue";
 import PikaaScene from "@/components/PikaaScene.vue";
 import ResultScene from "@/components/ResultScene.vue";
 
+type UnitInfo = {
+  name: string;
+}
+
 @Component({
   components: {
     SelectGasyaScene,
@@ -43,8 +47,8 @@ export default class Home extends Vue {
   currentScene = this.scenes[0];
   result: string[] = [];
   async actionPull(n: number) {
-    const json: { n: string }[] = await this.gasya(n);
-    this.result = json.map((u) => u["n"]);
+    const json: UnitInfo[] = await this.gasya(n);
+    this.result = json.map((u) => u["name"]);
     this.nextScene();
   }
   async gasya(n: number) {

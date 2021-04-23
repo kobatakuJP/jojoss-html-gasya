@@ -10,7 +10,6 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class SelectGasyaScene extends Vue {
-  @Prop() private msg!: string;
   pullGasha(v: number) {
     this.$emit("pull", v);
   }

@@ -1,7 +1,7 @@
 <template>
   <div @click="onclick">
     <ul>
-      <li v-for="(unit, i) in result" :key="i">{{ unit }}</li>
+      <li v-for="(unit, i) in result" :key="i">{{ unit.name }}</li>
     </ul>
   </div>
 </template>

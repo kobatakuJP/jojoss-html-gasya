@@ -45,10 +45,10 @@ export default class Home extends Vue {
     "ResultScene",
   ];
   currentScene = this.scenes[0];
-  result: string[] = [];
+  result: UnitInfo[] = [];
   async actionPull(n: number) {
     const json: UnitInfo[] = await this.gasya(n);
-    this.result = json.map((u) => u["name"]);
+    this.result = json;
     this.nextScene();
   }
   async gasya(n: number) {

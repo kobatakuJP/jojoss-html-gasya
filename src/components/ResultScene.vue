@@ -1,9 +1,7 @@
 <template>
   <div @click="onclick">
     <ResultSceneBackground :rarity="currenRarity"></ResultSceneBackground>
-    <div v-if="result.length === 1" class="img-wrap">
-      <img v-for="(unit, i) in result" :key="i" :src="unit.pictureurl" />
-    </div>
+    <div v-if="result.length === 1" class="img-wrap" :style="tdStyle(0)" />
     <div v-else-if="result.length === 10" class="img-wrap">
       <table>
         <tr>
@@ -70,6 +68,8 @@ export default class ResultScene extends AbstractScene {
   top: 0;
   bottom: 0;
   margin: auto;
+}
+img {
 }
 table {
   width: 100%;

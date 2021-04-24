@@ -55,16 +55,16 @@ export default class ResultSceneBackground extends Vue {
     }
   }
   rDraw() {
-    this.drawGrid();
+    this.drawGrid(false);
   }
   srDraw() {
-    this.drawGrid();
+    this.drawGrid(false);
   }
   ssrDraw() {
     this.drawSSRLine();
-    this.drawGrid();
+    this.drawGrid(true);
   }
-  drawGrid() {
+  drawGrid(isBorder: boolean) {
     if (!this.ctx) return;
     this.ctx.beginPath();
     for (let sw = 0; sw < this.canW + this.diaW; sw += this.diaW) {
@@ -78,9 +78,11 @@ export default class ResultSceneBackground extends Vue {
     }
     this.ctx.fillStyle = "rgba(0,0,0,0.15)";
     this.ctx.fill();
-    this.ctx.lineWidth = 10;
-    this.ctx.strokeStyle="rgba(255,255,255,0.8)"
-    this.ctx.stroke();
+    if (isBorder) {
+      this.ctx.lineWidth = 10;
+      this.ctx.strokeStyle = "rgba(255,255,255,0.8)";
+      this.ctx.stroke();
+    }
   }
   drawSSRLine() {
     if (!this.ctx) return;
@@ -113,5 +115,7 @@ export default class ResultSceneBackground extends Vue {
 .background-canvas {
   width: 100%;
   height: 100%;
+  position: absolute;
+  left: 0;
 }
 </style>

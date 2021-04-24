@@ -1,13 +1,22 @@
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { RARITY, UnitInfo } from "@/views/Home.vue";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class AbstractScene extends Vue {
+  @Prop() private result!: UnitInfo[];
   /** 画面クリックで終了するか否か */
   clickToDone = false;
   /** 表示後に何msでdoneになるか。-1で無効。 ※アニメーション後に終了させたい場合はこのプロパティでなくonanimationendでthis.done()を実行する */
   timeoutForDone = -1;
   private timeoutID = -1;
+  get currenRarity() {
+    return this.result
+      ? this.result
+          .map((v) => v.rarity)
+          .reduce((p, c) => (p.length > c.length ? p : c))
+      : RARITY.R;
+  }
   onclick() {
     if (this.clickToDone) {
       this.done();

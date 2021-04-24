@@ -53,5 +53,6 @@ body {
   right: 0;
   bottom: 0;
   margin: auto;
+  overflow: hidden;
 }
 </style>

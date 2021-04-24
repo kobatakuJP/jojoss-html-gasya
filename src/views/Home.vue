@@ -22,6 +22,7 @@ import ResultScene from "@/components/ResultScene.vue";
 export type UnitInfo = {
   name: string;
   rarity: RARITY;
+  pictureurl: string;
 };
 export enum RARITY {
   SSR = "SSR",

@@ -21,6 +21,11 @@ import ResultScene from "@/components/ResultScene.vue";
 
 export type UnitInfo = {
   name: string;
+};
+export enum RARITY {
+  SSR = "SSR",
+  SR = "SR",
+  R = "R",
 }
 
 @Component({

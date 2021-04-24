@@ -9,10 +9,11 @@
 <script lang="ts">
 import { Component, Prop } from "vue-property-decorator";
 import AbstractScene from "@/components/AbstractScene.vue";
+import { UnitInfo } from "@/views/Home.vue";
 
 @Component
 export default class ResultScene extends AbstractScene {
-  @Prop() private result!: string;
+  @Prop() private result!: UnitInfo[];
   clickToDone = true;
 }
 </script>

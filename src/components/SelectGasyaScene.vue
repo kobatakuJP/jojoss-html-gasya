@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="parent100">
     <div class="version">version:{{ version }}</div>
     <div><button @click="pullGasha(1)">ガシャを引く!💎0個消費</button></div>
     <div>

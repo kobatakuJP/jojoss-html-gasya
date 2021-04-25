@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="parent100">
     <component
       :is="currentScene"
       @done="sceneDone"

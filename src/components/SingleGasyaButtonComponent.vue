@@ -1,5 +1,5 @@
 <template>
-  <div class="parent100 centering">
+  <div class="parent100 centering noclick">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="792"
@@ -8,16 +8,17 @@
     >
       <defs>
         <linearGradient id="grad1" x1="50%" y1="50%" x2="100%" y2="100%">
-          <stop id="g1" offset="0%" stop-color="#daa331" stop-opacity="1" />
-          <stop id="g2" offset="100%" stop-color="#c25e34" stop-opacity="1" />
+          <stop id="g1" offset="0%" stop-color="#eed32a" stop-opacity="1" />
+          <stop id="g2" offset="100%" stop-color="#e78143" stop-opacity="1" />
         </linearGradient>
       </defs>
       <rect x="0" y="0" width="792" height="132" fill="url(#grad1)" />
       <defs>
-        <linearGradient id="grad2" x1="0%" y1="30%" x2="00%" y2="90%">
-          <stop id="g3" offset="0%" stop-color="#ded6d8" stop-opacity="1" />
-          <stop id="g4" offset="50%" stop-color="#9b734a" stop-opacity="1" />
-          <stop id="g5" offset="100%" stop-color="#ded6d8" stop-opacity="1" />
+        <linearGradient id="grad2" x1="0%" y1="0%" x2="00%" y2="90%">
+          <stop offset="0%" stop-color="#e6ebe7" stop-opacity="1" />
+          <stop offset="49%" stop-color="#e6ebe7" stop-opacity="1" />
+          <stop offset="50%" stop-color="#ac7c28" stop-opacity="1" />
+          <stop offset="90%" stop-color="#e6ebe7" stop-opacity="1" />
         </linearGradient>
       </defs>
       <text
@@ -36,9 +37,9 @@
       </text>
       <defs>
         <linearGradient id="grad3" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop id="g6" offset="0%" stop-color="#775744" stop-opacity="1" />
-          <stop id="g7" offset="50%" stop-color="#9f7b65" stop-opacity="1" />
-          <stop id="g8" offset="100%" stop-color="#775744" stop-opacity="1" />
+          <stop offset="0%" stop-color="#775744" stop-opacity="0.8" />
+          <stop offset="50%" stop-color="#9f7b65" stop-opacity="0.8" />
+          <stop offset="100%" stop-color="#775744" stop-opacity="0.8" />
         </linearGradient>
       </defs>
       <rect x="560" y="36" width="200" height="60" fill="url(#grad3)" />
@@ -63,7 +64,7 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class GasyaButtonComponent extends Vue {}
+export default class SingleGasyaButtonComponent extends Vue {}
 </script>
 
 <style scoped>
@@ -71,5 +72,8 @@ export default class GasyaButtonComponent extends Vue {}
   display: flex;
   justify-content: center; /*左右中央揃え*/
   align-items: center; /*上下中央揃え*/
+}
+.noclick {
+  pointer-events: none;
 }
 </style>

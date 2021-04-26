@@ -1,5 +1,5 @@
 import { units } from "./unitData";
-import { PAR_OF_SR, PAR_OF_R, PAR_OF_SSR } from "./conf";
+import { PAR_OF_SR, PAR_OF_SSR } from "./conf";
 const UNITS_SSR = units.filter(v => v.rarity === "SSR");
 const UNITS_SR = units.filter(v => v.rarity === "SR");
 const UNITS_R = units.filter(v => v.rarity === "R");

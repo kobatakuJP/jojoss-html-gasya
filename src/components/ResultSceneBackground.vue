@@ -26,7 +26,7 @@ export default class ResultSceneBackground extends Vue {
   styleObj = {
     backgroundColor: this.backgroundColor,
   };
-  get backgroundColor() {
+  get backgroundColor(): string {
     switch (this.rarity) {
       case RARITY.SSR:
         return this.ssrColor;
@@ -36,11 +36,11 @@ export default class ResultSceneBackground extends Vue {
         return this.rColor;
     }
   }
-  mounted() {
+  mounted(): void {
     this.ctx = (this.$el as HTMLCanvasElement).getContext("2d");
     this.draw();
   }
-  draw() {
+  draw(): void {
     if (!this.ctx) return;
     this.ctx.clearRect(0, 0, 1650, 2475);
     switch (this.rarity) {
@@ -54,17 +54,17 @@ export default class ResultSceneBackground extends Vue {
         this.rDraw();
     }
   }
-  rDraw() {
+  rDraw(): void {
     this.drawGrid(false);
   }
-  srDraw() {
+  srDraw(): void {
     this.drawGrid(false);
   }
-  ssrDraw() {
+  ssrDraw(): void {
     this.drawSSRLine();
     this.drawGrid(true);
   }
-  drawGrid(isBorder: boolean) {
+  drawGrid(isBorder: boolean): void {
     if (!this.ctx) return;
     this.ctx.beginPath();
     for (let sw = 0; sw < this.canW + this.diaW; sw += this.diaW) {
@@ -84,7 +84,7 @@ export default class ResultSceneBackground extends Vue {
       this.ctx.stroke();
     }
   }
-  drawSSRLine() {
+  drawSSRLine(): void {
     if (!this.ctx) return;
     this.ctx.beginPath();
     this.ctx.fillStyle = "rgb(171,233,204)";

@@ -28,10 +28,10 @@ export default class SelectGasyaScene extends Vue {
   version = process.env.VUE_APP_GIT_COMMIT_HASH;
   pcCount = 0;
   message = "夢の全部入りガシャ！";
-  pullGasha(v: number) {
+  pullGasha(v: number): void {
     this.$emit("pull", v);
   }
-  pcClick() {
+  pcClick(): void {
     this.pcCount++;
     if (this.pcCount === 10) {
       this.message = "カタカタカタッターン";

@@ -9,7 +9,7 @@ import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class Home extends Vue {
   myStyle = { width: "100%", height: "100%" };
-  handleResize() {
+  handleResize(): void {
     // 縦横サイズを調整する
     const w = this.$el.parentElement?.clientWidth as number;
     const h = this.$el.parentElement?.clientHeight as number;
@@ -23,11 +23,11 @@ export default class Home extends Vue {
       this.myStyle.width = `${w}px`;
     }
   }
-  mounted() {
+  mounted(): void {
     this.handleResize();
     window.addEventListener("resize", this.handleResize);
   }
-  beforeDestroy() {
+  beforeDestroy(): void {
     window.removeEventListener("resize", this.handleResize);
   }
 }

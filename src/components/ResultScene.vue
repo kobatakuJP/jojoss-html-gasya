@@ -52,7 +52,7 @@ import ResultSceneBackground from "@/components/ResultSceneBackground.vue";
 })
 export default class ResultScene extends AbstractScene {
   clickToDone = true;
-  tdStyle(i: number) {
+  tdStyle(i: number): { background: string } {
     return {
       background: `url(${this.result[i].pictureurl}) center center / contain no-repeat`,
     };

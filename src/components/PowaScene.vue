@@ -1,14 +1,20 @@
 <template>
-  <div >ポワポワァ</div>
+  <div>
+    <WallBackground :rarity="currenRarity"></WallBackground>
+    <div style="position: fixed; color: white">ポワポワァ</div>
+  </div>
 </template>
 
 <script lang="ts">
 import { Component } from "vue-property-decorator";
-import AbstractScene from "@/components/AbstractScene.vue"
+import AbstractScene from "@/components/AbstractScene.vue";
+import WallBackground from "@/components/WallBackground.vue"
 
-@Component
+@Component({
+  components: {WallBackground}
+})
 export default class PowaScene extends AbstractScene {
-  timeoutForDone = 2000;
+  timeoutForDone = 3000;
 }
 </script>
 

@@ -15,6 +15,26 @@ export default class StarBackground extends BaseCanvasComponent {
     this.draw();
   }
   draw() {
+    this.drawCircle();
+    this.drawStar();
+  }
+  drawCircle() {
+    if (!this.ctx) return;
+    this.ctx.beginPath();
+    this.ctx.arc(825, 1237.5, 600, 0, 2 * Math.PI);
+    this.ctx.fillStyle = "rgb(71,64,57)";
+    this.ctx.fill();
+    this.ctx.beginPath();
+    this.ctx.arc(825, 1237.5, 500, 0, 2 * Math.PI);
+    this.ctx.fillStyle = "rgb(184,158,114)";
+    this.ctx.fill();
+    this.ctx.beginPath();
+    this.ctx.arc(825, 1237.5, 400, 0, 2 * Math.PI);
+    this.ctx.lineWidth = 3;
+    this.ctx.strokeStyle = "rgb(0,0,0)";
+    this.ctx.stroke();
+  }
+  drawStar() {
     if (!this.ctx) return;
     const base = { x: canW / 2, y: canH / 2 };
     const hankei = 670;

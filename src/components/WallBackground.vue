@@ -22,19 +22,6 @@ export default class WallBackground extends BaseCanvasComponent {
     this.ctx.fillStyle = "rgb(96,63,32)";
     this.ctx.fillRect(0, 0, canW, canH);
     this.drawGrid();
-    this.ctx.beginPath();
-    this.ctx.arc(825, 1237.5, 600, 0, 2 * Math.PI);
-    this.ctx.fillStyle = "rgb(71,64,57)";
-    this.ctx.fill();
-    this.ctx.beginPath();
-    this.ctx.arc(825, 1237.5, 500, 0, 2 * Math.PI);
-    this.ctx.fillStyle = "rgb(184,158,114)";
-    this.ctx.fill();
-    this.ctx.beginPath();
-    this.ctx.arc(825, 1237.5, 400, 0, 2 * Math.PI);
-    this.ctx.lineWidth = 3;
-    this.ctx.strokeStyle = "rgb(0,0,0)";
-    this.ctx.stroke();
   }
   drawGrid(): void {
     if (!this.ctx) return;

@@ -14,6 +14,15 @@
     <div class="powa-soul l l2"></div>
     <div class="powa-soul l l3"></div>
     <div class="powa-soul l l4"></div>
+    <div class="powa-soul rapid r1"></div>
+    <div class="powa-soul rapid r2"></div>
+    <div class="powa-soul rapid r3"></div>
+    <div class="powa-soul rapid r4"></div>
+    <div class="powa-soul rapid r5"></div>
+    <div class="powa-soul rapid r6"></div>
+    <div class="powa-soul rapid r7"></div>
+    <div class="powa-soul rapid r8"></div>
+    <div class="powa-soul rapid r9"></div>
   </div>
 </template>
 
@@ -105,6 +114,51 @@ export default class PowaScene extends Vue {}
   left: 65%;
   top: 85%;
 }
+.powa-soul.rapid {
+  width: 8%;
+  animation: powapowa 0.2s infinite;
+}
+/* 
+計算式（本当は動的に計算したいが、cssなのでできない）
+left: 50-ポワ半径-(半径*COS(RADIANS(40*n(12時が0)+90)))*1.5(アスペクト比)
+top: 50-ポワ半径-(半径*SIN(RADIANS(40*n(12時が0)+90)))
+*/
+.powa-soul.rapid.r1 {
+  left: 46%;
+  top: 25%;
+}
+.powa-soul.rapid.r2 {
+  left: 66.2478097051%;
+  top: 29.9130666945%;
+}
+.powa-soul.rapid.r3 {
+  left: 77.0214442199%;
+  top: 42.353388269%;
+}
+.powa-soul.rapid.r4 {
+  left: 73.2798002192%;
+  top: 56.5%;
+}
+.powa-soul.rapid.r5 {
+  left: 56.7736345148%;
+  top: 65.7335450365%;
+}
+.powa-soul.rapid.r6 {
+  left: 35.2263654852%;
+  top: 65.7335450365%;
+}
+.powa-soul.rapid.r7 {
+  left: 18.7201997808%;
+  top: 56.5%;
+}
+.powa-soul.rapid.r8 {
+  left: 14.9785557801%;
+  top: 42.353388269%;
+}
+.powa-soul.rapid.r9 {
+  left: 25.7521902949%;
+  top: 29.9130666945%;
+}
 
 @keyframes move-powa {
   0% {
@@ -116,13 +170,13 @@ export default class PowaScene extends Vue {}
 }
 @keyframes powapowa {
   0% {
-    box-shadow: 0px 0px 5px 5px white, 0px 0px 10px 10px white;
+    box-shadow: 0px 0px 2px 2px white, 0px 0px 10px 10px white;
   }
   50% {
-    box-shadow: 0px 0px 5px 7px white, 0px 0px 10px 10px white;
+    box-shadow: 0px 0px 2px 4px white, 0px 0px 10px 10px white;
   }
   100% {
-    box-shadow: 0px 0px 5px 5px white, 0px 0px 10px 10px white;
+    box-shadow: 0px 0px 2px 2px white, 0px 0px 10px 10px white;
   }
 }
 </style>

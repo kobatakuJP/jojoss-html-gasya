@@ -1,28 +1,28 @@
 <template>
-  <!-- widthは11と3の公倍数。heightはその1.5倍。 -->
-  <canvas
-    width="1650"
-    height="2475"
-    class="background-canvas"
-    :style="styleObj"
-  ></canvas>
+  <BaseCanvasComponent ref="can" :style="styleObj"></BaseCanvasComponent>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop } from "vue-property-decorator";
 import { RARITY } from "@/views/Home.vue";
+import BaseCanvasComponent, {
+  canW,
+  canH,
+} from "@/components/BaseCanvasComponent.vue";
 
-@Component
-export default class ResultSceneBackground extends Vue {
+@Component({ components: { BaseCanvasComponent } })
+export default class ResultSceneBackground extends BaseCanvasComponent {
   @Prop() private rarity!: RARITY;
-  ctx: CanvasRenderingContext2D | null = null;
-  readonly canW = 1650;
-  readonly canH = 2475;
-  readonly diaW = this.canW / 11;
-  readonly diaH = (this.diaW * 9) / 7;
+  readonly diaW: number;
+  readonly diaH: number;
   readonly ssrColor = "rgb(226,229,180)";
   readonly srColor = "rgb(240,198,75)";
   readonly rColor = "rgb(149,201,202)";
+  constructor() {
+    super();
+    this.diaW = canW / 11;
+    this.diaH = (this.diaW * 9) / 7;
+  }
   styleObj = {
     backgroundColor: this.backgroundColor,
   };
@@ -37,7 +37,6 @@ export default class ResultSceneBackground extends Vue {
     }
   }
   mounted(): void {
-    this.ctx = (this.$el as HTMLCanvasElement).getContext("2d");
     this.draw();
   }
   draw(): void {
@@ -64,11 +63,16 @@ export default class ResultSceneBackground extends Vue {
     this.drawSSRLine();
     this.drawGrid(true);
   }
+  // drawBack() {
+  //   if (!this.ctx) return;
+  //   this.ctx.fillStyle = this.backgroundColor;
+  //   this.ctx.fillRect(0, 0, this.canW, this.canH);
+  // }
   drawGrid(isBorder: boolean): void {
     if (!this.ctx) return;
     this.ctx.beginPath();
-    for (let sw = 0; sw < this.canW + this.diaW; sw += this.diaW) {
-      for (let sh = 0; sh < this.canH + this.diaH; sh += this.diaH) {
+    for (let sw = 0; sw < canW + this.diaW; sw += this.diaW) {
+      for (let sh = 0; sh < canH + this.diaH; sh += this.diaH) {
         this.ctx.moveTo(sw, sh);
         this.ctx.lineTo(sw + this.diaW / 2, sh + this.diaH / 2);
         this.ctx.lineTo(sw, sh + this.diaH);
@@ -112,10 +116,4 @@ export default class ResultSceneBackground extends Vue {
 </script>
 
 <style scoped>
-.background-canvas {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-}
 </style>

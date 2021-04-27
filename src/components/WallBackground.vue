@@ -1,29 +1,32 @@
 <template>
-  <!-- ResultSceneBackgroundに合わせたサイズ -->
-  <canvas width="1650" height="2475" class="background-canvas"></canvas>
+  <BaseCanvasComponent ref="can"></BaseCanvasComponent>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { RARITY } from "@/views/Home.vue";
+import BaseCanvasComponent, {
+  canW,
+  canH,
+} from "@/components/BaseCanvasComponent.vue";
 
-@Component
-export default class WallBackground extends Vue {
-  @Prop() private rarity!: RARITY;
-  ctx: CanvasRenderingContext2D | null = null;
-  readonly canW = 1650;
-  readonly canH = 2475;
-  readonly diaW = this.canW / 9;
-  readonly diaH = this.diaW * 2;
+@Component({ components: { BaseCanvasComponent } })
+export default class WallBackground extends BaseCanvasComponent {
+  readonly diaW: number;
+  readonly diaH: number;
+  constructor() {
+    super();
+    this.diaW = canW / 9;
+    this.diaH = this.diaW * 2;
+  }
   mounted(): void {
-    this.ctx = (this.$el as HTMLCanvasElement).getContext("2d");
     this.draw();
   }
   draw() {
     if (!this.ctx) return;
     this.ctx.beginPath();
     this.ctx.fillStyle = "rgb(96,63,32)";
-    this.ctx.fillRect(0, 0, this.canW, this.canH);
+    this.ctx.fillRect(0, 0, canW, canH);
     this.drawGrid();
     this.ctx.beginPath();
     this.ctx.arc(825, 1237.5, 600, 0, 2 * Math.PI);
@@ -44,8 +47,8 @@ export default class WallBackground extends Vue {
   drawGrid(): void {
     if (!this.ctx) return;
     this.ctx.beginPath();
-    for (let sw = 0; sw < this.canW + this.diaW; sw += this.diaW) {
-      for (let sh = 0; sh < this.canH + this.diaH; sh += this.diaH) {
+    for (let sw = 0; sw < canW + this.diaW; sw += this.diaW) {
+      for (let sh = 0; sh < canH + this.diaH; sh += this.diaH) {
         this.ctx.moveTo(sw, sh);
         this.ctx.lineTo(sw + this.diaW / 2, sh + this.diaH / 2);
         this.ctx.lineTo(sw, sh + this.diaH);

@@ -1,6 +1,7 @@
 <template>
   <div class="parent100">
-    <WallBackground :rarity="currenRarity"></WallBackground>
+    <WallBackground></WallBackground>
+    <StarBackground></StarBackground>
     <BasePowaComponent></BasePowaComponent>
   </div>
 </template>
@@ -10,9 +11,10 @@ import { Component } from "vue-property-decorator";
 import AbstractScene from "@/components/AbstractScene.vue";
 import WallBackground from "@/components/WallBackground.vue";
 import BasePowaComponent from "@/components/BasePowaComponent.vue";
+import StarBackground from "@/components/StarBackground.vue";
 
 @Component({
-  components: { WallBackground, BasePowaComponent },
+  components: { WallBackground, BasePowaComponent, StarBackground },
 })
 export default class PowaScene extends AbstractScene {
   timeoutForDone = 3000;

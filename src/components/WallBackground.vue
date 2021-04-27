@@ -4,12 +4,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop } from "vue-property-decorator";
-import AbstractScene from "@/components/AbstractScene.vue";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import { RARITY } from "@/views/Home.vue";
 
 @Component
-export default class WallBackground extends AbstractScene {
+export default class WallBackground extends Vue {
   @Prop() private rarity!: RARITY;
   ctx: CanvasRenderingContext2D | null = null;
   readonly canW = 1650;

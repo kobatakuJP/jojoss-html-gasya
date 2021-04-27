@@ -1,20 +1,22 @@
 <template>
-  <div>
+  <div class="parent100">
     <WallBackground :rarity="currenRarity"></WallBackground>
-    <div class="powa-soul s s1"></div>
-    <div class="powa-soul s s2"></div>
-    <div class="powa-soul s s3"></div>
-    <div class="powa-soul s s4"></div>
-    <div class="powa-soul s s5"></div>
-    <div class="powa-soul s s6"></div>
-    <div class="powa-soul m m1"></div>
-    <div class="powa-soul m m2"></div>
-    <div class="powa-soul m m3"></div>
-    <div class="powa-soul m m4"></div>
-    <div class="powa-soul l l1"></div>
-    <div class="powa-soul l l2"></div>
-    <div class="powa-soul l l3"></div>
-    <div class="powa-soul l l4"></div>
+    <div class="powa-wrapper parent100">
+      <div class="powa-soul s s1"></div>
+      <div class="powa-soul s s2"></div>
+      <div class="powa-soul s s3"></div>
+      <div class="powa-soul s s4"></div>
+      <div class="powa-soul s s5"></div>
+      <div class="powa-soul s s6"></div>
+      <div class="powa-soul m m1"></div>
+      <div class="powa-soul m m2"></div>
+      <div class="powa-soul m m3"></div>
+      <div class="powa-soul m m4"></div>
+      <div class="powa-soul l l1"></div>
+      <div class="powa-soul l l2"></div>
+      <div class="powa-soul l l3"></div>
+      <div class="powa-soul l l4"></div>
+    </div>
   </div>
 </template>
 
@@ -27,18 +29,20 @@ import WallBackground from "@/components/WallBackground.vue";
   components: { WallBackground },
 })
 export default class PowaScene extends AbstractScene {
-  // timeoutForDone = 3000;
+  timeoutForDone = 3000;
 }
 </script>
 
 <style scoped>
+.powa-wrapper {
+  perspective: 400px;
+}
 .powa-soul {
   position: absolute;
   border-radius: 50%;
-  width: 5%;
   height: auto;
   background: white;
-  box-shadow:  0px 0px 10px 10px gold;
+  animation: move-powa 5s linear, powapowa 0.2s infinite;
 }
 .powa-soul:before {
   content: "";
@@ -109,5 +113,25 @@ export default class PowaScene extends AbstractScene {
 .powa-soul.l.l4 {
   left: 65%;
   top: 85%;
+}
+
+@keyframes move-powa {
+  0% {
+    transform: translateZ(150px);
+  }
+  100% {
+    transform: translateZ(0px);
+  }
+}
+@keyframes powapowa {
+  0% {
+    box-shadow: 0px 0px 5px 5px white, 0px 0px 10px 10px white;
+  }
+  50% {
+    box-shadow: 0px 0px 5px 7px white, 0px 0px 10px 10px white;
+  }
+  100% {
+    box-shadow: 0px 0px 5px 5px white, 0px 0px 10px 10px white;
+  }
 }
 </style>

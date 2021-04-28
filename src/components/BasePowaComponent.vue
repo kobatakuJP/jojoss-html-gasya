@@ -66,12 +66,16 @@ export default class PowaScene extends Vue {
     if (e.animationName.indexOf("zoomin-rapid-powa") === 0) {
       (e.target as HTMLElement).classList.add("z0");
     } else if (e.animationName.indexOf("closer-rapid-powa") === 0) {
-      (e.target as HTMLElement).classList.add("explosion-powa");
-    } else if (e.animationName.indexOf("explosion-powa") === 0) {
       this.rCount++;
       if (this.rCount === 9) {
-        this.$emit("endallanimation");
+        // 最後のひとつだけ爆発させる
+        (e.target as HTMLElement).classList.add("explosion-powa");
+      } else {
+        // 他は消滅させる
+        (e.target as HTMLElement).style.width = "0%";
       }
+    } else if (e.animationName.indexOf("explosion-powa") === 0) {
+      this.$emit("endallanimation");
     }
   }
 }
@@ -169,6 +173,9 @@ export default class PowaScene extends Vue {
     closer-rapid-powa 2s cubic-bezier(1, 0, 1, 0) forwards;
 }
 .explosion-powa {
+  left: 50% !important;
+  top: 50% !important;
+  width: 0% !important;
   animation: closer-rapid-powa 2s cubic-bezier(1, 0, 1, 0) forwards,
     explosion-powa 0.4s forwards !important;
 }
@@ -251,12 +258,33 @@ top: 50-ポワ半径-(半径*SIN(RADIANS(40*n(12時が0)+90)))
 }
 @keyframes explosion-powa {
   0% {
-    background-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 1),
+      0px 0px 0px 0px rgba(255, 255, 255, 1),
+      0px 0px 0px 0px rgba(255, 255, 255, 1);
+  }
+  10% {
+    box-shadow: 0px 0px 60px 60px rgba(255, 255, 255, 1),
+      0px 0px 0px 0px rgba(255, 255, 255, 1),
+      0px 0px 0px 0px rgba(255, 255, 255, 1);
+  }
+  20% {
+    box-shadow: 0px 0px 120px 120px rgba(255, 255, 255, 1),
+      0px 0px 60px 60px rgba(255, 255, 255, 1),
+      0px 0px 0px 0px rgba(255, 255, 255, 1);
+  }
+  80% {
+    box-shadow: 0px 0px 300px 300px rgba(255, 255, 255, 0.2),
+      0px 0px 240px 240px rgba(255, 255, 255, 0.2),
+      0px 0px 180px 180px rgba(255, 255, 255, 0.2);
+  }
+  90% {
+    box-shadow: 0px 0px 300px 300px rgba(255, 255, 255, 0.1),
+      0px 0px 300px 300px rgba(255, 255, 255, 0.1),
+      0px 0px 240px 240px rgba(255, 255, 255, 0.1);
   }
   100% {
-    background-color: rgba(255, 255, 255, 0);
-    box-shadow: 0px 0px 300px 300px rgba(255, 255, 255, 0);
-  }
-}
+    box-shadow: 0px 0px 300px 300px rgba(255, 255, 255, 0),
+      0px 0px 300px 300px rgba(255, 255, 255, 0),
+      0px 0px 300px 300px rgba(255, 255, 255, 0);
+  }}
 </style>

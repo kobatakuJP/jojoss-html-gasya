@@ -19,7 +19,6 @@ import StarBackground from "@/components/StarBackground.vue";
   components: { WallBackground, BasePowaComponent, StarBackground },
 })
 export default class PowaScene extends AbstractScene {
-  // timeoutForDone = 3000;
   fade = "fadein";
   endPowa() {
     setTimeout(() => (this.fade = "fadeout"), 500);

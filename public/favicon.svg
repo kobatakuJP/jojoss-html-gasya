@@ -1,0 +1,10 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="600">
+    <defs />
+    <g>
+        <path fill="rgb(71,64,57)" stroke="none" paint-order="stroke fill markers" d=" M 600 300 A 300 300 0 1 1 599.9998500000124 299.7000000499998" />
+        <path fill="rgb(184,158,114)" stroke="none" paint-order="stroke fill markers" d=" M 550 300 A 250 250 0 1 1 549.9998750000104 299.7500000416665" />
+        <path fill="none" stroke="rgb(0,0,0)" paint-order="fill stroke markers" d=" M 500 300 A 200 200 0 1 1 499.9999000000083 299.8000000333332" stroke-miterlimit="10" stroke-width="3" stroke-dasharray="" />
+        <path fill="rgb(166,146,114)" stroke="black" paint-order="fill stroke markers" d=" M 300 300 L 300 300 L 300 0 L 367.35 207.3 L 300 300 L 585.3299999999999 207.3 L 408.99 335.4 L 300 300 L 476.34000000000003 542.7 L 300 414.6 L 300 300 L 123.66 542.7 L 191.01 335.4 L 300 300 L 14.670000000000016 207.3 L 232.64999999999998 207.3 Z" stroke-miterlimit="10" stroke-width="3" stroke-dasharray="" />
+        <path fill="rgb(184,166,136)" stroke="black" paint-order="fill stroke markers" d=" M 300 300 L 300 300 L 367.35 207.3 L 585.3299999999999 207.3 L 300 300 L 408.99 335.4 L 476.34000000000003 542.7 L 300 300 L 300 414.6 L 123.66 542.7 L 300 300 L 191.01 335.4 L 14.670000000000016 207.3 L 300 300 L 232.64999999999998 207.3 L 300 0 Z" stroke-miterlimit="10" stroke-width="3" stroke-dasharray="" />
+    </g>
+</svg>

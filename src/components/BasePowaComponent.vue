@@ -14,15 +14,15 @@
     <div class="powa-soul l l2"></div>
     <div class="powa-soul l l3"></div>
     <div class="powa-soul l l4"></div>
-    <div class="powa-soul rapid r1"></div>
-    <div class="powa-soul rapid r2"></div>
-    <div class="powa-soul rapid r3"></div>
-    <div class="powa-soul rapid r4"></div>
-    <div class="powa-soul rapid r5"></div>
-    <div class="powa-soul rapid r6"></div>
-    <div class="powa-soul rapid r7"></div>
-    <div class="powa-soul rapid r8"></div>
-    <div class="powa-soul rapid r9"></div>
+    <div @animationend="rapidAnimEnd" class="powa-soul rapid r1"></div>
+    <div @animationend="rapidAnimEnd" class="powa-soul rapid r2"></div>
+    <div @animationend="rapidAnimEnd" class="powa-soul rapid r3"></div>
+    <div @animationend="rapidAnimEnd" class="powa-soul rapid r4"></div>
+    <div @animationend="rapidAnimEnd" class="powa-soul rapid r5"></div>
+    <div @animationend="rapidAnimEnd" class="powa-soul rapid r6"></div>
+    <div @animationend="rapidAnimEnd" class="powa-soul rapid r7"></div>
+    <div @animationend="rapidAnimEnd" class="powa-soul rapid r8"></div>
+    <div @animationend="rapidAnimEnd" class="powa-soul rapid r9"></div>
   </div>
 </template>
 
@@ -30,7 +30,14 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class PowaScene extends Vue {}
+export default class PowaScene extends Vue {
+  rapidAnimEnd(e: AnimationEvent) {
+    // アニメーション名を前方一致で確認（後ろにはvue特有の文字列がくるため）
+    if (e.animationName.indexOf("zoomin-rapid-powa") === 0) {
+      (e.target as HTMLElement).classList.add("z0");
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -116,7 +123,13 @@ export default class PowaScene extends Vue {}
 }
 .powa-soul.rapid {
   width: 8%;
-  animation: powapowa 0.2s infinite;
+  transform: translateZ(300px);
+  animation: powapowa 0.2s infinite, zoomin-rapid-powa 0.5s linear,
+    closer-rapid-powa 5s cubic-bezier(1, 0, 1, 1);
+}
+.powa-soul.rapid.combine {
+  animation: powapowa 0.2s infinite,
+    combine-rapid-powa 0.5s cubic-bezier(1, 0, 1, 1);
 }
 /* 
 計算式（本当は動的に計算したいが、cssなのでできない）
@@ -159,7 +172,9 @@ top: 50-ポワ半径-(半径*SIN(RADIANS(40*n(12時が0)+90)))
   left: 25.7521902949%;
   top: 29.9130666945%;
 }
-
+.z0 {
+  transform: translateZ(0px)  !important;
+}
 @keyframes move-powa {
   0% {
     transform: translateZ(150px);
@@ -177,6 +192,26 @@ top: 50-ポワ半径-(半径*SIN(RADIANS(40*n(12時が0)+90)))
   }
   100% {
     box-shadow: 0px 0px 2px 2px white, 0px 0px 10px 10px white;
+  }
+}
+@keyframes zoomin-rapid-powa {
+  0% {
+    transform: translateZ(300px);
+  }
+  100% {
+    transform: translateZ(0px);
+  }
+}
+@keyframes closer-rapid-powa {
+  100% {
+    left: 46%;
+    top: 46%;
+  }
+}
+@keyframes combine-rapid-powa {
+  100% {
+    left: 46%;
+    top: 46%;
   }
 }
 </style>

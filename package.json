@@ -1,6 +1,6 @@
 {
   "name": "jojoss-html-gasya",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "private": true,
   "scripts": {
     "serve": "VUE_APP_GIT_COMMIT_HASH=$(sed -n 3P package.json | sed 's/ *\"version\": \"\\(.*\\)\",/\\1/')-$(git rev-parse --verify HEAD | cut -c-6) vue-cli-service serve",

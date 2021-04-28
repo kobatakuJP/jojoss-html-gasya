@@ -14,15 +14,15 @@
     <div class="powa-soul l l2"></div>
     <div class="powa-soul l l3"></div>
     <div class="powa-soul l l4"></div>
-    <div @animationend="rapidAnimEnd" class="powa-soul rapid r1"></div>
-    <div @animationend="rapidAnimEnd" class="powa-soul rapid r2"></div>
-    <div @animationend="rapidAnimEnd" class="powa-soul rapid r3"></div>
-    <div @animationend="rapidAnimEnd" class="powa-soul rapid r4"></div>
-    <div @animationend="rapidAnimEnd" class="powa-soul rapid r5"></div>
-    <div @animationend="rapidAnimEnd" class="powa-soul rapid r6"></div>
-    <div @animationend="rapidAnimEnd" class="powa-soul rapid r7"></div>
-    <div @animationend="rapidAnimEnd" class="powa-soul rapid r8"></div>
-    <div @animationend="rapidAnimEnd" class="powa-soul rapid r9"></div>
+    <div ref="r1" @animationend="rapidAnimEnd" class="powa-soul rapid r1"></div>
+    <div ref="r2" @animationend="rapidAnimEnd" class="powa-soul rapid r2"></div>
+    <div ref="r3" @animationend="rapidAnimEnd" class="powa-soul rapid r3"></div>
+    <div ref="r4" @animationend="rapidAnimEnd" class="powa-soul rapid r4"></div>
+    <div ref="r5" @animationend="rapidAnimEnd" class="powa-soul rapid r5"></div>
+    <div ref="r6" @animationend="rapidAnimEnd" class="powa-soul rapid r6"></div>
+    <div ref="r7" @animationend="rapidAnimEnd" class="powa-soul rapid r7"></div>
+    <div ref="r8" @animationend="rapidAnimEnd" class="powa-soul rapid r8"></div>
+    <div ref="r9" @animationend="rapidAnimEnd" class="powa-soul rapid r9"></div>
   </div>
 </template>
 
@@ -31,10 +31,47 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class PowaScene extends Vue {
+  rCount = 0;
+  mounted() {
+    setTimeout(() => {
+      (this.$refs.r1 as HTMLElement).classList.add("zoom");
+      setTimeout(() => {
+        (this.$refs.r4 as HTMLElement).classList.add("zoom");
+      }, 65 * 1);
+      setTimeout(() => {
+        (this.$refs.r7 as HTMLElement).classList.add("zoom");
+      }, 65 * 2);
+      setTimeout(() => {
+        (this.$refs.r2 as HTMLElement).classList.add("zoom");
+      }, 65 * 3);
+      setTimeout(() => {
+        (this.$refs.r5 as HTMLElement).classList.add("zoom");
+      }, 65 * 4);
+      setTimeout(() => {
+        (this.$refs.r9 as HTMLElement).classList.add("zoom");
+      }, 65 * 5);
+      setTimeout(() => {
+        (this.$refs.r3 as HTMLElement).classList.add("zoom");
+      }, 65 * 6);
+      setTimeout(() => {
+        (this.$refs.r6 as HTMLElement).classList.add("zoom");
+      }, 65 * 7);
+      setTimeout(() => {
+        (this.$refs.r8 as HTMLElement).classList.add("zoom");
+      }, 65 * 8);
+    }, 500);
+  }
   rapidAnimEnd(e: AnimationEvent) {
     // アニメーション名を前方一致で確認（後ろにはvue特有の文字列がくるため）
     if (e.animationName.indexOf("zoomin-rapid-powa") === 0) {
       (e.target as HTMLElement).classList.add("z0");
+    } else if (e.animationName.indexOf("closer-rapid-powa") === 0) {
+      (e.target as HTMLElement).classList.add("explosion-powa");
+    } else if (e.animationName.indexOf("explosion-powa") === 0) {
+      this.rCount++;
+      if (this.rCount === 9) {
+        this.$emit("endallanimation");
+      }
     }
   }
 }
@@ -124,16 +161,20 @@ export default class PowaScene extends Vue {
 .powa-soul.rapid {
   width: 8%;
   transform: translateZ(300px);
-  animation: powapowa 0.2s infinite, zoomin-rapid-powa 0.5s linear,
-    closer-rapid-powa 5s cubic-bezier(1, 0, 1, 1);
-}
-.powa-soul.rapid.combine {
   animation: powapowa 0.2s infinite,
-    combine-rapid-powa 0.5s cubic-bezier(1, 0, 1, 1);
+    closer-rapid-powa 2s cubic-bezier(1, 0, 1, 0);
+}
+.powa-soul.rapid.zoom {
+  animation: powapowa 0.2s infinite, zoomin-rapid-powa 0.2s linear,
+    closer-rapid-powa 2s cubic-bezier(1, 0, 1, 0) forwards;
+}
+.explosion-powa {
+  animation: closer-rapid-powa 2s cubic-bezier(1, 0, 1, 0) forwards,
+    explosion-powa 0.4s forwards !important;
 }
 /* 
 計算式（本当は動的に計算したいが、cssなのでできない）
-left: 50-ポワ半径-(半径*COS(RADIANS(40*n(12時が0)+90)))*1.5(アスペクト比)
+left: 50-ポワ半径-(半径*COS(RADIANS(40*n(12時が0)+90)))*1.5(アスペクト比の逆)
 top: 50-ポワ半径-(半径*SIN(RADIANS(40*n(12時が0)+90)))
 */
 .powa-soul.rapid.r1 {
@@ -173,7 +214,7 @@ top: 50-ポワ半径-(半径*SIN(RADIANS(40*n(12時が0)+90)))
   top: 29.9130666945%;
 }
 .z0 {
-  transform: translateZ(0px)  !important;
+  transform: translateZ(0px) !important;
 }
 @keyframes move-powa {
   0% {
@@ -208,10 +249,14 @@ top: 50-ポワ半径-(半径*SIN(RADIANS(40*n(12時が0)+90)))
     top: 46%;
   }
 }
-@keyframes combine-rapid-powa {
+@keyframes explosion-powa {
+  0% {
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.3);
+  }
   100% {
-    left: 46%;
-    top: 46%;
+    background-color: rgba(255, 255, 255, 0);
+    box-shadow: 0px 0px 300px 300px rgba(255, 255, 255, 0);
   }
 }
 </style>

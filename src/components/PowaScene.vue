@@ -2,7 +2,9 @@
   <div class="parent100">
     <WallBackground></WallBackground>
     <StarBackground></StarBackground>
-    <BasePowaComponent></BasePowaComponent>
+    <!-- <SpotLightComponent></SpotLightComponent> -->
+    <BasePowaComponent @endallanimation="endPowa"></BasePowaComponent>
+    <div class="parent100 filter" :class="fade" @animationend="fadeEnd"></div>
   </div>
 </template>
 
@@ -17,9 +19,46 @@ import StarBackground from "@/components/StarBackground.vue";
   components: { WallBackground, BasePowaComponent, StarBackground },
 })
 export default class PowaScene extends AbstractScene {
-  timeoutForDone = 3000;
+  // timeoutForDone = 3000;
+  fade = "fadein";
+  endPowa() {
+    setTimeout(() => (this.fade = "fadeout"), 500);
+  }
+  fadeEnd(e: AnimationEvent) {
+    if (e.animationName.indexOf("fadeout") === 0) {
+      this.done();
+    }
+  }
 }
 </script>
 
 <style scoped>
+.filter {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: black;
+}
+.fadein {
+  animation: fadein 0.5s linear forwards;
+}
+.fadeout {
+  animation: fadeout 0.5s ease-in forwards;
+}
+@keyframes fadein {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fadeout {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 </style>

@@ -18,18 +18,7 @@ import PunchScene from "@/components/PunchScene.vue";
 import LastPunchScene from "@/components/LastPunchScene.vue";
 import PikaaScene from "@/components/PikaaScene.vue";
 import ResultScene from "@/components/ResultScene.vue";
-import { GASYA_KIND } from "@/constants";
-
-export type UnitInfo = {
-  name: string;
-  rarity: RARITY;
-  pictureurl: string;
-};
-export enum RARITY {
-  SSR = "SSR",
-  SR = "SR",
-  R = "R",
-}
+import { GASYA_KIND, UnitInfo } from "@/constants";
 
 @Component({
   components: {

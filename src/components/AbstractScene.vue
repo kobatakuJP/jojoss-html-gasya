@@ -1,5 +1,5 @@
 <script lang="ts">
-import { RARITY, UnitInfo } from "@/views/Home.vue";
+import { RARITY, UnitInfo } from "@/constants";
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component

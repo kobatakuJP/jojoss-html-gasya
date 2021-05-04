@@ -4,3 +4,13 @@ export const enum GASYA_KIND {
     KORIN,
     JOJOFES
 }
+export type UnitInfo = {
+  name: string;
+  rarity: RARITY;
+  pictureurl: string;
+};
+export enum RARITY {
+  SSR = "SSR",
+  SR = "SR",
+  R = "R",
+}

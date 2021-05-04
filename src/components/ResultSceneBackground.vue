@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { Component, Prop } from "vue-property-decorator";
-import { RARITY } from "@/views/Home.vue";
+import { RARITY } from "@/constants";
 import BaseCanvasComponent, {
   canW,
   canH,

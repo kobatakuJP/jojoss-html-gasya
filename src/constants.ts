@@ -1,9 +1,6 @@
-export const enum SCENE {
-    SELECT_GASYA,
-    POWA,
-    PUNCHER_APPEAR,
-    PUNCH,
-    LAST_PUNCH,
-    PIKAA,
-    RESULT,
+export const enum GASYA_KIND {
+    ZENBU,
+    CHO_KORIN,
+    KORIN,
+    JOJOFES
 }

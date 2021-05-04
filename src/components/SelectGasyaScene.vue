@@ -1,25 +1,33 @@
 <template>
   <div class="parent100 noselect">
-    <div style="font-weight: bold">ダイヤガシャ</div>
-    <div ref="pc" class="pc" @click="pcClick">
-      パソコン<br /><br /><br />
-      {{ message }}
+    <div style="height: 5%; background-color: rgb(81, 58, 52)">
+      <button class="gasya-banner" @click="gasyaTo(0)">ダイヤガシャ1</button>
+      <!-- <button class="gasya-banner" @click="gasyaTo(1)">ダイヤガシャ2</button>
+      <button class="gasya-banner" @click="gasyaTo(2)">ダイヤガシャ3</button> -->
     </div>
-    <div class="gasya-button ikkai" @click="pullGasha(1)">
-      <SingleGasyaButtonComponent></SingleGasyaButtonComponent>
+    <div style="height: 95%">
+      <div style="font-weight: bold">ダイヤガシャ</div>
+      <div ref="pc" class="pc" @click="pcClick">
+        パソコン<br /><br /><br />
+        {{ message }}
+      </div>
+      <div class="gasya-button ikkai" @click="pullGasha(1)">
+        <SingleGasyaButtonComponent></SingleGasyaButtonComponent>
+      </div>
+      <div class="spacer"></div>
+      <div class="gasya-button jukkai" @click="pullGasha(10)">
+        <SetGasyaButtonComponent></SetGasyaButtonComponent>
+      </div>
+      <div class="version">version:{{ version }}</div>
     </div>
-    <div class="spacer"></div>
-    <div class="gasya-button jukkai" @click="pullGasha(10)">
-      <SetGasyaButtonComponent></SetGasyaButtonComponent>
-    </div>
-    <div class="version">version:{{ version }}</div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import SingleGasyaButtonComponent from "@/components/SingleGasyaButtonComponent.vue";
 import SetGasyaButtonComponent from "@/components/SetGasyaButtonComponent.vue";
+import { GASYA_KIND } from "@/constants";
 
 @Component({
   components: { SingleGasyaButtonComponent, SetGasyaButtonComponent },
@@ -27,7 +35,25 @@ import SetGasyaButtonComponent from "@/components/SetGasyaButtonComponent.vue";
 export default class SelectGasyaScene extends Vue {
   version = process.env.VUE_APP_GIT_COMMIT_HASH;
   pcCount = 0;
+  kind = GASYA_KIND.ZENBU;
   message = "夢の全部入りガシャ！";
+  @Watch("kind")
+  changeKind(val: GASYA_KIND) {
+    switch (val) {
+      case GASYA_KIND.ZENBU:
+        this.message = "夢の全部入りガシャ！";
+        break;
+      case GASYA_KIND.CHO_KORIN:
+        this.message = "超降臨ガシャ！";
+        break;
+      case GASYA_KIND.KORIN:
+        this.message = "降臨ガシャ！";
+        break;
+    }
+  }
+  gasyaTo(v: GASYA_KIND) {
+    this.kind = v;
+  }
   pullGasha(v: number): void {
     this.$emit("pull", v);
   }
@@ -51,6 +77,10 @@ export default class SelectGasyaScene extends Vue {
   bottom: 0;
   font-size: 1rem;
   font-weight: bold;
+}
+.gasya-banner {
+  height: 100%;
+  font-size: 0.8rem;
 }
 .gasya-button {
   display: flex;

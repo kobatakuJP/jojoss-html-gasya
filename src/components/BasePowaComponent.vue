@@ -72,7 +72,7 @@ export default class PowaScene extends Vue {
         (e.target as HTMLElement).classList.add("explosion-powa");
       } else {
         // 他は消滅させる
-        (e.target as HTMLElement).style.width = "0%";
+        (e.target as HTMLElement).style.display = "none";
       }
     } else if (e.animationName.indexOf("explosion-powa") === 0) {
       this.$emit("endallanimation");

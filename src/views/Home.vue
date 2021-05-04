@@ -18,6 +18,7 @@ import PunchScene from "@/components/PunchScene.vue";
 import LastPunchScene from "@/components/LastPunchScene.vue";
 import PikaaScene from "@/components/PikaaScene.vue";
 import ResultScene from "@/components/ResultScene.vue";
+import { GASYA_KIND } from "@/constants";
 
 export type UnitInfo = {
   name: string;
@@ -53,13 +54,13 @@ export default class Home extends Vue {
   ];
   currentScene = this.scenes[0];
   result: UnitInfo[] = [];
-  async actionPull(n: number): Promise<void> {
-    const json: UnitInfo[] = await this.gasya(n);
+  async actionPull(n: number, kind: GASYA_KIND): Promise<void> {
+    const json: UnitInfo[] = await this.gasya(n, kind);
     this.result = json;
     this.nextScene();
   }
-  async gasya(n: number): Promise<UnitInfo[]> {
-    const resp = await fetch(`/.netlify/functions/gasya?num=${n}`);
+  async gasya(n: number, kind: GASYA_KIND): Promise<UnitInfo[]> {
+    const resp = await fetch(`/.netlify/functions/gasya?num=${n}&kind=${kind}`);
     return resp.json();
   }
   nextScene(): void {

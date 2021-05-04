@@ -1,9 +1,9 @@
 <template>
   <div class="parent100 noselect">
     <div style="height: 5%; background-color: rgb(81, 58, 52)">
-      <button class="gasya-banner" @click="gasyaTo(0)">ダイヤガシャ1</button>
-      <!-- <button class="gasya-banner" @click="gasyaTo(1)">ダイヤガシャ2</button>
-      <button class="gasya-banner" @click="gasyaTo(2)">ダイヤガシャ3</button> -->
+      <button class="gasya-banner" @click="gasyaTo(0)"><span v-show="kind === 0">★</span>ダイヤガシャ1</button>
+      <button class="gasya-banner" @click="gasyaTo(1)"><span v-show="kind === 1">★</span>ダイヤガシャ2</button>
+      <button class="gasya-banner" @click="gasyaTo(2)"><span v-show="kind === 2">★</span>ダイヤガシャ3</button>
     </div>
     <div style="height: 95%">
       <div style="font-weight: bold">ダイヤガシャ</div>
@@ -55,7 +55,7 @@ export default class SelectGasyaScene extends Vue {
     this.kind = v;
   }
   pullGasha(v: number): void {
-    this.$emit("pull", v);
+    this.$emit("pull", v, this.kind);
   }
   pcClick(): void {
     this.pcCount++;

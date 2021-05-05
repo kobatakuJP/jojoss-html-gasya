@@ -175,7 +175,8 @@ export default class PowaScene extends Vue {
 .explosion-powa {
   left: 50% !important;
   top: 50% !important;
-  width: 0% !important;
+  width: 1px !important;
+  background-color: rgba(0, 0, 0, 0);
   animation: closer-rapid-powa 2s cubic-bezier(1, 0, 1, 0) forwards,
     explosion-powa 0.4s forwards !important;
 }
@@ -286,5 +287,6 @@ top: 50-ポワ半径-(半径*SIN(RADIANS(40*n(12時が0)+90)))
     box-shadow: 0px 0px 300px 300px rgba(255, 255, 255, 0),
       0px 0px 300px 300px rgba(255, 255, 255, 0),
       0px 0px 300px 300px rgba(255, 255, 255, 0);
-  }}
+  }
+}
 </style>

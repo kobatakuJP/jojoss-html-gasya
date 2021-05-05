@@ -41,7 +41,7 @@ export default class ResultSceneBackground extends BaseCanvasComponent {
   }
   draw(): void {
     if (!this.ctx) return;
-    this.ctx.clearRect(0, 0, 1650, 2475);
+    this.ctx.clearRect(0, 0, canW, canH);
     switch (this.rarity) {
       case RARITY.SSR:
         this.ssrDraw();
@@ -92,25 +92,25 @@ export default class ResultSceneBackground extends BaseCanvasComponent {
     if (!this.ctx) return;
     this.ctx.beginPath();
     this.ctx.fillStyle = "rgb(171,233,204)";
-    this.ctx.fillRect(92, 0, 20, 2475);
+    this.ctx.fillRect(92, 0, 20, canH);
     this.ctx.fillStyle = "rgb(234,99,155)";
-    this.ctx.fillRect(182, 0, 45, 2475);
+    this.ctx.fillRect(182, 0, 45, canH);
     this.ctx.fillStyle = "rgb(118,183,193)";
-    this.ctx.fillRect(227, 0, 95, 2475);
+    this.ctx.fillRect(227, 0, 95, canH);
     this.ctx.fillStyle = "rgb(176,107,184)";
-    this.ctx.fillRect(503, 0, 21, 2475);
+    this.ctx.fillRect(503, 0, 21, canH);
     this.ctx.fillStyle = "rgb(238,151,219)";
-    this.ctx.fillRect(631, 0, 20, 2475);
+    this.ctx.fillRect(631, 0, 20, canH);
     this.ctx.fillStyle = "rgb(208,120,84)";
-    this.ctx.fillRect(1145, 0, 22, 2475);
+    this.ctx.fillRect(1145, 0, 22, canH);
     this.ctx.fillStyle = "rgb(245,188,217)";
-    this.ctx.fillRect(1322, 0, 45, 2475);
+    this.ctx.fillRect(1322, 0, 45, canH);
     this.ctx.fillStyle = "rgb(90,179,188)";
-    this.ctx.fillRect(1373, 0, 96, 2475);
+    this.ctx.fillRect(1373, 0, 96, canH);
     this.ctx.fillStyle = "rgb(241,156,196)";
-    this.ctx.fillRect(1476, 0, 24, 2475);
+    this.ctx.fillRect(1476, 0, 24, canH);
     this.ctx.fillStyle = "rgb(171,233,204)";
-    this.ctx.fillRect(1543, 0, 28, 2475);
+    this.ctx.fillRect(1543, 0, 28, canH);
   }
 }
 </script>

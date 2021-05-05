@@ -1,9 +1,9 @@
 <template>
   <div class="parent100 noselect">
     <div style="height: 5%; background-color: rgb(81, 58, 52)">
-      <button class="gasya-banner" @click="gasyaTo(0)"><span v-show="kind === 0">★</span>ダイヤガシャ1</button>
-      <button class="gasya-banner" @click="gasyaTo(1)"><span v-show="kind === 1">★</span>ダイヤガシャ2</button>
-      <button class="gasya-banner" @click="gasyaTo(2)"><span v-show="kind === 2">★</span>ダイヤガシャ3</button>
+      <button class="gasya-banner" @click="gasyaTo(0)"><span v-show="gasyaKind === 0">★</span>ダイヤガシャ1</button>
+      <button class="gasya-banner" @click="gasyaTo(1)"><span v-show="gasyaKind === 1">★</span>ダイヤガシャ2</button>
+      <button class="gasya-banner" @click="gasyaTo(2)"><span v-show="gasyaKind === 2">★</span>ダイヤガシャ3</button>
     </div>
     <div style="height: 95%">
       <div style="font-weight: bold">ダイヤガシャ</div>
@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from "vue-property-decorator";
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import SingleGasyaButtonComponent from "@/components/SingleGasyaButtonComponent.vue";
 import SetGasyaButtonComponent from "@/components/SetGasyaButtonComponent.vue";
 import { GASYA_KIND } from "@/constants";
@@ -35,9 +35,9 @@ import { GASYA_KIND } from "@/constants";
 export default class SelectGasyaScene extends Vue {
   version = process.env.VUE_APP_GIT_COMMIT_HASH;
   pcCount = 0;
-  kind = GASYA_KIND.ZENBU;
+  @Prop() gasyaKind!: GASYA_KIND;
   message = "夢の全部入りガシャ！";
-  @Watch("kind")
+  @Watch("gasyaKind")
   changeKind(val: GASYA_KIND) {
     switch (val) {
       case GASYA_KIND.ZENBU:
@@ -51,11 +51,14 @@ export default class SelectGasyaScene extends Vue {
         break;
     }
   }
+  mounted() {
+    this.changeKind(this.gasyaKind)
+  }
   gasyaTo(v: GASYA_KIND) {
-    this.kind = v;
+    this.$emit("gasyaTo", v);
   }
   pullGasha(v: number): void {
-    this.$emit("pull", v, this.kind);
+    this.$emit("pull", v);
   }
   pcClick(): void {
     this.pcCount++;

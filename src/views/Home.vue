@@ -5,6 +5,8 @@
       @done="sceneDone"
       :result="result"
       @pull="actionPull"
+      @gasyaTo="gasyaTo"
+      :gasyaKind="currentGasyaKind"
     ></component>
   </div>
 </template>
@@ -42,14 +44,15 @@ export default class Home extends Vue {
     "ResultScene",
   ];
   currentScene = this.scenes[0];
+  currentGasyaKind = GASYA_KIND.ZENBU;
   result: UnitInfo[] = [];
-  async actionPull(n: number, kind: GASYA_KIND): Promise<void> {
-    const json: UnitInfo[] = await this.gasya(n, kind);
+  async actionPull(n: number): Promise<void> {
+    const json: UnitInfo[] = await this.gasya(n);
     this.result = json;
     this.nextScene();
   }
-  async gasya(n: number, kind: GASYA_KIND): Promise<UnitInfo[]> {
-    const resp = await fetch(`/.netlify/functions/gasya?num=${n}&kind=${kind}`);
+  async gasya(n: number): Promise<UnitInfo[]> {
+    const resp = await fetch(`/.netlify/functions/gasya?num=${n}&kind=${this.currentGasyaKind}`);
     return resp.json();
   }
   nextScene(): void {
@@ -58,6 +61,9 @@ export default class Home extends Vue {
   }
   sceneDone(): void {
     this.nextScene();
+  }
+  gasyaTo(v: GASYA_KIND): void {
+    this.currentGasyaKind = v;
   }
 }
 </script>

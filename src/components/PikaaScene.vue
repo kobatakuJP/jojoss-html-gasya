@@ -1,23 +1,23 @@
 <template>
   <div>
     <ResultSceneBackground :rarity="currenRarity"></ResultSceneBackground>
-    <div class="pikaa">ピカー</div>
+    <StarBackground :isBreak="true" @breaked="done"></StarBackground>
   </div>
 </template>
 
 <script lang="ts">
 import { Component } from "vue-property-decorator";
-import AbstractScene from "@/components/AbstractScene.vue"
-import ResultSceneBackground from "@/components/ResultSceneBackground.vue"
+import AbstractScene from "@/components/AbstractScene.vue";
+import ResultSceneBackground from "@/components/ResultSceneBackground.vue";
+import StarBackground from "@/components/StarBackground.vue";
 
 @Component({
   components: {
-    ResultSceneBackground
-  }
+    ResultSceneBackground,
+    StarBackground,
+  },
 })
-export default class PikaaScene extends AbstractScene {
-  timeoutForDone = 2000;
-}
+export default class PikaaScene extends AbstractScene {}
 </script>
 
 <style scoped>

@@ -32,7 +32,7 @@ import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class PowaScene extends Vue {
   rCount = 0;
-  mounted() {
+  mounted(): void {
     setTimeout(() => {
       (this.$refs.r1 as HTMLElement).classList.add("zoom");
       setTimeout(() => {
@@ -61,7 +61,7 @@ export default class PowaScene extends Vue {
       }, 65 * 8);
     }, 500);
   }
-  rapidAnimEnd(e: AnimationEvent) {
+  rapidAnimEnd(e: AnimationEvent): void {
     // アニメーション名を前方一致で確認（後ろにはvue特有の文字列がくるため）
     if (e.animationName.indexOf("zoomin-rapid-powa") === 0) {
       (e.target as HTMLElement).classList.add("z0");

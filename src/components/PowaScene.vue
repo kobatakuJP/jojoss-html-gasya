@@ -20,10 +20,10 @@ import StarBackground from "@/components/StarBackground.vue";
 })
 export default class PowaScene extends AbstractScene {
   fade = "fadein";
-  endPowa() {
+  endPowa(): void {
     setTimeout(() => (this.fade = "fadeout"), 500);
   }
-  fadeEnd(e: AnimationEvent) {
+  fadeEnd(e: AnimationEvent): void {
     if (e.animationName.indexOf("fadeout") === 0) {
       this.done();
     }

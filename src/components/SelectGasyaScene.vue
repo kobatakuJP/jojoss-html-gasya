@@ -38,7 +38,7 @@ export default class SelectGasyaScene extends Vue {
   @Prop() gasyaKind!: GASYA_KIND;
   message = "夢の全部入りガシャ！";
   @Watch("gasyaKind")
-  changeKind(val: GASYA_KIND) {
+  changeKind(val: GASYA_KIND): void {
     switch (val) {
       case GASYA_KIND.ZENBU:
         this.message = "夢の全部入りガシャ！";
@@ -51,10 +51,10 @@ export default class SelectGasyaScene extends Vue {
         break;
     }
   }
-  mounted() {
+  mounted(): void {
     this.changeKind(this.gasyaKind)
   }
-  gasyaTo(v: GASYA_KIND) {
+  gasyaTo(v: GASYA_KIND): void {
     this.$emit("gasyaTo", v);
   }
   pullGasha(v: number): void {

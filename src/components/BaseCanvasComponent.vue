@@ -10,7 +10,7 @@ export const canH = 2475;
 @Component
 export default class BaseCanvasComponent extends Vue {
   ctx: CanvasRenderingContext2D | null = null;
-  mounted() {
+  mounted(): void {
     this.ctx = (this.$el as HTMLCanvasElement).getContext("2d");
   }
 }

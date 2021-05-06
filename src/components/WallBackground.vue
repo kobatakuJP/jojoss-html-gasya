@@ -16,7 +16,7 @@ export default class WallBackground extends BaseCanvasComponent {
   mounted(): void {
     this.draw();
   }
-  draw() {
+  draw(): void {
     if (!this.ctx) return;
     this.ctx.beginPath();
     this.ctx.fillStyle = "rgb(96,63,32)";

@@ -69,8 +69,6 @@ export default class ResultScene extends AbstractScene {
   bottom: 0;
   margin: auto;
 }
-img {
-}
 table {
   width: 100%;
   height: 100%;

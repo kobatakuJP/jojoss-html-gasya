@@ -17,7 +17,7 @@ export default class StarBackground extends BaseCanvasComponent {
   mounted(): void {
     this.draw();
   }
-  draw() {
+  draw(): void {
     this.drawCircle();
     this.drawStar();
     if (this.isBreak) {
@@ -29,10 +29,10 @@ export default class StarBackground extends BaseCanvasComponent {
       this.startBreakAnim();
     }
   }
-  removeAnim(e: AnimationEvent) {
+  removeAnim(): void {
     this.anim = "";
   }
-  drawCircle() {
+  drawCircle(): void {
     if (!this.ctx) return;
     this.ctx.beginPath();
     this.ctx.arc(canW / 2, canH / 2, 600, 0, 2 * Math.PI);
@@ -48,7 +48,7 @@ export default class StarBackground extends BaseCanvasComponent {
     this.ctx.strokeStyle = "rgb(0,0,0)";
     this.ctx.stroke();
   }
-  drawStar() {
+  drawStar(): void {
     if (!this.ctx) return;
     const base = { x: canW / 2, y: canH / 2 };
     const hankei = 670;
@@ -118,7 +118,7 @@ export default class StarBackground extends BaseCanvasComponent {
     this.ctx.strokeStyle = "black";
     this.ctx.stroke();
   }
-  startBreakAnim() {
+  startBreakAnim(): void {
     this.drawFlashBase();
     setTimeout(() => {
       this.anim = "buruburu";
@@ -137,7 +137,7 @@ export default class StarBackground extends BaseCanvasComponent {
       }, 400);
     }, 400);
   }
-  drawFlashBase() {
+  drawFlashBase(): void {
     if (!this.ctx) return;
     const lineWidth = 40;
     this.ctx.beginPath();
@@ -160,7 +160,7 @@ export default class StarBackground extends BaseCanvasComponent {
     this.ctx.lineWidth = 10;
     this.ctx.stroke();
   }
-  drawHibi1() {
+  drawHibi1(): void {
     if (!this.ctx) return;
     this.ctx.beginPath();
     this.ctx.moveTo(canW / 2, canH / 2);
@@ -187,7 +187,7 @@ export default class StarBackground extends BaseCanvasComponent {
     this.ctx.fillStyle = "rgba(245,244,212, 0.4)";
     this.ctx.fill();
   }
-  drawHibi2(w: number) {
+  drawHibi2(w: number): void {
     if (!this.ctx) return;
     this.ctx.beginPath();
     this.ctx.moveTo(canW / 2, canH / 2);
@@ -231,7 +231,7 @@ export default class StarBackground extends BaseCanvasComponent {
     this.ctx.fillStyle = "rgba(245,244,212, 0.4)";
     this.ctx.fill();
   }
-  drawHibi3() {
+  drawHibi3(): void {
     if (!this.ctx) return;
     this.drawHibi2(30);
     this.ctx.beginPath();
@@ -283,7 +283,7 @@ export default class StarBackground extends BaseCanvasComponent {
     this.ctx.fillStyle = "rgba(245,244,212, 0.6)";
     this.ctx.fill();
   }
-  async explosion() {
+  async explosion(): Promise<void> {
     const d = document.createElement("div");
     d.classList.add("explosion-seed");
     d.addEventListener("animationend", () => {

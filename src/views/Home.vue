@@ -49,10 +49,13 @@ export default class Home extends Vue {
   async actionPull(n: number): Promise<void> {
     const json: UnitInfo[] = await this.gasya(n);
     this.result = json;
+    this.preloadPicture();
     this.nextScene();
   }
   async gasya(n: number): Promise<UnitInfo[]> {
-    const resp = await fetch(`/.netlify/functions/gasya?num=${n}&kind=${this.currentGasyaKind}`);
+    const resp = await fetch(
+      `/.netlify/functions/gasya?num=${n}&kind=${this.currentGasyaKind}`
+    );
     return resp.json();
   }
   nextScene(): void {
@@ -64,6 +67,12 @@ export default class Home extends Vue {
   }
   gasyaTo(v: GASYA_KIND): void {
     this.currentGasyaKind = v;
+  }
+  preloadPicture(): void {
+    for (let v of this.result) {
+      const i = document.createElement("img");
+      i.src = v.pictureurl;
+    }
   }
 }
 </script>

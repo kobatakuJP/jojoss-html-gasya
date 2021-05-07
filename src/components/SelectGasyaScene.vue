@@ -1,9 +1,15 @@
 <template>
   <div class="parent100 noselect">
     <div style="height: 5%; background-color: rgb(81, 58, 52)">
-      <button class="gasya-banner" @click="gasyaTo(0)"><span v-show="gasyaKind === 0">★</span>ダイヤガシャ1</button>
-      <button class="gasya-banner" @click="gasyaTo(1)"><span v-show="gasyaKind === 1">★</span>ダイヤガシャ2</button>
-      <button class="gasya-banner" @click="gasyaTo(2)"><span v-show="gasyaKind === 2">★</span>ダイヤガシャ3</button>
+      <v-btn height="100%" x-small @click="gasyaTo(0)">
+        <span v-show="gasyaKind === 0">★</span>ダイヤガシャ1
+      </v-btn>
+      <v-btn height="100%" x-small @click="gasyaTo(1)">
+        <span v-show="gasyaKind === 1">★</span>ダイヤガシャ2
+      </v-btn>
+      <v-btn height="100%" x-small @click="gasyaTo(2)">
+        <span v-show="gasyaKind === 2">★</span>ダイヤガシャ3
+      </v-btn>
     </div>
     <div style="height: 95%">
       <div style="font-weight: bold">ダイヤガシャ</div>
@@ -18,7 +24,73 @@
       <div class="gasya-button jukkai" @click="pullGasha(10)">
         <SetGasyaButtonComponent></SetGasyaButtonComponent>
       </div>
+    </div>
+    <div class="overlay-all">
       <div class="version">version:{{ version }}</div>
+      <v-btn
+        class="ma-2 menu-btn"
+        text
+        icon
+        color="red lighten-2"
+        @click="drawer = !drawer"
+      >
+        <v-icon>mdi-dots-vertical-circle-outline </v-icon>
+      </v-btn>
+      <v-navigation-drawer v-model="drawer" right absolute temporary>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title class="title"> Share </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
+        <v-list-item>
+          <v-list-item-content>
+            <SNSShareButtonsComponent
+              msg="【ガシャを引こう！】ジョジョSSサ終を偲び、ガシャをHTMLで再現中ゥゥゥ！無料で引けるぞッ！"
+            ></SNSShareButtonsComponent>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title class="title"> Like </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
+        <v-list-item>
+          <v-list-item-content>
+            <iframe
+              src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fjojoss-html-gasya.netlify.app%2F&width=130&layout=button_count&action=like&size=small&share=false&height=21&appId"
+              width="130"
+              height="21"
+              style="border: none; overflow: hidden"
+              scrolling="no"
+              frameborder="0"
+              allowfullscreen="true"
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            ></iframe>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-divider></v-divider>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title class="title"> Past Version </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
+        <v-list-item>
+          <v-list-item-content>
+            <a
+              href="https://607c3e5045487400083dba39--jojoss-html-gasya.netlify.app/"
+              target="_blank"
+              rel="noopener"
+              >Ver 0.1.4</a
+            >
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
+      </v-navigation-drawer>
     </div>
   </div>
 </template>
@@ -27,14 +99,20 @@
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import SingleGasyaButtonComponent from "@/components/SingleGasyaButtonComponent.vue";
 import SetGasyaButtonComponent from "@/components/SetGasyaButtonComponent.vue";
+import SNSShareButtonsComponent from "@/components/SNSShareButtonsComponent.vue";
 import { GASYA_KIND } from "@/constants";
 
 @Component({
-  components: { SingleGasyaButtonComponent, SetGasyaButtonComponent },
+  components: {
+    SingleGasyaButtonComponent,
+    SetGasyaButtonComponent,
+    SNSShareButtonsComponent,
+  },
 })
 export default class SelectGasyaScene extends Vue {
   version = process.env.VUE_APP_GIT_COMMIT_HASH;
   pcCount = 0;
+  drawer = false;
   @Prop() gasyaKind!: GASYA_KIND;
   message = "夢の全部入りガシャ！";
   @Watch("gasyaKind")
@@ -52,7 +130,7 @@ export default class SelectGasyaScene extends Vue {
     }
   }
   mounted(): void {
-    this.changeKind(this.gasyaKind)
+    this.changeKind(this.gasyaKind);
   }
   gasyaTo(v: GASYA_KIND): void {
     this.$emit("gasyaTo", v);
@@ -75,11 +153,22 @@ export default class SelectGasyaScene extends Vue {
 
 <style scoped>
 .version {
-  position: fixed;
+  position: absolute;
   left: 0;
   bottom: 0;
   font-size: 1rem;
   font-weight: bold;
+}
+.menu-btn {
+  position: absolute;
+  right: 0;
+}
+.overlay-all {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
 }
 .gasya-banner {
   height: 100%;

@@ -4,5 +4,9 @@ module.exports = {
             entry: 'src/main.ts',
             title: 'ジョジョSS ガシャ',
         }
-    }
+    },
+
+    transpileDependencies: [
+      'vuetify'
+    ]
 }

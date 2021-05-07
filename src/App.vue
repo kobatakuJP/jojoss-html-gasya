@@ -22,6 +22,12 @@ export default class Home extends Vue {
       this.myStyle.height = `${w * 1.5}px`;
       this.myStyle.width = `${w}px`;
     }
+    this.setFillHeight();
+  }
+  /** スマホで100vhがうまくないのの対策 */
+  setFillHeight() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
   }
   mounted(): void {
     this.handleResize();

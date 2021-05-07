@@ -169,7 +169,7 @@ export default class SelectGasyaScene extends Vue {
   left: 0;
   bottom: 0;
   width: 100vw;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   pointer-events: none;
 }
 .gasya-banner {

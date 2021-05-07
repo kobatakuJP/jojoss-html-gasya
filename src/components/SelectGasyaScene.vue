@@ -162,6 +162,7 @@ export default class SelectGasyaScene extends Vue {
 .menu-btn {
   position: absolute;
   right: 0;
+  pointer-events: visible;
 }
 .overlay-all {
   position: fixed;
@@ -169,6 +170,7 @@ export default class SelectGasyaScene extends Vue {
   bottom: 0;
   width: 100vw;
   height: 100vh;
+  pointer-events: none;
 }
 .gasya-banner {
   height: 100%;

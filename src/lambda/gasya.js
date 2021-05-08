@@ -5,7 +5,7 @@ const UNITS_SR = units.filter(v => v.rarity === "SR");
 const UNITS_R = units.filter(v => v.rarity === "R");
 const UNITS_CHOKORIN = UNITS_SSR.filter(v => v.howtoget.match(/超降臨[^セ]/));
 const UNITS_KORIN = UNITS_SSR.filter(v => v.howtoget.match(/[^超]降臨/));
-const UNITS_GENTEI = UNITS_SSR.filter(v => v.howtoget.match(/限定/));
+const UNITS_GENTEI = UNITS_SSR.filter(v => v.howtoget.match(/限定/)).filter(v => !v.ability.match(/レッドライン/)).filter(v => !v.ability.match(/うぬぼれた性格/));
 const KIND = {
   ZENBU: 0,
   CHO_KORIN: 1,

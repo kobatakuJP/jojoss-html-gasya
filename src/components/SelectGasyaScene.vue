@@ -1,6 +1,6 @@
 <template>
   <div class="parent100 noselect">
-    <div style="height: 5%; background-color: rgb(81, 58, 52)">
+    <div class="gasya-banner-container">
       <v-btn height="100%" x-small @click="gasyaTo(0)">
         <span v-show="gasyaKind === 0">★</span>ダイヤガシャ1
       </v-btn>
@@ -9,6 +9,9 @@
       </v-btn>
       <v-btn height="100%" x-small @click="gasyaTo(2)">
         <span v-show="gasyaKind === 2">★</span>ダイヤガシャ3
+      </v-btn>
+      <v-btn height="100%" x-small @click="gasyaTo(3)">
+        <span v-show="gasyaKind === 3">★</span>ダイヤガシャ4
       </v-btn>
     </div>
     <div style="height: 95%">
@@ -127,6 +130,9 @@ export default class SelectGasyaScene extends Vue {
       case GASYA_KIND.KORIN:
         this.message = "降臨ガシャ！";
         break;
+      case GASYA_KIND.JOJOFES:
+        this.message = "ジョジョフェスッ！";
+        break;
     }
   }
   mounted(): void {
@@ -171,6 +177,16 @@ export default class SelectGasyaScene extends Vue {
   width: 100vw;
   height: calc(var(--vh, 1vh) * 100);
   pointer-events: none;
+}
+.gasya-banner-container {
+  height: 5%;
+  background-color: rgb(81, 58, 52);
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+.gasya-banner-container::-webkit-scrollbar {
+  display: none;
 }
 .gasya-banner {
   height: 100%;

@@ -17,7 +17,9 @@
     <div style="height: 95%">
       <div style="font-weight: bold">ダイヤガシャ</div>
       <div ref="pc" class="pc" @click="pcClick">
-        パソコン<br /><br /><br />
+        パソコン<br />
+        10回ガシャはSSR1枚確定ィィィ！
+        <br />
         {{ message }}
       </div>
       <div class="gasya-button ikkai" @click="pullGasha(1)">

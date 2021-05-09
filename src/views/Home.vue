@@ -53,8 +53,9 @@ export default class Home extends Vue {
     this.nextScene();
   }
   async gasya(n: number): Promise<UnitInfo[]> {
+    const kakutei = n === 10 ? 1 : 0;
     const resp = await fetch(
-      `/.netlify/functions/gasya?num=${n}&kind=${this.currentGasyaKind}`
+      `/.netlify/functions/gasya?num=${n}&kind=${this.currentGasyaKind}&kakutei=${kakutei}`
     );
     return resp.json();
   }

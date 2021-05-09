@@ -16,29 +16,43 @@ const KIND = {
 export function handler(event, context, callback) {
   const num = parseInt(event?.queryStringParameters?.num);
   const kind = parseInt(event?.queryStringParameters?.kind);
+  const kakutei = parseInt(event?.queryStringParameters?.kakutei) || 0;
   if (isNaN(num) || isNaN(kind)) {
     callback(null, {
       statusCode: 500
     })
   } else {
-    const result = renGasya(num, kind)
+    const result = renGasya(num, kind, kakutei)
     callback(null, {
       statusCode: 200,
       body: JSON.stringify(result)
     })
   }
 }
-function renGasya(num, kind) {
+
+function renGasya(num, kind, kakutei) {
   const result = []
   for (let i = 0; i < num; i++) {
     result.push(gasya(kind));
   }
-  return result;
+  const ssrs = result.filter(v => v.rarity === "SSR");
+  const remainSSR = kakutei - ssrs.length;
+  if (remainSSR > 0) {
+    for (let i = 0; i < remainSSR; i++) {
+      const unit = gasya(kind, true);
+      const raritys = result.map(v => v.rarity);
+      const revIdx = raritys.reverse().findIndex(v => v !== "SSR");
+      const idx = result.length - 1 - revIdx;
+      // remainSSRがある以上findIndexがnotfoundはない
+      result[idx] = unit;
+    }
+  }
+  return fixOrder(result);
 }
 
-function gasya(kind) {
+function gasya(kind, forceSSR = false) {
   const s = Math.random();
-  if (s < PAR_OF_SSR) {
+  if (s < PAR_OF_SSR || forceSSR) {
     switch (kind) {
       case KIND.ZENBU:
         return getRandFromArr(UNITS_SSR)
@@ -48,8 +62,9 @@ function gasya(kind) {
         return getRandFromArr(UNITS_KORIN)
       case KIND.JOJOFES:
         return getRandFromArr(UNITS_GENTEI)
+      default:
+        return getRandFromArr(UNITS_SSR)
     }
-    return getRandFromArr(UNITS_SSR)
   } else if (s < (PAR_OF_SSR + PAR_OF_SR)) {
     return getRandFromArr(UNITS_SR)
   } else {
@@ -57,6 +72,23 @@ function gasya(kind) {
   }
 }
 
+/** 
+ * - SSRが1以上あれば最後の1つはかならずSSR
+ */
+function fixOrder(arr) {
+  const raritys = arr.map(v => v.rarity);
+  const revIdx = raritys.reverse().findIndex(v => v === "SSR");
+  const idx = revIdx === -1 ? -1 : arr.length - 1 - revIdx
+  if (idx >= 0) {
+    const ssr = arr[idx];
+    const lastIdx = arr.length - 1
+    arr.splice(idx, 1, arr[lastIdx]);
+    arr.splice(lastIdx, 1, ssr);
+  }
+  return arr;
+}
+
+/** 配列からランダムの値を取り出す */
 function getRandFromArr(arr) {
   return arr[Math.floor(Math.random() * arr.length)]
 }

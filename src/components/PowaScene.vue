@@ -3,22 +3,27 @@
     <WallBackground></WallBackground>
     <StarBackground></StarBackground>
     <!-- <SpotLightComponent></SpotLightComponent> -->
-    <BasePowaComponent @endallanimation="endPowa"></BasePowaComponent>
+    <BasePowaComponent
+      @endallanimation="endPowa"
+      :targetRarity="this.result[0].rarity"
+    ></BasePowaComponent>
     <div class="parent100 filter" :class="fade" @animationend="fadeEnd"></div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component } from "vue-property-decorator";
+import { Component, Prop } from "vue-property-decorator";
 import AbstractScene from "@/components/AbstractScene.vue";
 import WallBackground from "@/components/WallBackground.vue";
 import BasePowaComponent from "@/components/BasePowaComponent.vue";
 import StarBackground from "@/components/StarBackground.vue";
+import { UnitInfo } from "@/constants";
 
 @Component({
   components: { WallBackground, BasePowaComponent, StarBackground },
 })
 export default class PowaScene extends AbstractScene {
+  @Prop() result!: UnitInfo[];
   fade = "fadein";
   endPowa(): void {
     setTimeout(() => (this.fade = "fadeout"), 500);

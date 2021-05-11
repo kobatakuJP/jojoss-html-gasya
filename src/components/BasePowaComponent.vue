@@ -27,39 +27,61 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { RARITY } from "@/constants";
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 
 @Component
 export default class PowaScene extends Vue {
   rCount = 0;
+  powaColor = "white";
+  @Prop() targetRarity!: RARITY;
+  @Watch("powaColor")
+  powaColorChange(v: string) {
+    document.documentElement.style.setProperty("--powa-color", this.powaColor);
+  }
   mounted(): void {
+    const refs = [
+      this.$refs.r1,
+      this.$refs.r4,
+      this.$refs.r7,
+      this.$refs.r2,
+      this.$refs.r5,
+      this.$refs.r9,
+      this.$refs.r3,
+      this.$refs.r6,
+      this.$refs.r8,
+    ];
+    // 真ん中で集合するポワ
     setTimeout(() => {
-      (this.$refs.r1 as HTMLElement).classList.add("zoom");
-      setTimeout(() => {
-        (this.$refs.r4 as HTMLElement).classList.add("zoom");
-      }, 65 * 1);
-      setTimeout(() => {
-        (this.$refs.r7 as HTMLElement).classList.add("zoom");
-      }, 65 * 2);
-      setTimeout(() => {
-        (this.$refs.r2 as HTMLElement).classList.add("zoom");
-      }, 65 * 3);
-      setTimeout(() => {
-        (this.$refs.r5 as HTMLElement).classList.add("zoom");
-      }, 65 * 4);
-      setTimeout(() => {
-        (this.$refs.r9 as HTMLElement).classList.add("zoom");
-      }, 65 * 5);
-      setTimeout(() => {
-        (this.$refs.r3 as HTMLElement).classList.add("zoom");
-      }, 65 * 6);
-      setTimeout(() => {
-        (this.$refs.r6 as HTMLElement).classList.add("zoom");
-      }, 65 * 7);
-      setTimeout(() => {
-        (this.$refs.r8 as HTMLElement).classList.add("zoom");
-      }, 65 * 8);
+      refs.forEach((v, i) =>
+        setTimeout(() => {
+          (v as HTMLElement).classList.add("zoom");
+        }, 65 * i)
+      );
     }, 500);
+    // ポワの色変え
+    setTimeout(() => {
+      this.changePowaColor();
+    }, 2000);
+  }
+  changePowaColor() {
+    const seed = Math.random();
+    const blue = "rgba(135, 206, 235, 0.3)";
+    const gold = "rgba(255, 215, 0, 0.3)";
+    switch (this.targetRarity) {
+      case RARITY.R:
+        this.powaColor = blue;
+        break;
+      case RARITY.SR:
+      case RARITY.SSR: // TODO 虹できたらそちらに変更
+        if (seed < 0.4) {
+          this.powaColor = blue;
+        } else {
+          this.powaColor = gold;
+        }
+        break;
+    }
+    this.targetRarity;
   }
   rapidAnimEnd(e: AnimationEvent): void {
     // アニメーション名を前方一致で確認（後ろにはvue特有の文字列がくるため）
@@ -81,6 +103,11 @@ export default class PowaScene extends Vue {
 }
 </script>
 
+<style>
+:root {
+  --powa-color: white;
+}
+</style>
 <style scoped>
 .powa-wrapper {
   perspective: 400px;
@@ -165,8 +192,7 @@ export default class PowaScene extends Vue {
 .powa-soul.rapid {
   width: 8%;
   transform: translateZ(300px);
-  animation: powapowa 0.2s infinite,
-    closer-rapid-powa 2s cubic-bezier(1, 0, 1, 0);
+  animation: closer-rapid-powa 2s cubic-bezier(1, 0, 1, 0);
 }
 .powa-soul.rapid.zoom {
   animation: powapowa 0.2s infinite, zoomin-rapid-powa 0.2s linear,
@@ -234,13 +260,13 @@ top: 50-ポワ半径-(半径*SIN(RADIANS(40*n(12時が0)+90)))
 }
 @keyframes powapowa {
   0% {
-    box-shadow: 0px 0px 2px 2px white, 0px 0px 10px 10px white;
+    box-shadow: 0px 0px 2px 2px var(--powa-color), 0px 0px 10px 10px white;
   }
   50% {
-    box-shadow: 0px 0px 2px 4px white, 0px 0px 10px 10px white;
+    box-shadow: 0px 0px 2px 4px var(--powa-color), 0px 0px 10px 10px white;
   }
   100% {
-    box-shadow: 0px 0px 2px 2px white, 0px 0px 10px 10px white;
+    box-shadow: 0px 0px 2px 2px var(--powa-color), 0px 0px 10px 10px white;
   }
 }
 @keyframes zoomin-rapid-powa {

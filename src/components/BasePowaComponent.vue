@@ -1,5 +1,5 @@
 <template>
-  <div class="powa-wrapper parent100">
+  <div class="powa-wrapper parent100" :style="styles">
     <div class="powa-soul s s1"></div>
     <div class="powa-soul s s2"></div>
     <div class="powa-soul s s3"></div>
@@ -34,11 +34,12 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 export default class PowaScene extends Vue {
   rCount = 0;
   powaColor = "white";
-  @Prop() targetRarity!: RARITY;
-  @Watch("powaColor")
-  powaColorChange(v: string) {
-    document.documentElement.style.setProperty("--powa-color", this.powaColor);
+  get styles() {
+    return {
+      "--powa-color": this.powaColor,
+    };
   }
+  @Prop() targetRarity!: RARITY;
   mounted(): void {
     const refs = [
       this.$refs.r1,
@@ -103,11 +104,6 @@ export default class PowaScene extends Vue {
 }
 </script>
 
-<style>
-:root {
-  --powa-color: white;
-}
-</style>
 <style scoped>
 .powa-wrapper {
   perspective: 400px;

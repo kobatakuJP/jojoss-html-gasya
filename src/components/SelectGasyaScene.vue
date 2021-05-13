@@ -42,59 +42,7 @@
         <v-icon>mdi-dots-vertical-circle-outline </v-icon>
       </v-btn>
       <v-navigation-drawer v-model="drawer" right absolute temporary>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title class="title"> Share </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-divider></v-divider>
-        <v-list-item>
-          <v-list-item-content>
-            <SNSShareButtonsComponent
-              msg="【ガシャを引こう！】ジョジョSSサ終を偲び、ガシャをHTMLで再現中ゥゥゥ！無料で引けるぞッ！"
-            ></SNSShareButtonsComponent>
-          </v-list-item-content>
-        </v-list-item>
-        <v-divider></v-divider>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title class="title"> Like </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-divider></v-divider>
-        <v-list-item>
-          <v-list-item-content>
-            <iframe
-              src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fjojoss-html-gasya.netlify.app%2F&width=130&layout=button_count&action=like&size=small&share=false&height=21&appId"
-              width="130"
-              height="21"
-              style="border: none; overflow: hidden"
-              scrolling="no"
-              frameborder="0"
-              allowfullscreen="true"
-              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-            ></iframe>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-divider></v-divider>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title class="title"> Past Version </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-divider></v-divider>
-        <v-list-item>
-          <v-list-item-content>
-            <a
-              href="https://607c3e5045487400083dba39--jojoss-html-gasya.netlify.app/"
-              target="_blank"
-              rel="noopener"
-              >Ver 0.1.4</a
-            >
-          </v-list-item-content>
-        </v-list-item>
-        <v-divider></v-divider>
+        <drawer-contents-component></drawer-contents-component>
       </v-navigation-drawer>
     </div>
   </div>
@@ -105,6 +53,7 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import SingleGasyaButtonComponent from "@/components/SingleGasyaButtonComponent.vue";
 import SetGasyaButtonComponent from "@/components/SetGasyaButtonComponent.vue";
 import SNSShareButtonsComponent from "@/components/SNSShareButtonsComponent.vue";
+import DrawerContentsComponent from "@/components/DrawerContentsComponent.vue"
 import { GASYA_KIND } from "@/constants";
 
 @Component({
@@ -112,6 +61,7 @@ import { GASYA_KIND } from "@/constants";
     SingleGasyaButtonComponent,
     SetGasyaButtonComponent,
     SNSShareButtonsComponent,
+    DrawerContentsComponent
   },
 })
 export default class SelectGasyaScene extends Vue {

@@ -65,10 +65,10 @@ import { GASYA_KIND } from "@/constants";
   },
 })
 export default class SelectGasyaScene extends Vue {
-  version = process.env.VUE_APP_GIT_COMMIT_HASH;
+  @Prop() gasyaKind!: GASYA_KIND;
+  readonly version = process.env.VUE_APP_GIT_COMMIT_HASH;
   pcCount = 0;
   drawer = false;
-  @Prop() gasyaKind!: GASYA_KIND;
   message = "夢の全部入りガシャ！";
   @Watch("gasyaKind")
   changeKind(val: GASYA_KIND): void {

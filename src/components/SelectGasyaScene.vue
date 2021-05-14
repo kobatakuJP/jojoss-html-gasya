@@ -53,6 +53,7 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import SingleGasyaButtonComponent from "@/components/SingleGasyaButtonComponent.vue";
 import SetGasyaButtonComponent from "@/components/SetGasyaButtonComponent.vue";
 import SNSShareButtonsComponent from "@/components/SNSShareButtonsComponent.vue";
+import DrawerContentsComponent from "@/components/DrawerContentsComponent.vue";
 import { GASYA_KIND, GASYA_NUM } from "@/constants";
 
 @Component({
@@ -60,7 +61,7 @@ import { GASYA_KIND, GASYA_NUM } from "@/constants";
     SingleGasyaButtonComponent,
     SetGasyaButtonComponent,
     SNSShareButtonsComponent,
-    DrawerContentsComponent
+    DrawerContentsComponent,
   },
 })
 export default class SelectGasyaScene extends Vue {

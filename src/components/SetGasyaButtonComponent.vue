@@ -74,10 +74,10 @@
       </defs>
       <text
         x="70"
-        y="10"
+        y="15"
         style="
           font-weight: bolder;
-          font-size: 60;
+          font-size: 90;
           font-style: oblique;
           stroke: #000000;
           fill: url(#ten);
@@ -87,12 +87,12 @@
         10
       </text>
       <text
-        x="140"
-        y="10"
+        x="170"
+        y="15"
         style="
           font-family: Times New Roman;
           font-weight: bold;
-          font-size: 30;
+          font-size: 50;
           stroke: #86633e;
           fill: #eace8f;
           filter: drop-shadow(1px 1px 1px #000);

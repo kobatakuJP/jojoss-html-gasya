@@ -22,11 +22,11 @@
         <br />
         {{ message }}
       </div>
-      <div class="gasya-button ikkai" @click="pullGasha(1)">
+      <div class="gasya-button ikkai" @click="pullGasha(one)">
         <SingleGasyaButtonComponent></SingleGasyaButtonComponent>
       </div>
       <div class="spacer"></div>
-      <div class="gasya-button jukkai" @click="pullGasha(10)">
+      <div class="gasya-button jukkai" @click="pullGasha(ten)">
         <SetGasyaButtonComponent></SetGasyaButtonComponent>
       </div>
     </div>
@@ -53,8 +53,7 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import SingleGasyaButtonComponent from "@/components/SingleGasyaButtonComponent.vue";
 import SetGasyaButtonComponent from "@/components/SetGasyaButtonComponent.vue";
 import SNSShareButtonsComponent from "@/components/SNSShareButtonsComponent.vue";
-import DrawerContentsComponent from "@/components/DrawerContentsComponent.vue"
-import { GASYA_KIND } from "@/constants";
+import { GASYA_KIND, GASYA_NUM } from "@/constants";
 
 @Component({
   components: {
@@ -67,6 +66,8 @@ import { GASYA_KIND } from "@/constants";
 export default class SelectGasyaScene extends Vue {
   @Prop() gasyaKind!: GASYA_KIND;
   readonly version = process.env.VUE_APP_GIT_COMMIT_HASH;
+  readonly one = GASYA_NUM.ONE;
+  readonly ten = GASYA_NUM.TEN
   pcCount = 0;
   drawer = false;
   message = "夢の全部入りガシャ！";
@@ -93,7 +94,7 @@ export default class SelectGasyaScene extends Vue {
   gasyaTo(v: GASYA_KIND): void {
     this.$emit("gasyaTo", v);
   }
-  pullGasha(v: number): void {
+  pullGasha(v: GASYA_NUM): void {
     this.$emit("pull", v);
   }
   pcClick(): void {

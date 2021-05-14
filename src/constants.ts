@@ -14,3 +14,7 @@ export enum RARITY {
   SR = "SR",
   R = "R",
 }
+export const enum GASYA_NUM {
+  ONE = 1,
+  TEN = 10
+}

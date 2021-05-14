@@ -20,7 +20,7 @@ import PunchScene from "@/components/PunchScene.vue";
 import LastPunchScene from "@/components/LastPunchScene.vue";
 import PikaaScene from "@/components/PikaaScene.vue";
 import ResultScene from "@/components/ResultScene.vue";
-import { GASYA_KIND, UnitInfo } from "@/constants";
+import { GASYA_KIND, GASYA_NUM, UnitInfo } from "@/constants";
 
 @Component({
   components: {
@@ -46,7 +46,7 @@ export default class Home extends Vue {
   currentScene = this.scenes[0];
   currentGasyaKind = GASYA_KIND.ZENBU;
   result: UnitInfo[] = [];
-  async actionPull(n: number): Promise<void> {
+  async actionPull(n: GASYA_NUM): Promise<void> {
     const json: UnitInfo[] = await this.gasya(n);
     this.result = json;
     this.preloadPicture();

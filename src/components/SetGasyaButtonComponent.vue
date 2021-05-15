@@ -105,8 +105,10 @@
         style="fill: rgb(76, 75, 135); stroke: black"
       />
       <text
-        x="30"
-        y="78"
+        x="45"
+        y="63"
+        text-anchor="middle"
+        dominant-baseline="central"
         style="
           font-family: Times New Roman;
           font-weight: bold;

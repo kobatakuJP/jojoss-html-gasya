@@ -31,6 +31,10 @@
       <div class="gasya-button jukkai" @click="pullGasha(ten)">
         <SetGasyaButtonComponent :count="next10Count"></SetGasyaButtonComponent>
       </div>
+      <div class="gasya-description">
+        <kakutei-msg-component :msg="kakuteiMsg" />
+      </div>
+      <div class="gasya-description">確定機能は、∞セット目までとなります</div>
     </div>
     <div class="overlay-all">
       <div class="version">version:{{ version }}</div>
@@ -56,6 +60,7 @@ import SingleGasyaButtonComponent from "@/components/SingleGasyaButtonComponent.
 import SetGasyaButtonComponent from "@/components/SetGasyaButtonComponent.vue";
 import SNSShareButtonsComponent from "@/components/SNSShareButtonsComponent.vue";
 import DrawerContentsComponent from "@/components/DrawerContentsComponent.vue";
+import KakuteiMsgComponent from "@/components/KakuteiMsgComponent.vue";
 import { GASYA_KIND, GASYA_NUM, LOCALSTORAGE_KEYS } from "@/constants";
 
 /** localstorageから特定のガシャのカウント情報を取得 */
@@ -71,6 +76,7 @@ function getCountFromLS(kind: GASYA_KIND, n: GASYA_NUM): number {
     SetGasyaButtonComponent,
     SNSShareButtonsComponent,
     DrawerContentsComponent,
+    KakuteiMsgComponent,
   },
 })
 export default class SelectGasyaScene extends Vue {
@@ -105,6 +111,57 @@ export default class SelectGasyaScene extends Vue {
   get next10Count(): number {
     return (this.counts[this.gasyaKind]?.set || 0) + 1;
   }
+  get kakuteiNum(): number {
+    let result = 1; // 10連ならまず1つ
+    const c = this.next10Count;
+    switch (this.gasyaKind) {
+      case GASYA_KIND.ZENBU:
+      case GASYA_KIND.CHO_KORIN:
+        if (c === 1 || c === 2 || c === 4 || c === 8 || c % 3 === 0) {
+          result += 2; // 1,2,4,7,8,3の倍数で2枚確定（7は7の倍数側になる）
+        }
+        if (c % 7 === 0) {
+          result = GASYA_NUM.TEN;
+        }
+        break;
+      case GASYA_KIND.KORIN:
+      case GASYA_KIND.JOJOFES:
+        if (c % 2 === 0) {
+          result += 2; // 2の倍数セット目で2枚確定
+        }
+        break;
+      default:
+      // 特になし
+    }
+    return result;
+  }
+  /** ピックアップ数 */
+  get puNum(): number {
+    switch (this.gasyaKind) {
+      case GASYA_KIND.ZENBU:
+      case GASYA_KIND.CHO_KORIN:
+        return this.next10Count % 5 === 0 ? 1 : 0;
+      default:
+        return 0;
+    }
+  }
+  /** 厳選ユニット確定 */
+  get gensenNum(): number {
+    switch (this.gasyaKind) {
+      case GASYA_KIND.ZENBU:
+      case GASYA_KIND.CHO_KORIN:
+        return this.next10Count % 10 === 0 ? 1 : 0;
+      default:
+        return 0;
+    }
+  }
+  get kakuteiMsg(): string {
+    // "2の倍数セット目でSSR2枚以上確定ッ！";
+    // "厳選1枚&ピックアップ1枚&SSR1枚確定中ッ！";
+    // "厳選1枚&ピックアップ1枚&SSR3枚確定中ッ！";
+    // "10の倍数セット目で厳選ユニット確定ッ！";
+    return `SSR${this.kakuteiNum}枚確定中ッ！`;
+  }
   @Watch("gasyaKind")
   changeKind(val: GASYA_KIND): void {
     switch (val) {
@@ -129,7 +186,11 @@ export default class SelectGasyaScene extends Vue {
     this.$emit("gasyaTo", v);
   }
   pullGasha(v: GASYA_NUM): void {
-    this.$emit("pull", v);
+    if (v === this.one) {
+      this.$emit("pull", v, 0, 0, 0);
+    } else if (v === this.ten) {
+      this.$emit("pull", v, this.kakuteiNum, this.puNum, this.gensenNum);
+    }
   }
   pcClick(): void {
     this.pcCount++;
@@ -196,7 +257,18 @@ export default class SelectGasyaScene extends Vue {
 .gasya-button.jukkai {
   border-color: rgb(83, 41, 27);
 }
-
+.gasya-description {
+  display: flex;
+  width: 90%;
+  height: 5%;
+  vertical-align: middle;
+  margin: auto;
+  justify-content: center; /*左右中央揃え*/
+  align-items: center; /*上下中央揃え*/
+}
+.no-border {
+  border: none;
+}
 .spacer {
   margin: 10%;
 }

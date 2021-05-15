@@ -6,23 +6,27 @@ const UNITS_R = units.filter(v => v.rarity === "R");
 const UNITS_CHOKORIN = UNITS_SSR.filter(v => v.howtoget.match(/超降臨[^セ]/));
 const UNITS_KORIN = UNITS_SSR.filter(v => v.howtoget.match(/[^超]降臨/));
 const UNITS_GENTEI = UNITS_SSR.filter(v => v.howtoget.match(/限定/)).filter(v => !v.ability.match(/レッドライン/)).filter(v => !v.ability.match(/うぬぼれた性格/));
+const UNITS_CHOKORIN_PU_NAMES = ["（SSR）空条承太郎【金】（終止符を打つ者）", "（SSR）ジョルノ・ジョバァーナ（ゴールド・E・レクイエム）", "（SSR）東方仗助（射程距離内に………入ったぜ………）", "（SSR）ジョナサン・ジョースター＆ジョセフ・ジョースター【白】"]
+const UNITS_CHOKORIN_PU = UNITS_SSR.filter(v => UNITS_CHOKORIN_PU_NAMES.some(t => t === v.name));
+const UNIT_CHOKORIN_GENSEN = UNITS_SSR.find(v => v.name === "（SSR）空条承太郎【金】（終止符を打つ者）")
 const KIND = {
   ZENBU: 0,
   CHO_KORIN: 1,
   KORIN: 2,
   JOJOFES: 3
 }
-
 export function handler(event, context, callback) {
   const num = parseInt(event?.queryStringParameters?.num);
   const kind = parseInt(event?.queryStringParameters?.kind);
   const kakutei = parseInt(event?.queryStringParameters?.kakutei) || 0;
+  const pu = parseInt(event?.queryStringParameters?.pu) || 0;
+  const gensen = parseInt(event?.queryStringParameters?.gensen) || 0;
   if (isNaN(num) || isNaN(kind)) {
     callback(null, {
       statusCode: 500
     })
   } else {
-    const result = renGasya(num, kind, kakutei)
+    const result = renGasya(num, kind, kakutei, pu, gensen)
     callback(null, {
       statusCode: 200,
       body: JSON.stringify(result)
@@ -30,7 +34,7 @@ export function handler(event, context, callback) {
   }
 }
 
-function renGasya(num, kind, kakutei) {
+function renGasya(num, kind, kakutei, pu, gensen) {
   const result = []
   for (let i = 0; i < num; i++) {
     result.push(gasya(kind));
@@ -47,6 +51,7 @@ function renGasya(num, kind, kakutei) {
       result[idx] = unit;
     }
   }
+  overridePUGensen(result, kind, pu, gensen);
   return fixOrder(result);
 }
 
@@ -72,6 +77,35 @@ function gasya(kind, forceSSR = false) {
   }
 }
 
+function overridePUGensen(result, kind, pu, gensen) {
+  const n = pu + gensen;
+  let idxs = []
+  result.forEach((v, i) => { if (v.rarity !== "SSR") idxs.push(i) })
+  for (let i = result.length - 1; i >= 0 && idxs.length < n; i--) {
+    if (!idxs.some(v => i === v)) idxs.push(i);
+  }
+  for (let i = 0; i < pu; i++) {
+    switch (kind) {
+      case KIND.ZENBU:
+      case KIND.CHO_KORIN:
+        const idx = getRandFromArrAndDel(idxs);
+        result[idx] = getRandFromArr(UNITS_CHOKORIN_PU);
+      default:
+      // なにもしない
+    }
+  }
+  for (let i = 0; i < gensen; i++) {
+    switch (kind) {
+      case KIND.ZENBU:
+      case KIND.CHO_KORIN:
+        const idx = getRandFromArrAndDel(idxs);
+        result[idx] = UNIT_CHOKORIN_GENSEN;
+      default:
+      // なにもしない
+    }
+  }
+}
+
 /** 
  * - SSRが1以上あれば最後の1つはかならずSSR
  */
@@ -91,4 +125,11 @@ function fixOrder(arr) {
 /** 配列からランダムの値を取り出す */
 function getRandFromArr(arr) {
   return arr[Math.floor(Math.random() * arr.length)]
+}
+
+/** 配列からランダムの値を取り出し配列から消す(破壊的) */
+function getRandFromArrAndDel(arr) {
+  const rand = getRandFromArr(arr);
+  arr.splice(arr.findIndex(v => v === rand), 1)
+  return rand;
 }

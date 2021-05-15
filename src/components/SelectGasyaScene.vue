@@ -156,11 +156,27 @@ export default class SelectGasyaScene extends Vue {
     }
   }
   get kakuteiMsg(): string {
-    // "2の倍数セット目でSSR2枚以上確定ッ！";
-    // "厳選1枚&ピックアップ1枚&SSR1枚確定中ッ！";
-    // "厳選1枚&ピックアップ1枚&SSR3枚確定中ッ！";
-    // "10の倍数セット目で厳選ユニット確定ッ！";
-    return `SSR${this.kakuteiNum}枚確定中ッ！`;
+    switch (this.gasyaKind) {
+      case GASYA_KIND.ZENBU:
+      case GASYA_KIND.CHO_KORIN: {
+        if (this.kakuteiNum < 2 && this.gensenNum === 0 && this.puNum === 0) {
+          return "10の倍数セット目で厳選ユニット確定ッ！";
+        }
+        const msgs = [];
+        if (this.gensenNum > 0) msgs.push(`厳選${this.gensenNum}枚`);
+        if (this.puNum > 0) msgs.push(`ピックアップ${this.puNum}枚`);
+        msgs.push(`SSR${this.kakuteiNum}枚`);
+        return msgs.join("&") + "確定中ッ！";
+      }
+      case GASYA_KIND.KORIN:
+      case GASYA_KIND.JOJOFES:
+        if (this.kakuteiNum < 2) {
+          return "2の倍数セット目でSSR2枚以上確定ッ！";
+        }
+        return `SSR${this.kakuteiNum}枚確定中ッ！`;
+      default:
+        return "";
+    }
   }
   @Watch("gasyaKind")
   changeKind(val: GASYA_KIND): void {

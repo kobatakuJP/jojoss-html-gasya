@@ -9,7 +9,8 @@
     <v-list-item>
       <v-list-item-content>
         <SNSShareButtonsComponent
-          msg="【ガシャを引こう！】ジョジョSSサ終を偲び、ガシャをHTMLで再現中ゥゥゥ！無料で引けるぞッ！"
+          msg="ジョジョSSサ終を偲び、ガシャをHTMLで再現中ゥゥゥ！無料で引けるぞッ！"
+          :tags="['ガシャ', 'ジョジョSS', '非公式']"
         ></SNSShareButtonsComponent>
       </v-list-item-content>
     </v-list-item>

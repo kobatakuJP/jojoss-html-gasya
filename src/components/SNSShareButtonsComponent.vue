@@ -2,7 +2,7 @@
   <div class="sns_box">
     <div class="sns_button twitter">
       <a
-        :href="`https://twitter.com/intent/tweet?url=${url}&text=${msg}`"
+        :href="`https://twitter.com/intent/tweet?url=${url}&text=${msg}&hashtags=${tags.join(',')}`"
         title="Tweet"
         ><i class="fa fa-twitter"></i
       ></a>
@@ -23,6 +23,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 @Component
 export default class SNSShareButtonsComponent extends Vue {
   @Prop() msg!: string;
+  @Prop() tags!: string[];
   url = location.href;
 }
 </script>

@@ -99,10 +99,10 @@ export default class SelectGasyaScene extends Vue {
       set: getCountFromLS(GASYA_KIND.JOJOFES, GASYA_NUM.TEN),
     },
   };
-  get nextSinCount() {
+  get nextSinCount(): number {
     return (this.counts[this.gasyaKind]?.sin || 0) + 1;
   }
-  get next10Count() {
+  get next10Count(): number {
     return (this.counts[this.gasyaKind]?.set || 0) + 1;
   }
   @Watch("gasyaKind")

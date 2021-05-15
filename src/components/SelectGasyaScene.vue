@@ -34,7 +34,9 @@
       <div class="gasya-description">
         <kakutei-msg-component :msg="kakuteiMsg" />
       </div>
-      <div class="gasya-description">確定機能は、∞セット目までとなります</div>
+      <div class="gasya-description">
+        <kakutei-desc-component />
+      </div>
     </div>
     <div class="overlay-all">
       <div class="version">version:{{ version }}</div>
@@ -61,6 +63,7 @@ import SetGasyaButtonComponent from "@/components/SetGasyaButtonComponent.vue";
 import SNSShareButtonsComponent from "@/components/SNSShareButtonsComponent.vue";
 import DrawerContentsComponent from "@/components/DrawerContentsComponent.vue";
 import KakuteiMsgComponent from "@/components/KakuteiMsgComponent.vue";
+import KakuteiDescComponent from "@/components/KakuteiDescComponent.vue";
 import { GASYA_KIND, GASYA_NUM, LOCALSTORAGE_KEYS } from "@/constants";
 
 /** localstorageから特定のガシャのカウント情報を取得 */
@@ -77,6 +80,7 @@ function getCountFromLS(kind: GASYA_KIND, n: GASYA_NUM): number {
     SNSShareButtonsComponent,
     DrawerContentsComponent,
     KakuteiMsgComponent,
+    KakuteiDescComponent,
   },
 })
 export default class SelectGasyaScene extends Vue {

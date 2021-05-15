@@ -23,11 +23,13 @@
         {{ message }}
       </div>
       <div class="gasya-button ikkai" @click="pullGasha(one)">
-        <SingleGasyaButtonComponent></SingleGasyaButtonComponent>
+        <SingleGasyaButtonComponent
+          :count="nextSinCount"
+        ></SingleGasyaButtonComponent>
       </div>
       <div class="spacer"></div>
       <div class="gasya-button jukkai" @click="pullGasha(ten)">
-        <SetGasyaButtonComponent></SetGasyaButtonComponent>
+        <SetGasyaButtonComponent :count="next10Count"></SetGasyaButtonComponent>
       </div>
     </div>
     <div class="overlay-all">
@@ -54,7 +56,14 @@ import SingleGasyaButtonComponent from "@/components/SingleGasyaButtonComponent.
 import SetGasyaButtonComponent from "@/components/SetGasyaButtonComponent.vue";
 import SNSShareButtonsComponent from "@/components/SNSShareButtonsComponent.vue";
 import DrawerContentsComponent from "@/components/DrawerContentsComponent.vue";
-import { GASYA_KIND, GASYA_NUM } from "@/constants";
+import { GASYA_KIND, GASYA_NUM, LOCALSTORAGE_KEYS } from "@/constants";
+
+/** localstorageから特定のガシャのカウント情報を取得 */
+function getCountFromLS(kind: GASYA_KIND, n: GASYA_NUM): number {
+  return (
+    parseInt(localStorage.getItem(LOCALSTORAGE_KEYS[kind][n]) as string) || 0
+  );
+}
 
 @Component({
   components: {
@@ -68,10 +77,34 @@ export default class SelectGasyaScene extends Vue {
   @Prop() gasyaKind!: GASYA_KIND;
   readonly version = process.env.VUE_APP_GIT_COMMIT_HASH;
   readonly one = GASYA_NUM.ONE;
-  readonly ten = GASYA_NUM.TEN
+  readonly ten = GASYA_NUM.TEN;
   pcCount = 0;
   drawer = false;
   message = "夢の全部入りガシャ！";
+  readonly counts = {
+    [GASYA_KIND.ZENBU]: {
+      sin: getCountFromLS(GASYA_KIND.ZENBU, GASYA_NUM.ONE),
+      set: getCountFromLS(GASYA_KIND.ZENBU, GASYA_NUM.TEN),
+    },
+    [GASYA_KIND.CHO_KORIN]: {
+      sin: getCountFromLS(GASYA_KIND.CHO_KORIN, GASYA_NUM.ONE),
+      set: getCountFromLS(GASYA_KIND.CHO_KORIN, GASYA_NUM.TEN),
+    },
+    [GASYA_KIND.KORIN]: {
+      sin: getCountFromLS(GASYA_KIND.KORIN, GASYA_NUM.ONE),
+      set: getCountFromLS(GASYA_KIND.KORIN, GASYA_NUM.TEN),
+    },
+    [GASYA_KIND.JOJOFES]: {
+      sin: getCountFromLS(GASYA_KIND.JOJOFES, GASYA_NUM.ONE),
+      set: getCountFromLS(GASYA_KIND.JOJOFES, GASYA_NUM.TEN),
+    },
+  };
+  get nextSinCount() {
+    return (this.counts[this.gasyaKind]?.sin || 0) + 1;
+  }
+  get next10Count() {
+    return (this.counts[this.gasyaKind]?.set || 0) + 1;
+  }
   @Watch("gasyaKind")
   changeKind(val: GASYA_KIND): void {
     switch (val) {

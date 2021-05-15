@@ -56,15 +56,35 @@
       >
         💎×0 消費
       </text>
+      <polygon
+        points="15,20 100,20 80,110 0,100"
+        style="fill: rgb(76, 75, 135); stroke: black"
+      />
+      <text
+        x="30"
+        y="78"
+        style="
+          font-family: Times New Roman;
+          font-weight: bold;
+          font-size: 50;
+          font-style: oblique;
+          fill: yellow;
+          filter: drop-shadow(1px 1px 1px #000);
+        "
+      >
+        {{ count }}
+      </text>
     </svg>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
-export default class SingleGasyaButtonComponent extends Vue {}
+export default class SingleGasyaButtonComponent extends Vue {
+  @Prop() count!: number;
+}
 </script>
 
 <style scoped>

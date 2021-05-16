@@ -13,7 +13,6 @@
         text-anchor="middle"
         dominant-baseline="central"
         lengthAdjust="spacingAndGlyphs"
-        :textLength="textLength"
         style="
           font-family: Times New Roman;
           font-weight: bold;
@@ -28,28 +27,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class SingleGasyaButtonComponent extends Vue {
-  @Prop() msg!: number;
   readonly w = 792;
   readonly h = 66;
-  textLength: string | null = null;
-  mounted() {
-    this.resizeFont();
-  }
-  @Watch("msg")
-  changeMsg() {
-    this.textLength = null;
-    this.$nextTick(this.resizeFont);
-  }
-  resizeFont() {
-    const txt = this.$refs.txt as SVGTextElement;
-    if (this.w - 10 < txt.getBBox().width) {
-      this.textLength = `${this.w - 10}`;
-    }
-  }
 }
 </script>
 

@@ -23,11 +23,6 @@ export default class PuncherAppearScene extends AbstractScene {
 .dogyuun {
   animation: dogyuun 1s linear;
 }
-.centering {
-  display: flex;
-  justify-content: center; /*左右中央揃え*/
-  align-items: center; /*上下中央揃え*/
-}
 @keyframes dogyuun {
   0% {
     width: 0%;

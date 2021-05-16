@@ -69,4 +69,9 @@ body {
 .noclick {
   pointer-events: none;
 }
+.centering {
+  display: flex;
+  justify-content: center; /*左右中央揃え*/
+  align-items: center; /*上下中央揃え*/
+}
 </style>

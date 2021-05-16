@@ -38,11 +38,3 @@ export default class SingleGasyaButtonComponent extends Vue {
   readonly h = 792;
 }
 </script>
-
-<style scoped>
-.centering {
-  display: flex;
-  justify-content: center; /*左右中央揃え*/
-  align-items: center; /*上下中央揃え*/
-}
-</style>

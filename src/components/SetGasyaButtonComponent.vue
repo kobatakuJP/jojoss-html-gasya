@@ -132,11 +132,3 @@ export default class SetGasyaButtonComponent extends Vue {
   @Prop() count!: number;
 }
 </script>
-
-<style scoped>
-.centering {
-  display: flex;
-  justify-content: center; /*左右中央揃え*/
-  align-items: center; /*上下中央揃え*/
-}
-</style>

@@ -45,7 +45,4 @@ export default class SingleGasyaButtonComponent extends Vue {
   justify-content: center; /*左右中央揃え*/
   align-items: center; /*上下中央揃え*/
 }
-.noclick {
-  pointer-events: none;
-}
 </style>

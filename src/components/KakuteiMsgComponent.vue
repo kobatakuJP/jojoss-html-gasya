@@ -53,15 +53,15 @@ export default class SingleGasyaButtonComponent extends Vue {
   readonly w = 792;
   readonly h = 66;
   textLength: string | null = null;
-  mounted() {
+  mounted(): void {
     this.resizeFont();
   }
   @Watch("msg")
-  changeMsg() {
+  changeMsg(): void {
     this.textLength = null;
     this.$nextTick(this.resizeFont);
   }
-  resizeFont() {
+  resizeFont(): void {
     const txt = this.$refs.txt as SVGTextElement;
     if (this.w - 10 < txt.getBBox().width) {
       this.textLength = `${this.w - 10}`;

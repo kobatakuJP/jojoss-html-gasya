@@ -49,8 +49,8 @@ export default class SingleGasyaButtonComponent extends Vue {
   }
   ora(i: number) {
     const t = (this.$refs[`txt`] as SVGTextElement[])[i];
-    t.setAttribute("x", this.getRand(this.w) + "");
-    t.setAttribute("y", this.getRand(this.h) + "");
+    t.setAttribute("x", this.getRand(this.w + 20) - 20 + "");
+    t.setAttribute("y", this.getRand(this.h + 20) - 20 + "");
     t.setAttribute("display", "block");
     t.classList.add("ora-anime");
   }

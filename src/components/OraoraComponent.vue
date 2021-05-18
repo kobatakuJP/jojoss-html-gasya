@@ -38,19 +38,26 @@ export default class SingleGasyaButtonComponent extends Vue {
   readonly h = 792 * 1.5;
   readonly idxs = [...Array(10).keys()];
   currentIdx = 0;
+  loopID = -1;
   mounted() {
     this.oraora();
   }
+  destroyed() {
+    clearInterval(this.loopID);
+  }
   oraora() {
-    setInterval(() => {
+    this.loopID = setInterval(() => {
       this.ora(this.currentIdx);
-      this.currentIdx >= this.idxs.length - 1 ? this.currentIdx = 0 : this.currentIdx++;
-    }, 100)
+      this.currentIdx >= this.idxs.length - 1
+        ? (this.currentIdx = 0)
+        : this.currentIdx++;
+    }, 100);
   }
   ora(i: number) {
     const t = (this.$refs[`txt`] as SVGTextElement[])[i];
+    if (!t) return;
     t.setAttribute("x", this.getRand(this.w + 20) - 20 + "");
-    t.setAttribute("y", this.getRand(this.h + 20) - 20 + "");
+    t.setAttribute("y", this.getRand(this.h + 50) - 50 + "");
     t.setAttribute("display", "block");
     t.classList.add("ora-anime");
   }
@@ -66,7 +73,7 @@ export default class SingleGasyaButtonComponent extends Vue {
 
 <style scoped>
 .ora-anime {
-  animation: oraora .2s linear;
+  animation: oraora 0.2s linear;
 }
 @keyframes oraora {
   0% {

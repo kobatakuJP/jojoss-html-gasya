@@ -39,13 +39,13 @@ export default class SingleGasyaButtonComponent extends Vue {
   readonly idxs = [...Array(10).keys()];
   currentIdx = 0;
   loopID = -1;
-  mounted() {
+  mounted(): void {
     this.oraora();
   }
-  destroyed() {
+  destroyed(): void {
     clearInterval(this.loopID);
   }
-  oraora() {
+  oraora(): void {
     this.loopID = setInterval(() => {
       this.ora(this.currentIdx);
       this.currentIdx >= this.idxs.length - 1
@@ -53,7 +53,7 @@ export default class SingleGasyaButtonComponent extends Vue {
         : this.currentIdx++;
     }, 100);
   }
-  ora(i: number) {
+  ora(i: number): void {
     const t = (this.$refs[`txt`] as SVGTextElement[])[i];
     if (!t) return;
     t.setAttribute("x", this.getRand(this.w + 20) - 20 + "");
@@ -61,11 +61,11 @@ export default class SingleGasyaButtonComponent extends Vue {
     t.setAttribute("display", "block");
     t.classList.add("ora-anime");
   }
-  endOra(t: SVGTextElement) {
+  endOra(t: SVGTextElement): void {
     t.classList.remove("ora-anime");
     t.setAttribute("display", "none");
   }
-  getRand(n: number) {
+  getRand(n: number): number {
     return Math.random() * n;
   }
 }

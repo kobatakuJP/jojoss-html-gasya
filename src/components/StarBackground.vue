@@ -13,6 +13,7 @@ import BaseCanvasComponent, {
 @Component({ components: { BaseCanvasComponent } })
 export default class StarBackground extends BaseCanvasComponent {
   @Prop() isBreak!: boolean;
+  @Prop() isFlash!: boolean;
   anim = "";
   mounted(): void {
     this.draw();
@@ -27,6 +28,13 @@ export default class StarBackground extends BaseCanvasComponent {
       );
       this.anim = "dropin";
       this.startBreakAnim();
+    }
+    if (this.isFlash) {
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+          this.drawFlashBase(true);
+        }, 100 * i);
+      }
     }
   }
   removeAnim(): void {
@@ -137,26 +145,27 @@ export default class StarBackground extends BaseCanvasComponent {
       }, 400);
     }, 400);
   }
-  drawFlashBase(): void {
+  drawFlashBase(isOpa?: boolean): void {
+    const opa = isOpa ? 0.05 : 1;
     if (!this.ctx) return;
     const lineWidth = 40;
     this.ctx.beginPath();
     this.ctx.arc(canW / 2, canH / 2, 600, 0, 2 * Math.PI);
-    this.ctx.strokeStyle = "rgb(245,244,212)";
+    this.ctx.strokeStyle = `rgba(245,244,212,${opa})`;
     this.ctx.lineWidth = lineWidth;
     this.ctx.stroke();
-    this.ctx.fillStyle = "rgba(245,244,212, 0.4)";
+    this.ctx.fillStyle = `rgba(245,244,212, ${isOpa ? opa : 0.4})`;
     this.ctx.fill();
 
     this.ctx.beginPath();
     this.ctx.arc(canW / 2, canH / 2, 600 + lineWidth / 2, 0, 2 * Math.PI);
-    this.ctx.strokeStyle = "rgb(234,220,145)";
+    this.ctx.strokeStyle = `rgba(234,220,145,${opa})`;
     this.ctx.lineWidth = 10;
     this.ctx.stroke();
 
     this.ctx.beginPath();
     this.ctx.arc(canW / 2, canH / 2, 600 - lineWidth / 2, 0, 2 * Math.PI);
-    this.ctx.strokeStyle = "rgb(234,220,145)";
+    this.ctx.strokeStyle = `rgba(234,220,145,${opa})`;
     this.ctx.lineWidth = 10;
     this.ctx.stroke();
   }

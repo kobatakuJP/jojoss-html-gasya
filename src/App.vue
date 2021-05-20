@@ -1,7 +1,7 @@
 <template>
-  <div id="app" :style="myStyle">
+  <v-app id="app" :style="myStyle">
     <router-view />
-  </div>
+  </v-app>
 </template>
 
 <script lang="ts">

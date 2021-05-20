@@ -51,13 +51,23 @@ export default class Home extends Vue {
   currentScene = this.scenes[0];
   currentGasyaKind = GASYA_KIND.ZENBU;
   result: UnitInfo[] = [];
-  async actionPull(n: GASYA_NUM, kakutei: number, pu: number, gensen: number): Promise<void> {
+  async actionPull(
+    n: GASYA_NUM,
+    kakutei: number,
+    pu: number,
+    gensen: number
+  ): Promise<void> {
     const json: UnitInfo[] = await this.gasya(n, kakutei, pu, gensen);
     this.result = json;
     this.preloadPicture();
     this.nextScene();
   }
-  async gasya(n: GASYA_NUM, kakutei: number, pu: number, gensen: number): Promise<UnitInfo[]> {
+  async gasya(
+    n: GASYA_NUM,
+    kakutei: number,
+    pu: number,
+    gensen: number
+  ): Promise<UnitInfo[]> {
     const nextCount = this.getCurrentCount(this.currentGasyaKind, n) + 1;
     const resp = await fetch(
       `/.netlify/functions/gasya?num=${n}&kind=${this.currentGasyaKind}&kakutei=${kakutei}&pu=${pu}&gensen=${gensen}`

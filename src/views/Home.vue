@@ -12,7 +12,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
+import { units } from "../lambda/submodule/unitData";
 import SelectGasyaScene from "@/components/SelectGasyaScene.vue";
 import PowaScene from "@/components/PowaScene.vue";
 import PuncherAppearScene from "@/components/PuncherAppearScene.vue";
@@ -24,6 +25,7 @@ import {
   GASYA_KIND,
   GASYA_NUM,
   LOCALSTORAGE_KEYS,
+  RARITY,
   UnitInfo,
 } from "@/constants";
 
@@ -51,6 +53,13 @@ export default class Home extends Vue {
   currentScene = this.scenes[0];
   currentGasyaKind = GASYA_KIND.ZENBU;
   result: UnitInfo[] = [];
+  ssrUnits = units.filter((v) => v.rarity === RARITY.SSR);
+  /** SSRの所持数一覧、localstorageになければSSRの配列長で0埋め */
+  ssrNums: number[] = localStorage.getItem(LOCALSTORAGE_KEYS.SSR_NUMS)
+    ? (JSON.parse(
+        localStorage.getItem(LOCALSTORAGE_KEYS.SSR_NUMS) as string
+      ) as number[])
+    : Array(this.ssrUnits.length).fill(0);
   async actionPull(
     n: GASYA_NUM,
     kakutei: number,
@@ -82,6 +91,17 @@ export default class Home extends Vue {
   }
   updateCount(kind: GASYA_KIND, n: GASYA_NUM, c: number): void {
     localStorage.setItem(LOCALSTORAGE_KEYS[kind][n], c + "");
+  }
+  @Watch("result")
+  updateSSRNums(): void {
+    this.result.forEach((v) => {
+      const idx = this.ssrUnits.findIndex((t) => t.name === v.name);
+      this.ssrNums[idx] += 1; // TODO +1とかバイツァ実装時は修正要
+    });
+    localStorage.setItem(
+      LOCALSTORAGE_KEYS.SSR_NUMS,
+      JSON.stringify(this.ssrNums)
+    );
   }
   nextScene(): void {
     const nxt = this.scenes.findIndex((v) => v === this.currentScene) + 1;

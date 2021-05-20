@@ -8,7 +8,12 @@ export type UnitInfo = {
   name: string;
   rarity: RARITY;
   pictureurl: string;
+  color: string;
+  howtoget: string;
+  ability: string;
+  cs: string;
 };
+
 export enum RARITY {
   SSR = "SSR",
   SR = "SR",
@@ -35,5 +40,5 @@ export const LOCALSTORAGE_KEYS = {
     [GASYA_NUM.ONE]: "jojofesSinCount",
     [GASYA_NUM.TEN]: "jojofes10Count"
   },
-  
+  SSR_NUMS: "ssrNums"
 }

@@ -1,8 +1,8 @@
 <template>
   <div id="app" :style="myStyle">
-    <v-app>
+    <!-- <v-app> -->
       <router-view />
-    </v-app>
+    <!-- </v-app> -->
   </div>
 </template>
 

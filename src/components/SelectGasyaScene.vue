@@ -37,7 +37,6 @@
       <div class="gasya-description">
         <kakutei-desc-component />
       </div>
-      <v-spacer />
       <had-unit-list-component :ssrUnits="ssrUnits" :ssrNums="ssrNums" />
     </div>
     <div class="overlay-all">

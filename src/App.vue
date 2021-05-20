@@ -1,7 +1,9 @@
 <template>
-  <v-app id="app" :style="myStyle">
-    <router-view />
-  </v-app>
+  <div id="app" :style="myStyle">
+    <v-app>
+      <router-view />
+    </v-app>
+  </div>
 </template>
 
 <script lang="ts">

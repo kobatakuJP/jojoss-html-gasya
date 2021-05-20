@@ -37,6 +37,8 @@
       <div class="gasya-description">
         <kakutei-desc-component />
       </div>
+      <v-spacer />
+      <had-unit-list-component :ssrUnits="ssrUnits" :ssrNums="ssrNums" />
     </div>
     <div class="overlay-all">
       <div class="version">version:{{ version }}</div>
@@ -64,7 +66,13 @@ import SNSShareButtonsComponent from "@/components/SNSShareButtonsComponent.vue"
 import DrawerContentsComponent from "@/components/DrawerContentsComponent.vue";
 import KakuteiMsgComponent from "@/components/KakuteiMsgComponent.vue";
 import KakuteiDescComponent from "@/components/KakuteiDescComponent.vue";
-import { GASYA_KIND, GASYA_NUM, LOCALSTORAGE_KEYS } from "@/constants";
+import {
+  GASYA_KIND,
+  GASYA_NUM,
+  LOCALSTORAGE_KEYS,
+  UnitInfo,
+} from "@/constants";
+import HadUnitListComponent from "@/components/HadUnitListComponent.vue";
 
 /** localstorageから特定のガシャのカウント情報を取得 */
 function getCountFromLS(kind: GASYA_KIND, n: GASYA_NUM): number {
@@ -81,10 +89,13 @@ function getCountFromLS(kind: GASYA_KIND, n: GASYA_NUM): number {
     DrawerContentsComponent,
     KakuteiMsgComponent,
     KakuteiDescComponent,
+    HadUnitListComponent,
   },
 })
 export default class SelectGasyaScene extends Vue {
   @Prop() gasyaKind!: GASYA_KIND;
+  @Prop() ssrUnits!: UnitInfo[];
+  @Prop() ssrNums!: number[];
   readonly version = process.env.VUE_APP_GIT_COMMIT_HASH;
   readonly one = GASYA_NUM.ONE;
   readonly ten = GASYA_NUM.TEN;

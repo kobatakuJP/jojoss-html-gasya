@@ -4,6 +4,8 @@
       :is="currentScene"
       :result="result"
       :gasyaKind="currentGasyaKind"
+      :ssrUnits="ssrUnits"
+      :ssrNums="ssrNums"
       @done="sceneDone"
       @pull="actionPull"
       @gasyaTo="gasyaTo"

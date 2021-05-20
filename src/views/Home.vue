@@ -2,11 +2,11 @@
   <div class="parent100">
     <component
       :is="currentScene"
-      @done="sceneDone"
       :result="result"
+      :gasyaKind="currentGasyaKind"
+      @done="sceneDone"
       @pull="actionPull"
       @gasyaTo="gasyaTo"
-      :gasyaKind="currentGasyaKind"
     ></component>
   </div>
 </template>

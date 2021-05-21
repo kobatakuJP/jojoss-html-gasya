@@ -60,7 +60,7 @@
       </v-card>
     </v-dialog>
     <v-dialog v-model="dialog2" max-width="500px">
-      <v-card>
+      <v-card v-if="currentUnit">
         <v-card-title> {{ currentUnit.name.replace("（SSR）", "") }} </v-card-title>
         <v-card-text>
           <v-img :src="currentUnit.pictureurl" />

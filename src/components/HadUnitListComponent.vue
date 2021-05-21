@@ -26,7 +26,7 @@
                 currentUnit = unit;
               "
             >
-              {{ unit.name.replace("（SSR）", "") }}
+              {{ removePrefix(unit.name) }}
             </v-btn>
             <span v-else>？？？</span>
           </div>
@@ -60,8 +60,10 @@
       </v-card>
     </v-dialog>
     <v-dialog v-model="dialog2" max-width="500px">
-      <v-card v-if="currentUnit">
-        <v-card-title> {{ currentUnit.name.replace("（SSR）", "") }} </v-card-title>
+      <v-card>
+        <v-card-title>
+          {{ removePrefix(currentUnit.name) }}
+        </v-card-title>
         <v-card-text>
           <v-img :src="currentUnit.pictureurl" />
         </v-card-text>
@@ -106,6 +108,9 @@ export default class HadUnitListComponent extends Vue {
   addPage(add: boolean): void {
     add ? this.currentPage++ : this.currentPage--;
     this.currentPage = Math.max(0, Math.min(this.currentPage, this.maxPage));
+  }
+  removePrefix(str: string) {
+    return str ? str.replace("（SSR）", "") : str;
   }
 }
 </script>

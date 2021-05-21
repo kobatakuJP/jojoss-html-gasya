@@ -56,7 +56,7 @@ body {
   text-align: center;
   color: #2c3e50;
   background-color: orange;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   right: 0;

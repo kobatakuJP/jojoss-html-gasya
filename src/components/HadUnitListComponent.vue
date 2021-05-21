@@ -18,7 +18,6 @@
           <div v-for="(unit, i) in currentPageMaskedSSRUnits" :key="i">
             <v-btn
               v-if="unit"
-              block
               text
               color="primary"
               x-small
@@ -45,6 +44,9 @@
           >
             <v-icon>mdi-chevron-left</v-icon>
           </v-btn>
+          <span class="text-center">
+            {{ currentPage + 1 }}
+          </span>
           <v-btn
             color="primary"
             text
@@ -59,7 +61,7 @@
     </v-dialog>
     <v-dialog v-model="dialog2" max-width="500px">
       <v-card>
-        <v-card-title> {{ currentUnit.name }} </v-card-title>
+        <v-card-title> {{ currentUnit.name.replace("（SSR）", "") }} </v-card-title>
         <v-card-text>
           <v-img :src="currentUnit.pictureurl" />
         </v-card-text>
@@ -67,6 +69,7 @@
         <v-card-text>{{ currentUnit.cs }}</v-card-text>
         <v-card-subtitle>アビリティ</v-card-subtitle>
         <v-card-text>{{ currentUnit.ability }}</v-card-text>
+        <v-btn color="primary" text @click="dialog2 = false"> Close </v-btn>
       </v-card>
     </v-dialog>
   </div>

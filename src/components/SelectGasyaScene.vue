@@ -37,7 +37,7 @@
       <div class="gasya-description">
         <kakutei-desc-component />
       </div>
-      <!-- <had-unit-list-component :ssrUnits="ssrUnits" :ssrNums="ssrNums" /> -->
+      <had-unit-list-component :ssrUnits="ssrUnits" :ssrNums="ssrNums" />
     </div>
     <div class="overlay-all">
       <div class="version">version:{{ version }}</div>

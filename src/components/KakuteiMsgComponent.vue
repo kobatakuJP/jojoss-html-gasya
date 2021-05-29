@@ -35,7 +35,6 @@
           font-size: 50;
           stroke: #86633e;
           fill: white;
-          filter: drop-shadow(1px 1px 1px #000);
         "
       >
         {{ msg }}

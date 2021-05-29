@@ -96,6 +96,8 @@ export default class SingleGasyaButtonComponent extends Vue {
     }, shortMS * this.xys.length + longMS);
     setTimeout(() => {
       (lastRefs[1] as HTMLElement).classList.add("hamon");
+      // フェードアウトさせつつ
+      this.$emit("done");
     }, shortMS * this.xys.length + longMS + smallHamonMS);
   }
 }

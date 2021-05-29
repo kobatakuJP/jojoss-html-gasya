@@ -5,7 +5,7 @@
       style="position: absolute"
       :result="result"
       @done="done"
-      v-show="!attracting"
+      v-if="!attracting"
     />
     <transition name="fade">
       <SoulAttractComponent

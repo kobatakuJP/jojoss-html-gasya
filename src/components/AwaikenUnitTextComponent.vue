@@ -4,8 +4,9 @@
     :width="w"
     :height="h"
     :viewBox="`0 0 ${w} ${h}`"
-    class="parent100 noclick"
+    class="parent100"
     style="position: absolute"
+    @click="click"
   >
     <transition name="list">
       <text
@@ -14,6 +15,7 @@
         :y="h / 2"
         text-anchor="middle"
         dominant-baseline="text-after-edge"
+        class="noclick"
         style="
           font-family: Times New Roman;
           font-weight: bold;
@@ -40,6 +42,7 @@
         fill="rgba(0,0,0,0.8)"
         stroke-width="3"
         stroke="gold"
+        class="noclick"
       />
     </transition>
     <transition name="list">
@@ -49,6 +52,7 @@
         :y="h / 2 + numH / 2"
         text-anchor="middle"
         dominant-baseline="central"
+        class="noclick"
         style="
           font-family: Times New Roman;
           font-weight: bold;
@@ -65,7 +69,7 @@
     </transition>
     <transition name="list">
       <polygon
-        v-show="animeIdx > 2"
+        v-show="animeIdx > 1"
         :points="`80,${h / 2 + numH} ${w - 80},${h / 2 + numH} ${w - 60},${
           h / 2 + numH + mesH / 2
         } ${w - 80},${h / 2 + numH + mesH} 80,${h / 2 + numH + mesH} 60,${
@@ -74,45 +78,59 @@
         fill="black"
         stroke-width="1"
         stroke="gold"
+        class="noclick"
       />
     </transition>
     <transition name="list">
       <text
-        v-show="animeIdx > 3"
+        v-show="animeIdx > 2"
         :x="w / 2"
         :y="h / 2 + numH + mesH / 2"
         text-anchor="middle"
         dominant-baseline="central"
+        class="noclick"
         style="font-family: Times New Roman; font-size: 30; fill: white"
       >
-        {{currentUnit.name}}が覚醒したッ！
+        {{ unit.name }}が覚醒したッ！
       </text>
     </transition>
   </svg>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { UnitInfo } from "@/constants";
 
 @Component
-export default class ResultScene extends Vue {
-  @Prop() currentUnit!: UnitInfo;
+export default class AwaikenUnitTextComponent extends Vue {
+  @Prop() unit!: UnitInfo;
   animeIdx = 0;
   timeoutID = -1;
   readonly w = 792;
   readonly h = 792 * 1.5;
   readonly numH = 100;
   readonly mesH = 50;
-  readonly allAnime = 4;
+  readonly lastAnimeIdx = 3;
   mounted() {
+    this.timeoutID = setTimeout(this.next, 200);
+  }
+  @Watch("unit")
+  changeUnit() {
+    this.animeIdx = 0;
     this.timeoutID = setTimeout(this.next, 200);
   }
   next() {
     clearTimeout(this.timeoutID);
     this.animeIdx++;
-    if (this.animeIdx < this.allAnime) {
+    if (this.animeIdx <= this.lastAnimeIdx) {
       this.timeoutID = setTimeout(this.next, 200);
+    }
+  }
+  click() {
+    if (this.animeIdx <= this.lastAnimeIdx) {
+      this.next();
+    } else {
+      this.$emit("done");
     }
   }
 }
@@ -139,7 +157,7 @@ export default class ResultScene extends Vue {
   }
 }
 .list-enter-active {
-  transition: all 1s;
+  transition: all 0.1s;
 }
 .list-enter {
   opacity: 0;

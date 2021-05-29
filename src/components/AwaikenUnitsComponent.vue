@@ -1,38 +1,30 @@
 <template>
   <div class="parent100">
-    <div class="parent100 centering">
-      <div class="img-wrap" :style="tdStyle" @click="next" />
-      <AwaikenUnitTextComponent :currentUnit="result[idx]" />
-    </div>
+    <AwaikenUnitComponent :unit="currentUnit" @done="next" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { UnitInfo } from "@/constants";
-import AwaikenUnitTextComponent from "@/components/AwaikenUnitTextComponent.vue";
+import AwaikenUnitComponent from "@/components/AwaikenUnitComponent.vue";
 
 @Component({
   components: {
-    AwaikenUnitTextComponent,
+    AwaikenUnitComponent,
   },
 })
-export default class ResultScene extends Vue {
+export default class AwaikenUnitsComponent extends Vue {
   @Prop() result!: UnitInfo[];
   idx = 0;
-  readonly w = 792;
-  readonly h = 792 * 1.5;
-  get tdStyle(): { background: string } {
-    return {
-      background: `url(${
-        this.result[this.idx].pictureurl
-      }) center center / contain no-repeat`,
-    };
+  get currentUnit() {
+    return this.result[this.idx];
   }
   next() {
     this.idx++;
     if (this.idx >= this.result.length) {
       this.$emit("done");
+      this.$destroy();
     }
   }
 }

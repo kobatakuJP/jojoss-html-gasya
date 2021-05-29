@@ -1,7 +1,7 @@
 <template>
   <div class="parent100 centering">
     <div class="img-wrap" :style="tdStyle" />
-    <AwaikenUnitTextComponent :unit="unit" @done="done" />
+    <AwaikenUnitTextComponent :unit="unit" :awaikingNum="awaikingNum" @done="done" />
   </div>
 </template>
 
@@ -17,6 +17,7 @@ import AwaikenUnitTextComponent from "@/components/AwaikenUnitTextComponent.vue"
 })
 export default class AwaikenUnitComponent extends Vue {
   @Prop() unit!: UnitInfo;
+  @Prop() awaikingNum!: number;
   readonly w = 792;
   readonly h = 792 * 1.5;
   get tdStyle(): { background: string } {

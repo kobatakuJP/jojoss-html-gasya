@@ -64,7 +64,7 @@
           stroke: gold;
         "
       >
-        +72
+        +{{ awaikingNum }}
       </text>
     </transition>
     <transition name="list">
@@ -104,6 +104,7 @@ import { UnitInfo } from "@/constants";
 @Component
 export default class AwaikenUnitTextComponent extends Vue {
   @Prop() unit!: UnitInfo;
+  @Prop() awaikingNum!: number;
   animeIdx = 0;
   timeoutID = -1;
   readonly w = 792;

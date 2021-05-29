@@ -1,6 +1,10 @@
 <template>
   <div class="parent100">
-    <AwaikenUnitComponent :unit="currentUnit" @done="next" />
+    <AwaikenUnitComponent
+      :unit="currentUnit"
+      :awaikingNum="awaikingNum"
+      @done="next"
+    />
   </div>
 </template>
 
@@ -16,9 +20,13 @@ import AwaikenUnitComponent from "@/components/AwaikenUnitComponent.vue";
 })
 export default class AwaikenUnitsComponent extends Vue {
   @Prop() result!: UnitInfo[];
+  @Prop() awaikingNums!: number[];
   idx = 0;
   get currentUnit() {
     return this.result[this.idx];
+  }
+  get awaikingNum() {
+    return this.awaikingNums[this.idx];
   }
   next() {
     this.idx++;

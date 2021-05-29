@@ -3,7 +3,8 @@
     <ResultSceneBackground :rarity="currenRarity"></ResultSceneBackground>
     <AwaikenUnitsComponent
       style="position: absolute"
-      :result="result"
+      :result="filteredResults"
+      :awaikingNums="awaikingNums"
       @done="done"
       v-if="!attracting"
     />
@@ -18,11 +19,12 @@
 </template>
 
 <script lang="ts">
-import { Component } from "vue-property-decorator";
+import { Component, Prop } from "vue-property-decorator";
 import AbstractScene from "@/components/AbstractScene.vue";
 import ResultSceneBackground from "@/components/ResultSceneBackground.vue";
 import SoulAttractComponent from "@/components/SoulAttractComponent.vue";
 import AwaikenUnitsComponent from "@/components/AwaikenUnitsComponent.vue";
+import { RARITY, UnitInfo } from "@/constants";
 
 @Component({
   components: {
@@ -32,9 +34,32 @@ import AwaikenUnitsComponent from "@/components/AwaikenUnitsComponent.vue";
   },
 })
 export default class SoulAttractScene extends AbstractScene {
+  /** 引かれ合ってる時 */
   attracting = true;
-  // clickToDone = true;
-  //   timeoutForDone = 1000;
+  @Prop() ssrUnits!: UnitInfo[];
+  @Prop() ssrNums!: number[];
+  /** filteredResultsの覚醒数一覧 */
+  awaikingNums: number[] = [];
+  /** SSRユニット一覧(重複排除済み) */
+  get filteredResults() {
+    return this.result
+      .filter((v) => v.rarity === RARITY.SSR) // SSRでフィルタ
+      .filter((v, i, self) => self.findIndex((w) => w.name === v.name) === i); // 名前で重複排除
+  }
+  beforeMount() {
+    this.awaikingNums = this.filteredResults.map((v) => this.getAwaikingNum(v));
+    if (
+      this.filteredResults.length === 0 ||
+      !this.awaikingNums.some((v) => v > 1)
+    ) {
+      // SSRユニットがないor覚醒数が2以上のものがない場合はスキップ
+      this.done();
+    }
+  }
+  getAwaikingNum(unit: UnitInfo): number {
+    const i = this.ssrUnits.findIndex((v) => v.name === unit.name);
+    return i >= 0 ? this.ssrNums[i] : 0;
+  }
 }
 </script>
 

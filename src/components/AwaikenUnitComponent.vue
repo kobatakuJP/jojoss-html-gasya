@@ -1,12 +1,21 @@
 <template>
   <div class="parent100 centering">
-    <div class="img-wrap" :style="tdStyle" />
-    <AwaikenUnitTextComponent :unit="unit" :awaikingNum="awaikingNum" @done="done" />
+    <div
+      class="img-wrap img-anime"
+      ref="img"
+      :style="tdStyle"
+      @animationend="endanime"
+    />
+    <AwaikenUnitTextComponent
+      :unit="unit"
+      :awaikingNum="awaikingNum"
+      @done="done"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { UnitInfo } from "@/constants";
 import AwaikenUnitTextComponent from "@/components/AwaikenUnitTextComponent.vue";
 
@@ -25,6 +34,13 @@ export default class AwaikenUnitComponent extends Vue {
       background: `url(${this.unit.pictureurl}) center center / contain no-repeat`,
     };
   }
+  @Watch("unit")
+  changeUnit() {
+    (this.$refs.img as HTMLElement)?.classList?.add("img-anime");
+  }
+  endanime() {
+    (this.$refs.img as HTMLElement)?.classList?.remove("img-anime");
+  }
   done() {
     this.$emit("done");
   }
@@ -41,6 +57,8 @@ export default class AwaikenUnitComponent extends Vue {
   left: 0;
   right: 0;
   margin: auto;
+}
+.img-anime {
   animation: appear 0.1s ease;
 }
 @keyframes appear {

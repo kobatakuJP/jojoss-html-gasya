@@ -73,27 +73,30 @@ export default class SingleGasyaButtonComponent extends Vue {
     { x: this.w / 4, y: (this.h * 4) / 5 },
   ];
   mounted() {
-    const ms = 300;
+    const shortMS = 300;
+    const longMS = 300;
+    const smallHamonMS = 100;
     const refs = this.xys.map((_, i) => [
       this.$refs[`1_${i}`],
       this.$refs[`2_${i}`],
     ]);
+    // 短い間隔の波紋
     refs.forEach((v, i) => {
       setTimeout(() => {
         (v[0] as HTMLElement[])[0].classList.add("hamon");
-      }, ms * i);
+      }, shortMS * i);
       setTimeout(() => {
         (v[1] as HTMLElement[])[0].classList.add("hamon");
-      }, ms * i + 100);
+      }, shortMS * i + smallHamonMS);
     });
-    debugger
+    // 最後の波紋は長い間隔
     const lastRefs = [this.$refs["1_last"], this.$refs["2_last"]];
     setTimeout(() => {
       (lastRefs[0] as HTMLElement).classList.add("hamon");
-    }, ms * this.xys.length + 1000);
+    }, shortMS * this.xys.length + longMS);
     setTimeout(() => {
       (lastRefs[1] as HTMLElement).classList.add("hamon");
-    }, ms * this.xys.length + 1100);
+    }, shortMS * this.xys.length + longMS + smallHamonMS);
   }
 }
 </script>

@@ -33,7 +33,7 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class SingleGasyaButtonComponent extends Vue {
+export default class DogyuunComponent extends Vue {
   readonly w = 792;
   readonly h = 792;
 }

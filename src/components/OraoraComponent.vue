@@ -33,7 +33,7 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class SingleGasyaButtonComponent extends Vue {
+export default class OraoraComponent extends Vue {
   readonly w = 792;
   readonly h = 792 * 1.5;
   readonly idxs = [...Array(10).keys()];

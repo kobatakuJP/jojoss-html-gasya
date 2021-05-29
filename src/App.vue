@@ -9,7 +9,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 @Component
-export default class Home extends Vue {
+export default class App extends Vue {
   myStyle = { width: "100%", height: "100%" };
   handleResize(): void {
     // 縦横サイズを調整する

@@ -65,5 +65,5 @@ import SNSShareButtonsComponent from "@/components/SNSShareButtonsComponent.vue"
     SNSShareButtonsComponent,
   },
 })
-export default class SingleGasyaButtonComponent extends Vue {}
+export default class DrawerContentsComponent extends Vue {}
 </script>

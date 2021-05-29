@@ -48,7 +48,7 @@
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 
 @Component
-export default class SingleGasyaButtonComponent extends Vue {
+export default class KakuteiMsgComponent extends Vue {
   @Prop() msg!: number;
   readonly w = 792;
   readonly h = 66;

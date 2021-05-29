@@ -31,7 +31,7 @@ import { RARITY } from "@/constants";
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 
 @Component
-export default class PowaScene extends Vue {
+export default class BasePowaComponent extends Vue {
   rCount = 0;
   powaColor = "white";
   get styles() {

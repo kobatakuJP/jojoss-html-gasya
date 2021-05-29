@@ -31,7 +31,7 @@ import AwaikenUnitsComponent from "@/components/AwaikenUnitsComponent.vue";
     AwaikenUnitsComponent,
   },
 })
-export default class LastPunchScene extends AbstractScene {
+export default class SoulAttractScene extends AbstractScene {
   attracting = true;
   // clickToDone = true;
   //   timeoutForDone = 1000;

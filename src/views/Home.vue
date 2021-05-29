@@ -23,6 +23,7 @@ import PunchScene from "@/components/PunchScene.vue";
 import LastPunchScene from "@/components/LastPunchScene.vue";
 import PikaaScene from "@/components/PikaaScene.vue";
 import ResultScene from "@/components/ResultScene.vue";
+import SoulAttractScene from "@/components/SoulAttractScene.vue";
 import {
   GASYA_KIND,
   GASYA_NUM,
@@ -40,6 +41,7 @@ import {
     LastPunchScene,
     PikaaScene,
     ResultScene,
+    SoulAttractScene,
   },
 })
 export default class Home extends Vue {
@@ -51,6 +53,7 @@ export default class Home extends Vue {
     "LastPunchScene",
     "PikaaScene",
     "ResultScene",
+    "SoulAttractScene",
   ];
   currentScene = this.scenes[0];
   currentGasyaKind = GASYA_KIND.ZENBU;

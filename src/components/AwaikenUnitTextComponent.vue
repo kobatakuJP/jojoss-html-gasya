@@ -14,7 +14,7 @@
         :x="w / 2"
         :y="h / 2"
         text-anchor="middle"
-        dominant-baseline="text-after-edge"
+        dy="-0.25em"
         class="noclick"
         style="
           font-family: Times New Roman;
@@ -64,7 +64,7 @@
           stroke: gold;
         "
       >
-        +{{ awaikingNum }}
+        +{{ awaikingNum - 1 }}
       </text>
     </transition>
     <transition name="list">

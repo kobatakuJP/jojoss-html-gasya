@@ -44,7 +44,8 @@ export default class SoulAttractScene extends AbstractScene {
   get filteredResults() {
     return this.result
       .filter((v) => v.rarity === RARITY.SSR) // SSRでフィルタ
-      .filter((v, i, self) => self.findIndex((w) => w.name === v.name) === i); // 名前で重複排除
+      .filter((v, i, self) => self.findIndex((w) => w.name === v.name) === i) // 名前で重複排除
+      .filter((v) => this.getAwaikingNum(v) > 1); // 無覚醒は排除
   }
   beforeMount() {
     this.awaikingNums = this.filteredResults.map((v) => this.getAwaikingNum(v));

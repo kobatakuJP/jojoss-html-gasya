@@ -10,13 +10,30 @@
       <circle
         v-for="(v, i) in xys"
         :key="`1_${i}`"
-        :ref="`1_${i}`"
         :cx="v.x"
         :cy="v.y"
         stroke="white"
         fill-opacity="0"
         stroke-width="2"
-      />
+      >
+        <animate
+          :ref="`1_${i}`"
+          attributeName="r"
+          values="0;200"
+          dur="1s"
+          begin="indefinite"
+          keyTimes="0;1"
+          keySplines="0.25 0.1 0.25 1.0"
+        />
+        <animate
+          :ref="`1_after_${i}`"
+          attributeName="stroke-opacity"
+          values="1;1;0"
+          dur="1s"
+          begin="indefinite"
+          keyTimes="0;.8;1"
+        />
+      </circle>
       <circle
         v-for="(v, i) in xys"
         :key="`2_${i}`"
@@ -26,7 +43,25 @@
         stroke="white"
         fill-opacity="0"
         stroke-width="2"
-      />
+      >
+        <animate
+          :ref="`2_${i}`"
+          attributeName="r"
+          values="0;200"
+          dur="1s"
+          begin="indefinite"
+          keyTimes="0;1"
+          keySplines="0.25 0.1 0.25 1.0"
+        />
+        <animate
+          :ref="`2_after_${i}`"
+          attributeName="stroke-opacity"
+          values="1;1;0"
+          dur="1s"
+          begin="indefinite"
+          keyTimes="0;.8;1"
+        />
+      </circle>
       <defs>
         <filter id="soulattract-font-shadow">
           <feDropShadow dx="-6" dy="16" stdDeviation="10" flood-color="white" />
@@ -45,28 +80,65 @@
       </text>
 
       <circle
-        ref="1_last"
         :cx="w / 2"
         :cy="h / 2"
         stroke="white"
         fill-opacity="0"
         stroke-width="2"
-      />
+      >
+        <animate
+          ref="1_last"
+          attributeName="r"
+          values="0;200"
+          dur="1s"
+          begin="indefinite"
+          keyTimes="0;1"
+          keySplines="0.25 0.1 0.25 1.0"
+        />
+        <animate
+          :ref="`1_after_last`"
+          attributeName="stroke-opacity"
+          values="1;1;0"
+          dur="1s"
+          begin="indefinite"
+          keyTimes="0;.8;1"
+        />
+      </circle>
       <circle
-        ref="2_last"
         :cx="w / 2"
         :cy="h / 2"
         stroke="white"
         fill-opacity="0"
         stroke-width="2"
-      />
+      >
+        <animate
+          ref="2_last"
+          attributeName="r"
+          values="0;200"
+          dur="1s"
+          begin="indefinite"
+          keyTimes="0;1"
+          keySplines="0.25 0.1 0.25 1.0"
+        />
+        <animate
+          :ref="`2_after_last`"
+          attributeName="stroke-opacity"
+          values="1;1;0"
+          dur="1s"
+          begin="indefinite"
+          keyTimes="0;.8;1"
+        />
+      </circle>
     </svg>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-
+/** TSでbeginElementが用意されていないので追加 */
+interface SVGElement extends Element {
+  beginElement(): SVGElement;
+}
 @Component
 export default class SoulAttractComponent extends Vue {
   readonly w = 792;
@@ -83,24 +155,35 @@ export default class SoulAttractComponent extends Vue {
     const smallHamonMS = 100;
     const refs = this.xys.map((_, i) => [
       this.$refs[`1_${i}`],
+      this.$refs[`1_after_${i}`],
       this.$refs[`2_${i}`],
+      this.$refs[`2_after_${i}`],
     ]);
     // 短い間隔の波紋
     refs.forEach((v, i) => {
       setTimeout(() => {
-        (v[0] as HTMLElement[])[0].classList.add("hamon");
+        (v[0] as SVGElement[])[0].beginElement();
+        (v[1] as SVGElement[])[0].beginElement();
       }, shortMS * i);
       setTimeout(() => {
-        (v[1] as HTMLElement[])[0].classList.add("hamon");
+        (v[2] as SVGElement[])[0].beginElement();
+        (v[3] as SVGElement[])[0].beginElement();
       }, shortMS * i + smallHamonMS);
     });
     // 最後の波紋は長い間隔
-    const lastRefs = [this.$refs["1_last"], this.$refs["2_last"]];
+    const lastRefs = [
+      this.$refs["1_last"],
+      this.$refs["1_after_last"],
+      this.$refs["2_last"],
+      this.$refs["2_after_last"],
+    ];
     setTimeout(() => {
-      (lastRefs[0] as HTMLElement).classList.add("hamon");
+      (lastRefs[0] as SVGElement).beginElement();
+      (lastRefs[1] as SVGElement).beginElement();
     }, shortMS * this.xys.length + longMS);
     setTimeout(() => {
-      (lastRefs[1] as HTMLElement).classList.add("hamon");
+      (lastRefs[2] as SVGElement).beginElement();
+      (lastRefs[3] as SVGElement).beginElement();
       // フェードアウトさせつつ
       this.$emit("done");
     }, shortMS * this.xys.length + longMS + smallHamonMS);
@@ -117,20 +200,5 @@ export default class SoulAttractComponent extends Vue {
   fill: rgb(139, 186, 206);
   stroke-width: 2;
   stroke: white;
-}
-.hamon {
-  animation: hamon 1s ease;
-}
-@keyframes hamon {
-  0% {
-    r: 0;
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    r: 200;
-    opacity: 0;
-  }
 }
 </style>

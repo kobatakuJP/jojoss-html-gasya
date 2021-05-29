@@ -8,6 +8,11 @@
     style="position: absolute"
     @click="click"
   >
+    <defs>
+      <filter id="awaiken-font-shadow">
+        <feDropShadow dx="10" dy="20" stdDeviation="5" />
+      </filter>
+    </defs>
     <transition name="list">
       <text
         v-show="animeIdx > 0"
@@ -21,7 +26,7 @@
           font-weight: bold;
           font-size: 120;
           font-style: oblique;
-          filter: drop-shadow(10px 20px 5px black);
+          filter: url(#awaiken-font-shadow);
           fill: red;
           stroke-width: 1;
           stroke: white;
@@ -45,6 +50,12 @@
         class="noclick"
       />
     </transition>
+
+    <defs>
+      <filter id="awaiken-num-font-shadow">
+        <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="yellow" />
+      </filter>
+    </defs>
     <transition name="list">
       <text
         v-show="animeIdx > 1"
@@ -58,7 +69,7 @@
           font-weight: bold;
           font-size: 100;
           font-style: oblique;
-          filter: drop-shadow(0px 0px 10px yellow);
+          filter: url(#awaiken-num-font-shadow);
           fill: red;
           stroke-width: 1;
           stroke: gold;

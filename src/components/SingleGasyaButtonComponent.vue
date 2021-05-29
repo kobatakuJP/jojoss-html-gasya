@@ -20,6 +20,9 @@
           <stop offset="50%" stop-color="#ac7c28" stop-opacity="1" />
           <stop offset="90%" stop-color="#e6ebe7" stop-opacity="1" />
         </linearGradient>
+        <filter id="singlegasya-font-shadow">
+          <feDropShadow dx="1" dy="1" stdDeviation="1"/>
+        </filter>
       </defs>
       <text
         x="83"
@@ -30,7 +33,7 @@
           font-size: 72;
           stroke: #86633e;
           fill: url(#grad2);
-          filter: drop-shadow(1px 1px 1px #000);
+          filter: url(#singlegasya-font-shadow);
         "
       >
         ガシャを引く!
@@ -51,7 +54,7 @@
           font-weight: lighter;
           font-size: 35;
           fill: white;
-          filter: drop-shadow(1px 1px 1px #000);
+          filter: url(#singlegasya-font-shadow);
         "
       >
         💎×0 消費
@@ -71,7 +74,7 @@
           font-size: 50;
           font-style: oblique;
           fill: yellow;
-          filter: drop-shadow(1px 1px 1px #000);
+          filter: url(#singlegasya-font-shadow);
         "
       >
         {{ count }}

@@ -21,6 +21,9 @@
           <stop id="g4" offset="50%" stop-color="#9b734a" stop-opacity="1" />
           <stop id="g5" offset="100%" stop-color="#ded6d8" stop-opacity="1" />
         </linearGradient>
+        <filter id="setgasya-font-shadow">
+          <feDropShadow dx="1" dy="1" stdDeviation="1" />
+        </filter>
       </defs>
       <text
         x="83"
@@ -31,7 +34,7 @@
           font-size: 72;
           stroke: #86633e;
           fill: url(#grad2);
-          filter: drop-shadow(1px 1px 1px #000);
+          filter: url(#setgasya-font-shadow);
         "
       >
         ガシャを引く!
@@ -59,7 +62,7 @@
           font-weight: lighter;
           font-size: 35;
           fill: white;
-          filter: drop-shadow(1px 1px 1px #000);
+          filter: url(#setgasya-font-shadow);
         "
       >
         💎×0 消費
@@ -71,6 +74,9 @@
           <stop offset="50%" stop-color="#170400" stop-opacity="1" />
           <stop offset="70%" stop-color="#a3b6c5" stop-opacity="1" />
         </linearGradient>
+        <filter id="setgasya-font-10-shadow">
+          <feDropShadow dx="2" dy="2" stdDeviation="3" />
+        </filter>
       </defs>
       <text
         x="70"
@@ -81,7 +87,7 @@
           font-style: oblique;
           stroke: #000000;
           fill: url(#ten);
-          filter: drop-shadow(2px 2px 3px #000);
+          filter: url(#setgasya-font-10-shadow);
         "
       >
         10
@@ -95,7 +101,7 @@
           font-size: 50;
           stroke: #86633e;
           fill: #eace8f;
-          filter: drop-shadow(1px 1px 1px #000);
+          filter: url(#setgasya-font-shadow);
         "
       >
         回!!
@@ -115,7 +121,7 @@
           font-size: 50;
           font-style: oblique;
           fill: yellow;
-          filter: drop-shadow(1px 1px 1px #000);
+          filter: url(#setgasya-font-shadow);
         "
       >
         {{ count }}

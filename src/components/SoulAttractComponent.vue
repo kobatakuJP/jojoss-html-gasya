@@ -27,6 +27,11 @@
         fill-opacity="0"
         stroke-width="2"
       />
+      <defs>
+        <filter id="soulattract-font-shadow">
+          <feDropShadow dx="-6" dy="16" stdDeviation="10" flood-color="white" />
+        </filter>
+      </defs>
       <text
         :x="w / 2"
         :y="h / 2"
@@ -106,10 +111,10 @@ export default class SoulAttractComponent extends Vue {
 <style scoped>
 .hikareau {
   font-family: Times New Roman;
-  text-shadow: -6px 6px 10px white, 1px 1px 5px black;
+  filter: url(#soulattract-font-shadow);
   font-weight: bold;
   font-size: 100px;
-  fill: rgb(135, 206, 235);
+  fill: rgb(139, 186, 206);
   stroke-width: 2;
   stroke: white;
 }

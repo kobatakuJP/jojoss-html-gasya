@@ -7,16 +7,6 @@
       :viewBox="`0 0 ${w} ${h}`"
       class="parent100"
     >
-      <defs>
-        <filter id="plusone-font-shadow">
-          <feDropShadow
-            dx="0"
-            dy="0"
-            :stdDeviation="30"
-            flood-color="yellow"
-          />
-        </filter>
-      </defs>
       <text
         :x="w / 2"
         :y="h * 0.75"
@@ -44,7 +34,6 @@
           font-weight: bold;
           font-size: ${w / 5};
           font-style: oblique;
-          filter: url(#plusone-font-shadow);
           fill: red;
           stroke-width: 1;
           stroke: gold;

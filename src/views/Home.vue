@@ -101,7 +101,8 @@ export default class Home extends Vue {
   updateSSRNums(): void {
     this.result.forEach((v) => {
       const idx = this.ssrUnits.findIndex((t) => t.name === v.name);
-      this.ssrNums[idx] += 1; // TODO +1とかバイツァ実装時は修正要
+      this.ssrNums[idx] += 1; // TODO バイツァ実装時は修正要
+      this.ssrNums[idx] += v.p1 ? 1 : 0; // +1
     });
     localStorage.setItem(
       LOCALSTORAGE_KEYS.SSR_NUMS,

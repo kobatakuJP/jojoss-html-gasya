@@ -52,6 +52,7 @@ function renGasya(num, kind, kakutei, pu, gensen) {
     }
   }
   overridePUGensen(result, kind, pu, gensen);
+  rafflePlusOne(result);
   return fixOrder(result);
 }
 
@@ -132,4 +133,25 @@ function getRandFromArrAndDel(arr) {
   const rand = getRandFromArr(arr);
   arr.splice(arr.findIndex(v => v === rand), 1)
   return rand;
+}
+
+/** 
+ * +1抽選(破壊的変更) 
+ * @return 破壊後の配列
+ */
+function rafflePlusOne(result) {
+  result.forEach(v => {
+    if (winRaffle(0.2)) {
+      v.p1 = true;
+    }
+  })
+  return result;
+}
+
+/** 
+ * 当選判定 
+ * @param probability 0~1の確率値を入力
+ */
+function winRaffle(probability) {
+  return Math.random() < probability;
 }

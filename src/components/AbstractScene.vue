@@ -1,10 +1,10 @@
 <script lang="ts">
-import { RARITY, UnitInfo } from "@/constants";
+import { GasyaResultUnit, RARITY } from "@/constants";
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class AbstractScene extends Vue {
-  @Prop() result!: UnitInfo[];
+  @Prop() result!: GasyaResultUnit[];
   /** 画面クリックで終了するか否か */
   clickToDone = false;
   /** 表示後に何msでdoneになるか。-1で無効。 ※アニメーション後に終了させたい場合はこのプロパティでなくonanimationendでthis.done()を実行する */

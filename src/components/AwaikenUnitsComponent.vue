@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { UnitInfo } from "@/constants";
+import { GasyaResultUnit } from "@/constants";
 import AwaikenUnitComponent from "@/components/AwaikenUnitComponent.vue";
 
 @Component({
@@ -19,7 +19,7 @@ import AwaikenUnitComponent from "@/components/AwaikenUnitComponent.vue";
   },
 })
 export default class AwaikenUnitsComponent extends Vue {
-  @Prop() result!: UnitInfo[];
+  @Prop() result!: GasyaResultUnit[];
   @Prop() awaikingNums!: number[];
   idx = 0;
   get currentUnit() {

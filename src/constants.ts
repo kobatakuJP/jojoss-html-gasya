@@ -1,8 +1,8 @@
 export const enum GASYA_KIND {
-    ZENBU,
-    CHO_KORIN,
-    KORIN,
-    JOJOFES
+  ZENBU,
+  CHO_KORIN,
+  KORIN,
+  JOJOFES
 }
 export type UnitInfo = {
   name: string;
@@ -13,6 +13,10 @@ export type UnitInfo = {
   ability: string;
   cs: string;
 };
+
+export type GasyaResultUnit = UnitInfo & {
+  p1?: boolean;
+}
 
 export enum RARITY {
   SSR = "SSR",

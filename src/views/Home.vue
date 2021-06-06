@@ -25,11 +25,11 @@ import PikaaScene from "@/components/PikaaScene.vue";
 import ResultScene from "@/components/ResultScene.vue";
 import SoulAttractScene from "@/components/SoulAttractScene.vue";
 import {
+  GasyaResultUnit,
   GASYA_KIND,
   GASYA_NUM,
   LOCALSTORAGE_KEYS,
   RARITY,
-  UnitInfo,
 } from "@/constants";
 
 @Component({
@@ -57,7 +57,7 @@ export default class Home extends Vue {
   ];
   currentScene = this.scenes[0];
   currentGasyaKind = GASYA_KIND.ZENBU;
-  result: UnitInfo[] = [];
+  result: GasyaResultUnit[] = [];
   ssrUnits = units.filter((v) => v.rarity === RARITY.SSR);
   /** SSRの所持数一覧、localstorageになければSSRの配列長で0埋め */
   ssrNums: number[] = localStorage.getItem(LOCALSTORAGE_KEYS.SSR_NUMS)
@@ -71,7 +71,7 @@ export default class Home extends Vue {
     pu: number,
     gensen: number
   ): Promise<void> {
-    const json: UnitInfo[] = await this.gasya(n, kakutei, pu, gensen);
+    const json: GasyaResultUnit[] = await this.gasya(n, kakutei, pu, gensen);
     this.result = json;
     this.preloadPicture();
     this.nextScene();
@@ -81,7 +81,7 @@ export default class Home extends Vue {
     kakutei: number,
     pu: number,
     gensen: number
-  ): Promise<UnitInfo[]> {
+  ): Promise<GasyaResultUnit[]> {
     const nextCount = this.getCurrentCount(this.currentGasyaKind, n) + 1;
     const resp = await fetch(
       `/.netlify/functions/gasya?num=${n}&kind=${this.currentGasyaKind}&kakutei=${kakutei}&pu=${pu}&gensen=${gensen}`

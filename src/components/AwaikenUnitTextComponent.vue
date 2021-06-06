@@ -110,11 +110,11 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import { UnitInfo } from "@/constants";
+import { GasyaResultUnit } from "@/constants";
 
 @Component
 export default class AwaikenUnitTextComponent extends Vue {
-  @Prop() unit!: UnitInfo;
+  @Prop() unit!: GasyaResultUnit;
   @Prop() awaikingNum!: number;
   animeIdx = 0;
   timeoutID = -1;

@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import { UnitInfo } from "@/constants";
+import { GasyaResultUnit } from "@/constants";
 import AwaikenUnitTextComponent from "@/components/AwaikenUnitTextComponent.vue";
 
 @Component({
@@ -25,7 +25,7 @@ import AwaikenUnitTextComponent from "@/components/AwaikenUnitTextComponent.vue"
   },
 })
 export default class AwaikenUnitComponent extends Vue {
-  @Prop() unit!: UnitInfo;
+  @Prop() unit!: GasyaResultUnit;
   @Prop() awaikingNum!: number;
   readonly w = 792;
   readonly h = 792 * 1.5;

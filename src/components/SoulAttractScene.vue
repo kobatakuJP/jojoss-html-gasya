@@ -24,7 +24,7 @@ import AbstractScene from "@/components/AbstractScene.vue";
 import ResultSceneBackground from "@/components/ResultSceneBackground.vue";
 import SoulAttractComponent from "@/components/SoulAttractComponent.vue";
 import AwaikenUnitsComponent from "@/components/AwaikenUnitsComponent.vue";
-import { RARITY, UnitInfo } from "@/constants";
+import { RARITY, GasyaResultUnit } from "@/constants";
 
 @Component({
   components: {
@@ -36,7 +36,7 @@ import { RARITY, UnitInfo } from "@/constants";
 export default class SoulAttractScene extends AbstractScene {
   /** 引かれ合ってる時 */
   attracting = true;
-  @Prop() ssrUnits!: UnitInfo[];
+  @Prop() ssrUnits!: GasyaResultUnit[];
   @Prop() ssrNums!: number[];
   /** filteredResultsの覚醒数一覧 */
   awaikingNums: number[] = [];
@@ -57,7 +57,7 @@ export default class SoulAttractScene extends AbstractScene {
       this.done();
     }
   }
-  getAwaikingNum(unit: UnitInfo): number {
+  getAwaikingNum(unit: GasyaResultUnit): number {
     const i = this.ssrUnits.findIndex((v) => v.name === unit.name);
     return i >= 0 ? this.ssrNums[i] : 0;
   }

@@ -162,12 +162,12 @@ export default class SoulAttractComponent extends Vue {
     // 短い間隔の波紋
     refs.forEach((v, i) => {
       setTimeout(() => {
-        (v[0] as SVGElement[])[0].beginElement();
-        (v[1] as SVGElement[])[0].beginElement();
+        (v[0] as SVGElement[])[0]?.beginElement();
+        (v[1] as SVGElement[])[0]?.beginElement();
       }, shortMS * i);
       setTimeout(() => {
-        (v[2] as SVGElement[])[0].beginElement();
-        (v[3] as SVGElement[])[0].beginElement();
+        (v[2] as SVGElement[])[0]?.beginElement();
+        (v[3] as SVGElement[])[0]?.beginElement();
       }, shortMS * i + smallHamonMS);
     });
     // 最後の波紋は長い間隔
@@ -178,12 +178,12 @@ export default class SoulAttractComponent extends Vue {
       this.$refs["2_after_last"],
     ];
     setTimeout(() => {
-      (lastRefs[0] as SVGElement).beginElement();
-      (lastRefs[1] as SVGElement).beginElement();
+      (lastRefs[0] as SVGElement)?.beginElement();
+      (lastRefs[1] as SVGElement)?.beginElement();
     }, shortMS * this.xys.length + longMS);
     setTimeout(() => {
-      (lastRefs[2] as SVGElement).beginElement();
-      (lastRefs[3] as SVGElement).beginElement();
+      (lastRefs[2] as SVGElement)?.beginElement();
+      (lastRefs[3] as SVGElement)?.beginElement();
       // フェードアウトさせつつ
       this.$emit("done");
     }, shortMS * this.xys.length + longMS + smallHamonMS);

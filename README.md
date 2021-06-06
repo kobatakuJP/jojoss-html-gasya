@@ -22,13 +22,13 @@
         ........
         ```
 1. windows側でport-forward  
-    - cmd(管理者権限)$ netsh.exe interface portproxy add <適当な名前> listenaddress=<winのIP> listenport=8080 connectaddress=<wslのIP> connectport=8080  
+    - cmd(管理者権限)$ netsh.exe interface portproxy add v4tov4 listenaddress=<winのIP> listenport=8080 connectaddress=<wslのIP> connectport=8080  
     ※8080だけでlambda側も接続できた(9000いらなかった)
 1. スマホから<winのIP>:8080で接続！
 - port-forwardの確認  
-    $ netsh.exe interface portproxy show <適当な名前>
+    $ netsh.exe interface portproxy show v4tov4
 - port-forwardの削除  
-    $ netsh.exe interface portproxy delete <適当な名前> listenport=8080 listenaddress=<winのIP>
+    $ netsh.exe interface portproxy delete v4tov4 listenport=8080 listenaddress=<winのIP>
 
 ## Project setup
 ```

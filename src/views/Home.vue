@@ -72,6 +72,7 @@ export default class Home extends Vue {
     gensen: number
   ): Promise<void> {
     const json: GasyaResultUnit[] = await this.gasya(n, kakutei, pu, gensen);
+    json.forEach(this.addNew);
     this.result = json;
     this.preloadPicture();
     this.nextScene();
@@ -118,6 +119,10 @@ export default class Home extends Vue {
   }
   gasyaTo(v: GASYA_KIND): void {
     this.currentGasyaKind = v;
+  }
+  addNew(v: GasyaResultUnit) {
+    const idx = this.ssrUnits.findIndex((t) => t.name === v.name);
+    if (this.ssrNums[idx] === 0) v.new = true;
   }
   preloadPicture(): void {
     for (let v of this.result) {

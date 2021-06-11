@@ -9,6 +9,7 @@
       @done="sceneDone"
       @pull="actionPull"
       @gasyaTo="gasyaTo"
+      @removeUnits="resetSSRNums"
     ></component>
   </div>
 </template>
@@ -105,6 +106,13 @@ export default class Home extends Vue {
       this.ssrNums[idx] += 1; // TODO バイツァ実装時は修正要
       this.ssrNums[idx] += v.p1 ? 1 : 0; // +1
     });
+    this.persistentSSRNums();
+  }
+  resetSSRNums() {
+    this.ssrNums = Array(this.ssrUnits.length).fill(0);
+    this.persistentSSRNums();
+  }
+  persistentSSRNums() {
     localStorage.setItem(
       LOCALSTORAGE_KEYS.SSR_NUMS,
       JSON.stringify(this.ssrNums)

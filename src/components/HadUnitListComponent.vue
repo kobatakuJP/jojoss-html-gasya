@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-dialog v-model="dialog" width="1000" scrollable>
+    <v-dialog v-model="unitListDialog" width="1000" scrollable>
       <template v-slot:activator="{ on, attrs }">
         <v-btn color="red lighten-2" dark v-bind="attrs" v-on="on">
           所持SSR一覧
@@ -13,6 +13,9 @@
           {{ maskedSSRUnits.filter((v) => v).length }}/{{
             maskedSSRUnits.length
           }}
+          <v-btn color="error" text icon @click="removeUnitsDialog = true">
+            <v-icon>mdi-delete-alert</v-icon>
+          </v-btn>
         </v-card-title>
         <v-card-text>
           <div v-for="(unit, i) in currentPageMaskedSSRUnits" :key="i">
@@ -22,7 +25,7 @@
               color="primary"
               x-small
               @click="
-                dialog2 = true;
+                unitDetailDialog = true;
                 currentUnit = unit;
               "
             >
@@ -33,7 +36,9 @@
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn color="primary" text @click="dialog = false"> Close </v-btn>
+          <v-btn color="primary" text @click="unitListDialog = false">
+            Close
+          </v-btn>
           <v-spacer />
           <v-btn
             color="primary"
@@ -59,7 +64,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="dialog2" max-width="500px">
+    <v-dialog v-model="unitDetailDialog" max-width="500px">
       <v-card>
         <v-card-title>
           {{ removePrefix(currentUnit.name) }}
@@ -71,7 +76,25 @@
         <v-card-text>{{ currentUnit.cs }}</v-card-text>
         <v-card-subtitle>アビリティ</v-card-subtitle>
         <v-card-text>{{ currentUnit.ability }}</v-card-text>
-        <v-btn color="primary" text @click="dialog2 = false"> Close </v-btn>
+        <v-btn color="primary" text @click="unitDetailDialog = false">
+          Close
+        </v-btn>
+      </v-card>
+    </v-dialog>
+    <v-dialog v-model="removeUnitsDialog" max-width="500px">
+      <v-card>
+        <v-card-title bold>所持SSR情報を削除しますか？</v-card-title>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="green darken-1" text @click="removeUnitsDialog = false">
+            いいえ
+          </v-btn>
+          <v-spacer></v-spacer>
+          <v-btn color="red darken-1" text @click="clickRemove">
+            削除
+          </v-btn>
+          <v-spacer></v-spacer>
+        </v-card-actions>
       </v-card>
     </v-dialog>
   </div>
@@ -98,8 +121,9 @@ export default class HadUnitListComponent extends Vue {
       (this.currentPage + 1) * this.viewNum
     );
   }
-  dialog = false;
-  dialog2 = false;
+  unitListDialog = false;
+  unitDetailDialog = false;
+  removeUnitsDialog = false;
   currentUnit = {};
   currentPage = 0;
   get maxPage(): number {
@@ -111,6 +135,10 @@ export default class HadUnitListComponent extends Vue {
   }
   removePrefix(str: string) {
     return str ? str.replace("（SSR）", "") : str;
+  }
+  clickRemove() {
+    this.$emit("removeUnits")
+    this.removeUnitsDialog = false;
   }
 }
 </script>

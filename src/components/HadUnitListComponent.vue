@@ -65,7 +65,12 @@
       </v-card>
     </v-dialog>
     <v-dialog v-model="unitDetailDialog" max-width="500px">
-      <v-card>
+      <v-card
+        v-touch="{
+          left: () => moveCurrentUnit(true),
+          right: () => moveCurrentUnit(false),
+        }"
+      >
         <v-card-title>
           {{ removePrefix(currentUnit.name) }}
         </v-card-title>
@@ -90,9 +95,7 @@
             いいえ
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="red darken-1" text @click="clickRemove">
-            削除
-          </v-btn>
+          <v-btn color="red darken-1" text @click="clickRemove"> 削除 </v-btn>
           <v-spacer></v-spacer>
         </v-card-actions>
       </v-card>
@@ -124,7 +127,7 @@ export default class HadUnitListComponent extends Vue {
   unitListDialog = false;
   unitDetailDialog = false;
   removeUnitsDialog = false;
-  currentUnit = {};
+  currentUnit: UnitInfo = this.ssrUnits[0];
   currentPage = 0;
   get maxPage(): number {
     return this.ssrUnits ? Math.floor(this.ssrUnits.length / this.viewNum) : 0;
@@ -133,11 +136,27 @@ export default class HadUnitListComponent extends Vue {
     add ? this.currentPage++ : this.currentPage--;
     this.currentPage = Math.max(0, Math.min(this.currentPage, this.maxPage));
   }
+  /**
+   * current unitを所持済みの前後に移動
+   * @param next 次の時はtrue、前の時はfalse
+   */
+  moveCurrentUnit(next: boolean): void {
+    const i = this.maskedSSRUnits.findIndex(
+      (v) => v?.name === this.currentUnit.name
+    );
+    const moveToUnit = next
+      ? this.maskedSSRUnits.slice(i + 1).filter((v) => v)[0]
+      : this.maskedSSRUnits
+          .slice(0, i)
+          .reverse()
+          .filter((v) => v)[0];
+    if (moveToUnit) this.currentUnit = moveToUnit;
+  }
   removePrefix(str: string) {
     return str ? str.replace("（SSR）", "") : str;
   }
   clickRemove() {
-    this.$emit("removeUnits")
+    this.$emit("removeUnits");
     this.removeUnitsDialog = false;
   }
 }

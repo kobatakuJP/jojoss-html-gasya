@@ -7,9 +7,10 @@
     （すぐ）ドグオオン、白画面 BitetheExplosionComponent<br>
     シュゴォーーッ BitetheShugooComponent<br>
     +1 PlusOneComponent<br> -->
-    <BitetheUnitComponent :unit="bitethedustUnit" />
-    <BitetheEyeComponent />
-    <BitetheKachiComponent />
+    <bitethe-unit-component :unit="bitethedustUnit" />
+    <bitethe-eye-component />
+    <bitethe-kachi-component />
+    <bitethe-doguoon-component />
   </div>
 </template>
 
@@ -19,6 +20,7 @@ import AbstractScene from "@/components/AbstractScene.vue";
 import BitetheUnitComponent from "@/components/BitetheUnitComponent.vue";
 import BitetheEyeComponent from "@/components/BitetheEyeComponent.vue";
 import BitetheKachiComponent from "@/components/BitetheKachiComponent.vue";
+import BitetheDoguoonComponent from "@/components/BitetheDoguoonComponent.vue";
 import { GasyaResultUnit } from "@/constants";
 
 @Component({
@@ -26,6 +28,7 @@ import { GasyaResultUnit } from "@/constants";
     BitetheUnitComponent,
     BitetheEyeComponent,
     BitetheKachiComponent,
+    BitetheDoguoonComponent,
   },
 })
 export default class BitethedustScene extends AbstractScene {

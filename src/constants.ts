@@ -17,6 +17,7 @@ export type UnitInfo = {
 export type GasyaResultUnit = UnitInfo & {
   p1?: boolean;
   new?: boolean;
+  b?: number;
 }
 
 export enum RARITY {

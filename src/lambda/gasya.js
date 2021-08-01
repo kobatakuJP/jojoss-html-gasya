@@ -53,6 +53,7 @@ function renGasya(num, kind, kakutei, pu, gensen) {
   }
   overridePUGensen(result, kind, pu, gensen);
   rafflePlusOne(result);
+  // raffleBitethe(result); TODO バイツァ実装時にアンコメント
   return fixOrder(result);
 }
 
@@ -154,4 +155,24 @@ function rafflePlusOne(result) {
  */
 function winRaffle(probability) {
   return Math.random() < probability;
+}
+
+/** 
+ * バイツァ抽選(破壊的変更) 
+ * @return 破壊後の配列
+ */
+function raffleBitethe(result) {
+  const prob = 0.5; // バイツァの確率
+  let i = 0; // バイツァ回数
+  for (; i < 4; i++) {
+    // バイツァ回数を抽選
+    if (!winRaffle(prob)) break;
+  }
+  if (i) result[selectBitetheUnitIdx(result)].b = i;
+  return result;
+}
+
+function selectBitetheUnitIdx(result) {
+  const unit = getRandFromArr(result.filter(u => u.rarity === 'SSR'))
+  return result.findIndex(v => v === unit)
 }

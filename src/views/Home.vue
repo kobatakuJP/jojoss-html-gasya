@@ -24,6 +24,7 @@ import PunchScene from "@/components/PunchScene.vue";
 import LastPunchScene from "@/components/LastPunchScene.vue";
 import PikaaScene from "@/components/PikaaScene.vue";
 import ResultScene from "@/components/ResultScene.vue";
+import BitethedustScene from "@/components/BitethedustScene.vue";
 import SoulAttractScene from "@/components/SoulAttractScene.vue";
 import {
   GasyaResultUnit,
@@ -42,6 +43,7 @@ import {
     LastPunchScene,
     PikaaScene,
     ResultScene,
+    BitethedustScene,
     SoulAttractScene,
   },
 })
@@ -54,6 +56,7 @@ export default class Home extends Vue {
     "LastPunchScene",
     "PikaaScene",
     "ResultScene",
+    // "BitethedustScene", TODO バイツァ実装時にアンコメント
     "SoulAttractScene",
   ];
   currentScene = this.scenes[0];

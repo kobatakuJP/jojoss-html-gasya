@@ -11,6 +11,7 @@
     <bitethe-eye-component />
     <bitethe-kachi-component />
     <bitethe-doguoon-component />
+    <bitethe-explosion-component />
   </div>
 </template>
 
@@ -21,6 +22,7 @@ import BitetheUnitComponent from "@/components/BitetheUnitComponent.vue";
 import BitetheEyeComponent from "@/components/BitetheEyeComponent.vue";
 import BitetheKachiComponent from "@/components/BitetheKachiComponent.vue";
 import BitetheDoguoonComponent from "@/components/BitetheDoguoonComponent.vue";
+import BitetheExplosionComponent from "@/components/BitetheExplosionComponent.vue";
 import { GasyaResultUnit } from "@/constants";
 
 @Component({
@@ -29,6 +31,7 @@ import { GasyaResultUnit } from "@/constants";
     BitetheEyeComponent,
     BitetheKachiComponent,
     BitetheDoguoonComponent,
+    BitetheExplosionComponent,
   },
 })
 export default class BitethedustScene extends AbstractScene {

@@ -1,8 +1,8 @@
 <template>
   <div class="parent100">
     <WallBackground></WallBackground>
-    <star-background class="tateyure" :is-flash="true"/>
-    <oraora-component style="position: absolute" />
+    <star-background class="tateyure" :is-flash="true" />
+    <oraora-component :is-jolyn="isJolyn" style="position: absolute" />
   </div>
 </template>
 
@@ -12,6 +12,7 @@ import WallBackground from "@/components/WallBackground.vue";
 import StarBackground from "@/components/StarBackground.vue";
 import AbstractScene from "@/components/AbstractScene.vue";
 import OraoraComponent from "@/components/OraoraComponent.vue";
+import { RARITY } from "@/constants";
 
 @Component({
   components: {
@@ -21,6 +22,13 @@ import OraoraComponent from "@/components/OraoraComponent.vue";
   },
 })
 export default class PunchScene extends AbstractScene {
+  get isJolyn(): boolean {
+    return (
+      this.result.findIndex(
+        (v) => v.name.includes("徐倫") && v.rarity === RARITY.SSR
+      ) >= 0
+    );
+  }
   timeoutForDone = 2000;
 }
 </script>

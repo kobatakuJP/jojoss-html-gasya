@@ -480,4 +480,5 @@ export const units = [
    {  "name" : "（R）宮本輝之輔",  "pictureurl" : "https://cdn.img-conv.gamerch.com/img.gamerch.com/xn--q9jh4tbaiaj6bci1hsssab45afb1069mnh6ahobmy21e/wikidb_img/1479780581.jpg",  "rarity" : "R",  "color" : "黒",  "howtoget" : "ガシャ",  "ability" : "[弱点]スピードブレイク",  "cs" : "ビビったかい？",  },
    {  "name" : "（SSR）花京院＆ジョセフ（隠者の紫＆エメラルド・スプラッシュ）",  "pictureurl" : "https://cdn.img-conv.gamerch.com/img.gamerch.com/xn--q9jh4tbaiaj6bci1hsssab45afb1069mnh6ahobmy21e/wikidb_img/1609604565001.jpg",  "rarity" : "SSR",  "color" : "緑",  "howtoget" : "ガシャ（極星）",  "ability" : "[ｽﾃｰﾀｽ]「魂」を！賭けよう！",  "cs" : "隠者の紫＆エメラルド・スプラッシュ",  },
    {  "name" : "（SSR）空条承太郎【金】（終止符を打つ者）",  "pictureurl" : "https://cdn.img-conv.gamerch.com/img.gamerch.com/xn--q9jh4tbaiaj6bci1hsssab45afb1069mnh6ahobmy21e/wikidb_img/1615474919.jpg",  "rarity" : "SSR",  "color" : "金",  "howtoget" : "ガシャ（超降臨）",  "ability" : "[特殊]終止符を打つ者",  "cs" : "神速の拳",  },
+   {  "name" : "（SSR）空条徐倫（「ストーン・フリー」）",  "pictureurl" : "https://i.imgur.com/Ik8G2Nc.png",  "rarity" : "SSR",  "color" : "白",  "howtoget" : "ガシャ（超降臨）",  "ability" : "[特殊]あたしは…この「石の海」から自由になる…",  "cs" : "「ストーン・フリー」",  },
 ];

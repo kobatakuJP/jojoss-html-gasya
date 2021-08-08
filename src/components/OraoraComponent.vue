@@ -18,9 +18,9 @@
           font-family: Times New Roman;
           font-weight: bold;
           font-size: 200;
-          fill: ${i % 2 ? 'black' : 'white'};
+          fill: ${fillColor[i % 2]};
           stroke-width: 2;
-          stroke: ${i % 2 ? 'white' : 'black'};
+          stroke: ${strokeColor[i % 2]};
         `"
       >
         オラ
@@ -30,15 +30,22 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class OraoraComponent extends Vue {
+  @Prop() isJolyn!: boolean;
   readonly w = 792;
   readonly h = 792 * 1.5;
   readonly idxs = [...Array(10).keys()];
   currentIdx = 0;
   loopID = -1;
+  get fillColor(): [string, string] {
+    return this.isJolyn ? ["purple", "pink"] : ["black", "white"];
+  }
+  get strokeColor(): [string, string] {
+    return this.isJolyn ? ["white", "white"] : ["white", "black"];
+  }
   mounted(): void {
     this.oraora();
   }

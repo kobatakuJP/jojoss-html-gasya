@@ -64,11 +64,17 @@ export default class Home extends Vue {
   result: GasyaResultUnit[] = [];
   ssrUnits = units.filter((v) => v.rarity === RARITY.SSR);
   /** SSRの所持数一覧、localstorageになければSSRの配列長で0埋め */
-  ssrNums: number[] = localStorage.getItem(LOCALSTORAGE_KEYS.SSR_NUMS)
-    ? (JSON.parse(
-        localStorage.getItem(LOCALSTORAGE_KEYS.SSR_NUMS) as string
-      ) as number[])
-    : Array(this.ssrUnits.length).fill(0);
+  ssrNums: number[] = ((v: string | null) => {
+    if (!v) {
+      return Array(this.ssrUnits.length).fill(0);
+    } else {
+      const current = JSON.parse(v as string) as number[];
+      // ユニット増えてたらここで0を入れる
+      const sa = this.ssrUnits.length - current.length;
+      if (sa > 0) for (let i = 0; i < sa; i++) current.push(0);
+      return current
+    }
+  })(localStorage.getItem(LOCALSTORAGE_KEYS.SSR_NUMS));
   async actionPull(
     n: GASYA_NUM,
     kakutei: number,

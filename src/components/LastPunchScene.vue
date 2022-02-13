@@ -1,12 +1,17 @@
 <template>
-  <div>オラァ！</div>
+  <OraaComponent />
 </template>
 
 <script lang="ts">
 import { Component } from "vue-property-decorator";
 import AbstractScene from "@/components/AbstractScene.vue"
+import OraaComponent from "@/components/OraaComponent.vue"
 
-@Component
+@Component({
+  components: {
+    OraaComponent
+  }
+})
 export default class LastPunchScene extends AbstractScene {
   timeoutForDone = 1000;
 }

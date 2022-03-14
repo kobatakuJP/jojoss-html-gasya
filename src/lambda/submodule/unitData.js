@@ -483,5 +483,6 @@ export const units = [
    {  "name" : "（SSR）空条徐倫（「ストーン・フリー」）",  "pictureurl" : "https://i.imgur.com/Ik8G2Nc.png",  "rarity" : "SSR",  "color" : "白",  "howtoget" : "ガシャ（超降臨）",  "ability" : "[特殊]あたしは…この「石の海」から自由になる…",  "cs" : "「ストーン・フリー」",  },
    {  "name" : "（SSR）空条徐倫＆空条承太郎（どうした？・・・手を出せ）",  "pictureurl" : "https://i.imgur.com/b8AqH0R.png",  "rarity" : "SSR",  "color" : "青",  "howtoget" : "ガシャ（超降臨）",  "ability" : "[ｽﾃｰﾀｽ]のこのこ父親面して来てんじゃねェーーーーッ！！",  "cs" : "どうした？・・・手を出せ",  },
    {  "name" : "（SSR）エルメェス・コステロ（そして亀裂を入れて破壊することができる）",  "pictureurl" : "https://i.imgur.com/LotcPET.png",  "rarity" : "SSR",  "color" : "赤",  "howtoget" : "ガシャ（超降臨）",  "ability" : "[援軍]最悪な時にもラッキーな事は起こるって事だよなあ～～っ",  "cs" : "そして亀裂を入れて破壊することができる",  },
-   {  "name" : "（SSR）エートロ（フー・ファイターズ）（「知性」をすでに保有しているのだ）",  "pictureurl" : "https://i.imgur.com/jNLEDRl.png",  "rarity" : "SSR",  "color" : "緑",  "howtoget" : "ガシャ（超降臨）",  "ability" : "[ｽﾃｰﾀｽ]徐倫…あたしはあんたを守りたい",  "cs" : "「知性」をすでに保有しているのだ",  }
+   {  "name" : "（SSR）エートロ（フー・ファイターズ）（「知性」をすでに保有しているのだ）",  "pictureurl" : "https://i.imgur.com/jNLEDRl.png",  "rarity" : "SSR",  "color" : "緑",  "howtoget" : "ガシャ（超降臨）",  "ability" : "[ｽﾃｰﾀｽ]徐倫…あたしはあんたを守りたい",  "cs" : "「知性」をすでに保有しているのだ",  },
+   {  "name" : "（SSR）ウェザー・リポート（天候を自由に操れること…）",  "pictureurl" : "https://i.imgur.com/GFkucZ5.png",  "rarity" : "SSR",  "color" : "白",  "howtoget" : "ガシャ（超降臨）",  "ability" : "[スマッシュ]背のびしてつま先で歩くのが彼のくせ",  "cs" : "天候を自由に操れること…",  }
 ];

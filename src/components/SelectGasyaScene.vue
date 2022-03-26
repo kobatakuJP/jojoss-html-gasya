@@ -224,7 +224,7 @@ export default class SelectGasyaScene extends Vue {
         this.message = "ジョジョフェスッ！";
         break;
       case GASYA_KIND.FES8:
-        this.message = "幻の8周年ガシャ！";
+        this.message = "幻の8周年、『その血の運命』ガシャ！";
         break;
     }
   }

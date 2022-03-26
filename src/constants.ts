@@ -2,7 +2,8 @@ export const enum GASYA_KIND {
   ZENBU,
   CHO_KORIN,
   KORIN,
-  JOJOFES
+  JOJOFES,
+  FES8
 }
 export type UnitInfo = {
   name: string;
@@ -43,6 +44,10 @@ export const LOCALSTORAGE_KEYS = {
     [GASYA_NUM.TEN]: "korin10Count"
   },
   [GASYA_KIND.JOJOFES]: {
+    [GASYA_NUM.ONE]: "jojofesSinCount",
+    [GASYA_NUM.TEN]: "jojofes10Count"
+  },
+  [GASYA_KIND.FES8]: {
     [GASYA_NUM.ONE]: "jojofesSinCount",
     [GASYA_NUM.TEN]: "jojofes10Count"
   },

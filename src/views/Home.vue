@@ -60,7 +60,7 @@ export default class Home extends Vue {
     "SoulAttractScene",
   ];
   currentScene = this.scenes[0];
-  currentGasyaKind = GASYA_KIND.ZENBU;
+  currentGasyaKind = GASYA_KIND.FES8;
   result: GasyaResultUnit[] = [];
   ssrUnits = units.filter((v) => v.rarity === RARITY.SSR);
   /** SSRの所持数一覧、localstorageになければSSRの配列長で0埋め */

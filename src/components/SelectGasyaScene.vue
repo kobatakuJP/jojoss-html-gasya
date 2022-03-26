@@ -13,6 +13,9 @@
       <v-btn height="100%" x-small @click="gasyaTo(3)">
         <span v-show="gasyaKind === 3">★</span>ダイヤガシャ4
       </v-btn>
+      <v-btn height="100%" x-small @click="gasyaTo(4)">
+        <span v-show="gasyaKind === 4">★</span>ダイヤガシャ5
+      </v-btn>
     </div>
     <div style="height: 95%">
       <div style="font-weight: bold">ダイヤガシャ</div>
@@ -122,6 +125,10 @@ export default class SelectGasyaScene extends Vue {
       sin: getCountFromLS(GASYA_KIND.JOJOFES, GASYA_NUM.ONE),
       set: getCountFromLS(GASYA_KIND.JOJOFES, GASYA_NUM.TEN),
     },
+    [GASYA_KIND.FES8]: {
+      sin: getCountFromLS(GASYA_KIND.FES8, GASYA_NUM.ONE),
+      set: getCountFromLS(GASYA_KIND.FES8, GASYA_NUM.TEN),
+    },
   };
   get nextSinCount(): number {
     return (this.counts[this.gasyaKind]?.sin || 0) + 1;
@@ -147,6 +154,9 @@ export default class SelectGasyaScene extends Vue {
         if (c % 2 === 0) {
           result += 2; // 2の倍数セット目で2枚確定
         }
+        break;
+      case GASYA_KIND.FES8:
+        result = GASYA_NUM.TEN;
         break;
       default:
       // 特になし
@@ -192,6 +202,8 @@ export default class SelectGasyaScene extends Vue {
           return "2の倍数セット目でSSR2枚以上確定ッ！";
         }
         return `SSR${this.kakuteiNum}枚確定中ッ！`;
+      case GASYA_KIND.FES8:
+        return "常に主人公SSR10枚確定ィィィッ！"
       default:
         return "";
     }
@@ -210,6 +222,9 @@ export default class SelectGasyaScene extends Vue {
         break;
       case GASYA_KIND.JOJOFES:
         this.message = "ジョジョフェスッ！";
+        break;
+      case GASYA_KIND.FES8:
+        this.message = "幻の8周年ガシャ！";
         break;
     }
   }

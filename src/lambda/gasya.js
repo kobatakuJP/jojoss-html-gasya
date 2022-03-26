@@ -6,6 +6,7 @@ const UNITS_R = units.filter(v => v.rarity === "R");
 const UNITS_CHOKORIN = UNITS_SSR.filter(v => v.howtoget.match(/超降臨[^セ]/));
 const UNITS_KORIN = UNITS_SSR.filter(v => v.howtoget.match(/[^超]降臨/));
 const UNITS_GENTEI = UNITS_SSR.filter(v => v.howtoget.match(/限定/)).filter(v => !v.ability.match(/レッドライン/)).filter(v => !v.ability.match(/うぬぼれた性格/));
+const UNITS_FES8 = UNITS_SSR.filter(v => v.name.match(/ジョナサン|ジョセフ|承太郎|仗助|ジョルノ|徐倫/))
 const UNITS_CHOKORIN_PU_NAMES = ["（SSR）空条承太郎【金】（終止符を打つ者）", "（SSR）ジョルノ・ジョバァーナ（ゴールド・E・レクイエム）", "（SSR）東方仗助（射程距離内に………入ったぜ………）", "（SSR）ジョナサン・ジョースター＆ジョセフ・ジョースター【白】", "（SSR）空条徐倫（「ストーン・フリー」）"]
 const UNITS_CHOKORIN_PU = UNITS_SSR.filter(v => UNITS_CHOKORIN_PU_NAMES.some(t => t === v.name));
 const UNIT_CHOKORIN_GENSEN = UNITS_SSR.find(v => v.name === "（SSR）ウェザー・リポート（天候を自由に操れること…）")
@@ -13,7 +14,8 @@ const KIND = {
   ZENBU: 0,
   CHO_KORIN: 1,
   KORIN: 2,
-  JOJOFES: 3
+  JOJOFES: 3,
+  FES8: 4
 }
 export function handler(event, context, callback) {
   const num = parseInt(event?.queryStringParameters?.num);
@@ -70,6 +72,8 @@ function gasya(kind, forceSSR = false) {
         return getRandFromArr(UNITS_KORIN)
       case KIND.JOJOFES:
         return getRandFromArr(UNITS_GENTEI)
+      case KIND.FES8:
+        return getRandFromArr(UNITS_FES8)
       default:
         return getRandFromArr(UNITS_SSR)
     }

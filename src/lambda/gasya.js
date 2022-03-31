@@ -1,8 +1,11 @@
 import { units } from "./submodule/unitData";
 import { PAR_OF_SR, PAR_OF_SSR } from "./submodule/conf";
-const UNITS_SSR = units.filter(v => v.rarity === "SSR");
-const UNITS_SR = units.filter(v => v.rarity === "SR");
-const UNITS_R = units.filter(v => v.rarity === "R");
+import {isJpnAprilFool} from "./submodule/utils";
+const viran_units = units.filter(v => v.name.match(/ディオ|カーズ|DIO|ＤＩＯ|吉影|浩作|ディアボロ/) )
+const baseUnits = isJpnAprilFool() ? viran_units : units;
+const UNITS_SSR = baseUnits.filter(v => v.rarity === "SSR");
+const UNITS_SR = baseUnits.filter(v => v.rarity === "SR");
+const UNITS_R = baseUnits.filter(v => v.rarity === "R");
 const UNITS_CHOKORIN = UNITS_SSR.filter(v => v.howtoget.match(/超降臨[^セ]/));
 const UNITS_KORIN = UNITS_SSR.filter(v => v.howtoget.match(/[^超]降臨/));
 const UNITS_GENTEI = UNITS_SSR.filter(v => v.howtoget.match(/限定/)).filter(v => !v.ability.match(/レッドライン/)).filter(v => !v.ability.match(/うぬぼれた性格/));

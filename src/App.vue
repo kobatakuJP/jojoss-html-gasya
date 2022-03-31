@@ -8,9 +8,10 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { isJpnAprilFool } from "./lambda/submodule/utils";
 @Component
 export default class App extends Vue {
-  myStyle = { width: "100%", height: "100%" };
+  myStyle = { width: "100%", height: "100%", backgroundColor: isJpnAprilFool() ? "#9242a0" : "orange"};
   handleResize(): void {
     // 縦横サイズを調整する
     const w = this.$el.parentElement?.clientWidth as number;

@@ -23,7 +23,7 @@
           stroke: ${strokeColor[i % 2]};
         `"
       >
-        オラ
+        {{ isJpnAprilFool() ? "無駄" : "オラ" }}
       </text>
     </svg>
   </div>
@@ -31,6 +31,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { isJpnAprilFool } from "../lambda/submodule/utils";
 
 @Component
 export default class OraoraComponent extends Vue {
@@ -38,6 +39,7 @@ export default class OraoraComponent extends Vue {
   readonly w = 792;
   readonly h = 792 * 1.5;
   readonly idxs = [...Array(10).keys()];
+  isJpnAprilFool = isJpnAprilFool;
   currentIdx = 0;
   loopID = -1;
   get fillColor(): [string, string] {

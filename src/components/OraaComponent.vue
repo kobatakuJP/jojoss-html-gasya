@@ -20,8 +20,8 @@
         <tspan :x="w/2" :y="h/2 + 200" font-size="200" rotate="10" > ！</tspan>
         <tspan :x="w/2+100" :y="h/2 + 100" font-size="100">ッ</tspan>
         <tspan :x="w/2+100" :y="h/2" font-size="180">ァ</tspan>
-        <tspan :x="w/2" :y="h/2 - 100" font-size="200">ラ</tspan>
-        <tspan :x="w/2 - 300" :y="h/2 - 200" font-size="350" rotate="-5">オ</tspan>
+        <tspan :x="w/2" :y="h/2 - 100" font-size="200">{{isJpnAprilFool() ? "駄" : "ラ"}}</tspan>
+        <tspan :x="w/2 - 300" :y="h/2 - 200" font-size="350" rotate="-5">{{isJpnAprilFool() ? "無" : "オ"}}</tspan>
       </text>
     </svg>
   </div>
@@ -29,13 +29,14 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-
+import { isJpnAprilFool } from "../lambda/submodule/utils";
 @Component
 export default class OraaComponent extends Vue {
   @Prop() isJolyn!: boolean;
   readonly w = 792;
   readonly h = 792 * 1.5;
   readonly idxs = [...Array(10).keys()];
+  isJpnAprilFool = isJpnAprilFool;
   currentIdx = 0;
   loopID = -1;
   get fillColor(): string {

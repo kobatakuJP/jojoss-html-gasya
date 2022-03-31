@@ -11,7 +11,7 @@ import { Component, Vue } from "vue-property-decorator";
 import { isJpnAprilFool } from "./lambda/submodule/utils";
 @Component
 export default class App extends Vue {
-  myStyle = { width: "100%", height: "100%", backgroundColor: isJpnAprilFool() ? "#9242a0" : "orange"};
+  myStyle = { width: "100%", height: "100%", background: isJpnAprilFool() ? "#9242a0 url(https://i.imgur.com/MDJ4Zib.png) no-repeat bottom right" : "orange"};
   handleResize(): void {
     // 縦横サイズを調整する
     const w = this.$el.parentElement?.clientWidth as number;
@@ -56,7 +56,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: orange;
   position: fixed;
   left: 0;
   top: 0;

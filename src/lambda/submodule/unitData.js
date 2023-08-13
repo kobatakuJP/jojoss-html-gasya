@@ -1054,7 +1054,7 @@ export const units = [
    },
    {
       name: '（SSR）ヴァニラ・アイス（このヴァニラ・アイスの前では無力だ…）',
-      pictureurl: 'https://cdn.img-conv.gamerch.com/img.gamerch.com/xn--q9jh4tbaiaj6bci1hsssab45afb1069mnh6ahobmy21e/wikidb_img/1527585687.jpg',
+      pictureurl: 'https://cdn.gamerch.com/contents/wiki/4018/entry/sTHNM2IO.jpg',
       rarity: 'SSR',
       color: '赤',
       howtoget: 'ガシャ（超降臨）',
@@ -2377,7 +2377,7 @@ export const units = [
    },
    {
       name: '（SSR）ジョルノ・ジョバァーナ（ナランチャ・ギルガ）',
-      pictureurl: 'https://cdn.img-conv.gamerch.com/img.gamerch.com/xn--q9jh4tbaiaj6bci1hsssab45afb1069mnh6ahobmy21e/wikidb_img/1565667624.jpg',
+      pictureurl: 'https://cdn.gamerch.com/contents/wiki/4018/entry/2ZtjoyfV.jpg',
       rarity: 'SSR',
       color: '白',
       howtoget: 'ガシャ（期間限定）',
@@ -3637,7 +3637,7 @@ export const units = [
    },
    {
       name: '（SR）メローネ（良しッ帰って来いッ！）',
-      pictureurl: 'https://cdn.img-conv.gamerch.com/img.gamerch.com/xn--q9jh4tbaiaj6bci1hsssab45afb1069mnh6ahobmy21e/wikidb_img/1559213094.jpg',
+      pictureurl: 'https://cdn.gamerch.com/contents/wiki/4018/entry/fL1BDU6k.jpg',
       rarity: 'SR',
       color: '銀',
       howtoget: 'ガシャ',
